@@ -1,0 +1,23 @@
+.wrapper {
+    height: var(--default-layout-header-height);
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+}
+.navbar {
+    height: var(--default-layout-header-height);
+    display: flex;
+    align-items: center;
+}
+.logo-link {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 14px;
+    cursor: pointer;
+}
+
+.nav-item {
+    margin: 0px 8px;
+}
