@@ -1,0 +1,82 @@
+.login-background {
+    height: 100vh;
+    background: linear-gradient(135deg, rgb(34, 152, 195) 0%, rgb(237, 105, 206) 100%);
+    position: relative;
+
+    .login-container {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 400px;
+        height: 80%;
+        border-radius: 10px;
+        background-color: white;
+        .login-content {
+            padding: 30px;
+
+            .text-login {
+                text-align: center;
+                font-weight: 600;
+                font-size: 26px;
+                padding-top: 10px;
+            }
+            .input-login {
+                margin: 12px 0;
+                .form-control {
+                    font-size: 1.5rem !important;
+                }
+                .custom-input-password {
+                    position: relative;
+                    .eye {
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .btn-login {
+                width: 100%;
+                margin: 10px 0;
+                height: 30px;
+                border-radius: 15px;
+                background: linear-gradient(135deg, rgb(34, 152, 195) 0%, rgb(237, 105, 206) 100%);
+                color: white;
+            }
+            .forgot-password {
+                font-size: 16px;
+            }
+            .social-login {
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+                text-align: center;
+
+                .google,
+                .facebook {
+                    font-size: 25px;
+                    background: #c32424;
+                    border-radius: 50%;
+                    height: 45px;
+                    width: 45px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    margin-right: 10px;
+                }
+
+                .facebook {
+                    background: #307aaf;
+                }
+            }
+            .signup {
+                margin-top: 9rem;
+            }
+        }
+    }
+}

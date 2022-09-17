@@ -27,7 +27,7 @@ function Header() {
                         <Link to={config.routes.home}>Trang chủ</Link>
                     </li>
                     <li className={cx('nav-item')}>
-                        <Link to={config.routes.home}>Trang chủ</Link>
+                        <Link to={config.routes.signin}>Đăng nhập</Link>
                     </li>
                 </ul>
             </nav>
