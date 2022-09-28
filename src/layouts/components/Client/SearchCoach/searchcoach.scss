@@ -1,0 +1,95 @@
+.search-wrapper {
+    $parent-height: 100%;
+    width: 100%;
+    height: $parent-height;
+
+    .banner-search-tab {
+        border-bottom: 1px solid rgb(4, 11, 87);
+        border-radius: 5px 5px 0 0;
+        width: 15%;
+        height: calc($parent-height / 2);
+        background: var(--white);
+        // box-shadow: 5px -5px 15px 5px #4d667e;
+        .content-tab {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #2c3e50;
+            i {
+                margin-right: 10px;
+            }
+        }
+    }
+    .banner-search {
+        border-radius: 0px 5px 5px 5px;
+        height: calc($parent-height / 2);
+        background: var(--white);
+        display: flex;
+        justify-content: center;
+        // box-shadow: 5px 10px 8px #2c3e50;
+
+        .search-items {
+            border-radius: 0px 5px 5px 5px;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            display: flex;
+            .search-item {
+                position: relative;
+                height: 100%;
+                width: 100%;
+                i {
+                    color: #2c3e50;
+                    position: absolute;
+                    right: 10%;
+                    top: calc(50% - 10px);
+                    margin: auto;
+                    z-index: 1;
+                }
+            }
+            .search-item:not(.search-button):not(.from-where)::before {
+                content: ' ';
+                display: block;
+                height: 60%;
+                width: 3px;
+                top: 0;
+                bottom: 0;
+                left: -2px;
+                margin: auto;
+                background: #2c3e50;
+                position: absolute;
+                z-index: 1;
+            }
+
+            .from-where {
+                width: 35%;
+            }
+            .to-where {
+                width: 35%;
+            }
+            .date {
+                width: 30%;
+            }
+            .search-button {
+                width: 20%;
+                border-right: none;
+                height: 100%;
+                button {
+                    border-radius: 0px 5px 5px 0px;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #2c3e50;
+                    background: rgb(234, 161, 25);
+                }
+            }
+        }
+    }
+}
+.border {
+    border: 3px solid #2c3e50 !important;
+}

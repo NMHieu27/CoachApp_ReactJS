@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from '~/components/Helmet';
+import Helmet from '~/components/Helmet/Helmet';
 
 function Page404() {
     return (

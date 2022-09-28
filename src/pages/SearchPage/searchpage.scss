@@ -1,0 +1,19 @@
+.SearchPage-wrapper {
+    width: 100%;
+    .container {
+        width: 80%;
+    }
+    .SearchPage-wrapper__content {
+        .Search-box-container {
+            width: 100%;
+            height: 130px;
+            background: url(../../assets/images/banner.png);
+            .Search-box {
+                padding-top: 10px;
+                width: 95%;
+                height: 120px;
+                margin: auto;
+            }
+        }
+    }
+}

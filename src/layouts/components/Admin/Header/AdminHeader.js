@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 function AdminHeader() {
     return (
         <div className={cx('wrapper')}>
-            <ul className={cx('navbar')}>
+            <ul className={cx('navbar-admin')}>
                 <li>
                     <Link to={config.routes.accounts}> Tai khoan</Link>
                 </li>
