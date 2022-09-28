@@ -7,12 +7,69 @@
         .Search-box-container {
             width: 100%;
             height: 130px;
-            background: url(../../assets/images/banner.png);
+            background: #018699;
             .Search-box {
                 padding-top: 10px;
                 width: 95%;
                 height: 120px;
                 margin: auto;
+            }
+        }
+        .BreadCrumb {
+            font-weight: bold;
+        }
+
+        .result-wrapper {
+            background: #ccc;
+            height: 100vh;
+            width: 100%;
+            .filter-container {
+                background: palevioletred;
+                .header-filter {
+                    display: flex;
+                    justify-content: space-between;
+                    .clear-filter {
+                        color: blue;
+                    }
+                }
+                .section-filter {
+                    height: calc(100% - 27px);
+                    border: 2px solid #fff;
+                    z-index: 1;
+                    .filter-group {
+                        height: calc(100% - 37px);
+                        margin: 20px 20px;
+                        background: rgb(21, 171, 99);
+
+                        .filter-group__time {
+                            height: 250px;
+                            border: 2px solid rgb(10, 6, 6);
+                            .time-wrap {
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: space-between;
+
+                                .btn-time {
+                                    align-items: center;
+                                    font-size: 16px;
+                                    width: 48%;
+                                    height: 46%;
+                                    border: 2px solid #2c3e50;
+                                    border-radius: 5px;
+                                    margin: 5px 0;
+
+                                    .label-time {
+                                        margin-bottom: 0;
+                                        margin-top: 16px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .trip-container {
+                background: burlywood;
             }
         }
     }
