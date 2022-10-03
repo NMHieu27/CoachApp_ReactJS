@@ -1,0 +1,51 @@
+.coach-images-slider {
+    .swiper-slide {
+        padding-top: 100%;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 98%;
+        }
+    }
+
+    .swiper-button-prev {
+        left: 0;
+        color: #fff;
+    }
+
+    .swiper-button-next {
+        right: 0;
+        color: #fff;
+    }
+}
+
+.coach-images-slider-thumbs {
+    .swiper-slide {
+        cursor: pointer;
+        border: 1px solid #dddbdb;
+
+        &-thumb-active {
+            border: 3px solid #ff0000;
+        }
+    }
+
+    &-wrapper {
+        width: 100%;
+        padding-top: 100%;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

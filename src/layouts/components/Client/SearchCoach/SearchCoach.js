@@ -51,7 +51,7 @@ function SearchCoach() {
 
     const nav = useNavigate();
     const handleSearch = () => {
-        nav(config.routes.searchpage);
+        nav(config.routes.booking);
     };
     return (
         <div className="search-wrapper">

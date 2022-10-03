@@ -1,0 +1,81 @@
+.coach-card {
+    width: 100%;
+    height: 100%;
+    // background: olive;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        // border: 2px solid var(--main-color);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    &__container {
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px;
+        margin: 0;
+    }
+    &__image {
+        // border: 2px solid #2c3e50;
+        padding: 0;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    &__info {
+        padding-right: 0;
+        padding-bottom: 0 !important;
+        // border: 2px solid #2c3e50;
+        position: relative;
+    }
+    &__booking {
+        // border: 2px solid #2c3e50;
+        position: relative;
+        padding-right: 0;
+        &__price {
+            text-align: right;
+            font-weight: bold;
+            color: var(--main-color);
+            font-size: 24px;
+        }
+        &__empty-seat {
+            text-align: right;
+        }
+        &__btn-detail {
+            width: 50%;
+            height: 45px;
+            border-radius: 5px;
+            position: absolute;
+            right: 0px;
+            bottom: 0;
+            background: #eea119;
+            color: var(--main-color);
+            font-weight: bold;
+        }
+    }
+}
+.time-line {
+    position: absolute;
+    bottom: 0;
+    &__from-to {
+        height: 74px;
+        max-width: 100%;
+        padding-left: 9px;
+    }
+    &__hour {
+        padding-bottom: 11px;
+        font-weight: bold;
+        color: var(--main-color);
+    }
+    &__place {
+        // margin-left: 10px;
+        max-width: 265px;
+        padding-left: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

@@ -38,6 +38,7 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Đăng xuất',
+            isButton: true,
             separate: true,
         },
     ];

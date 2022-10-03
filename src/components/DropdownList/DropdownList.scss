@@ -1,0 +1,26 @@
+.DropdownList {
+    // background: #ccc;
+
+    &__search-input {
+        width: 100%;
+        border: 1px solid rgb(162, 161, 161);
+        border-radius: 5px;
+    }
+    &__items-container {
+        max-height: 250px;
+        overflow: auto;
+        &__content {
+            margin-left: 20px;
+            margin-top: 10px;
+
+            .item-parent-content {
+                margin-left: 14px;
+                &:hover {
+                    cursor: pointer;
+                    background: #2c3e50;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
