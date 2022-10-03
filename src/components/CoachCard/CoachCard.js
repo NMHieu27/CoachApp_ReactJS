@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import numberWithCommas from '~/utils/numberWithCommas';
 import './CoachCard.scss';
 function CoachCard({ data }) {
     return (
@@ -51,7 +52,7 @@ function CoachCard({ data }) {
                     </div>
                 </div>
                 <div className="col-4 coach-card__booking">
-                    <p className="coach-card__booking__price">{data.price}đ</p>
+                    <p className="coach-card__booking__price">{numberWithCommas(data.price)}đ</p>
                     <p className="coach-card__booking__empty-seat">Còn {data.empty_seat} chỗ trống</p>
                     <Link to={`/chi-tiet-chuyen-xe/${data.id}`}>
                         <button className="coach-card__booking__btn-detail">

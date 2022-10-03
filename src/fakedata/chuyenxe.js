@@ -9,6 +9,7 @@ const chuyenxe = [
         image: 'https://xeduykhang.vn/wp-content/uploads/2019/07/z1454854344791_31acb15f7d6d44a7c0d9bdf4b12a839b.jpg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,
@@ -78,6 +79,7 @@ const chuyenxe = [
         image: 'https://static.vexere.com/production/images/1658203853356.jpeg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,
@@ -147,6 +149,7 @@ const chuyenxe = [
         image: 'https://digiticket.vn/blog/wp-content/uploads/2022/05/xe-da-nang-sai-gon-2.jpg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,
@@ -216,6 +219,7 @@ const chuyenxe = [
         image: 'https://digiticket.vn/blog/wp-content/uploads/2022/05/xe-da-nang-sai-gon-2.jpg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,
@@ -285,6 +289,7 @@ const chuyenxe = [
         image: 'https://digiticket.vn/blog/wp-content/uploads/2022/05/xe-da-nang-sai-gon-2.jpg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,
@@ -354,6 +359,7 @@ const chuyenxe = [
         image: 'https://digiticket.vn/blog/wp-content/uploads/2022/05/xe-da-nang-sai-gon-2.jpg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,
@@ -423,6 +429,7 @@ const chuyenxe = [
         image: 'https://digiticket.vn/blog/wp-content/uploads/2022/05/xe-da-nang-sai-gon-2.jpg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,
@@ -492,6 +499,7 @@ const chuyenxe = [
         image: 'https://digiticket.vn/blog/wp-content/uploads/2022/05/xe-da-nang-sai-gon-2.jpg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
+        License_plate: '56E78910',
         images: [
             {
                 id: 1,

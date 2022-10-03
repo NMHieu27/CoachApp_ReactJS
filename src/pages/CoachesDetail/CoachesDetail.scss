@@ -1,3 +1,9 @@
-.coaches-detail-wrapper {
+.coaches-detail {
+    height: 100%;
     width: 80%;
+    background: #ccc;
+    height: 100vh;
+
+    &__info-container {
+    }
 }

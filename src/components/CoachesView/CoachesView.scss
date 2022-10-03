@@ -1,0 +1,85 @@
+.coaches-view {
+    height: 400px;
+    // background: pink;
+
+    &__breadcrumb {
+        font-weight: bold;
+    }
+    &__content {
+        width: 100%;
+        height: 100%;
+        border: 2px solid #ccc;
+        background: white;
+        border-radius: 4px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+        &__item {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: 20px 20px;
+        }
+        &__left {
+            position: relative;
+            // background: greenyellow;
+            .coaches-view__carousel {
+                // background: rgb(229, 152, 152);
+                // height: 100%;
+            }
+        }
+
+        &__right {
+            position: relative;
+            // background: orange;
+            .coaches-view__detail {
+                // background: rgb(126, 246, 160);
+                // height: 100%;
+            }
+        }
+    }
+    &__detail {
+        display: flex;
+        &__btn {
+            position: absolute;
+            bottom: 0;
+            width: 40%;
+            height: 45px;
+            border-radius: 5px;
+            background: #eea119;
+            color: var(--main-color);
+            font-weight: bold;
+        }
+        &__info {
+            // background: rgb(219, 153, 240);
+            width: 50%;
+            position: relative;
+            .star-counting {
+                position: absolute;
+                left: 37%;
+                bottom: 27%;
+                color: #fff;
+                background: var(--main-color);
+                padding: 0 5px;
+                border-radius: 2px;
+            }
+            .btn-shipping {
+                left: 0;
+            }
+        }
+        &__booking {
+            // background: rgb(108, 195, 239);
+            width: 50%;
+            position: relative;
+            .btn-booking {
+                right: 0;
+            }
+        }
+    }
+    &__stop-by {
+    }
+
+    &__description {
+    }
+}
