@@ -45,8 +45,8 @@ function CoachCard({ data }) {
                                 <p className="time-line__place">• {data.pick_up[0].name}</p>
                             </div>
                             <div className="time-line__to d-flex">
-                                <p className="time-line__hour">{data.drop_off[0].time} </p>
-                                <p className="time-line__place">• {data.drop_off[0].name}</p>
+                                <p className="time-line__hour">{data.drop_off[data.drop_off.length - 1].time}</p>
+                                <p className="time-line__place">• {data.drop_off[data.drop_off.length - 1].name}</p>
                             </div>
                         </div>
                     </div>

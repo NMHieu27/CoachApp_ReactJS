@@ -7,6 +7,7 @@ import './CoachesView.scss';
 function CoachesView({ data }) {
     return (
         <div className="coaches-view">
+            {/* section breadcrumb */}
             <div className="coaches-view__breadcrumb p-2">
                 <Link style={{ color: 'blue' }} to={config.routes.home}>
                     Vé xe H & L
@@ -18,6 +19,8 @@ function CoachesView({ data }) {
                     {` > `} Chuyến {data.id} đi từ {data.start} đến {data.end}
                 </span>
             </div>
+
+            {/* section coaches info */}
             <div className="row coaches-view__content p-0 m-0">
                 <div className="col-5 coaches-view__content__left p-0 m-0">
                     <div className="coaches-view__content__item coaches-view__carousel">
@@ -66,8 +69,43 @@ function CoachesView({ data }) {
                     </div>
                 </div>
             </div>
-            <div className="coaches-view__stop-by"></div>
-            <div className="coaches-view__description"></div>
+
+            {/* section stop by  */}
+            <div className="coaches-view__stop-by mt-4">
+                <div className="coaches-view__stop-by__note">
+                    <p style={{ color: 'blue', fontWeight: 'bold' }}>Lưu ý</p>
+                    <span>
+                        Các mốc thời gian đón, trả bên dưới là thời gian dự kiến, lịch này có thể thay đổi tùy tình hình
+                        thực tế. Rất mong quý khách có thể cảm thông.
+                    </span>
+                </div>
+                <div className="coaches-view__stop-by__from-to mt-2">
+                    <div className="coaches-view__stop-by__from-to__pick-up">
+                        <p style={{ fontWeight: 'bold', color: '#2c3e50', fontSize: '20px' }}>Điểm đón</p>
+                        {data.pick_up.map((value, index) => (
+                            <div className="coaches-view__stop-by__from-to__point-info" key={index}>
+                                <p className="coaches-view__stop-by__from-to__point-info__time">{value.time} • </p>
+                                <p>{value.name}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="coaches-view__stop-by__from-to__drop-off">
+                        <p style={{ fontWeight: 'bold', color: '#2c3e50', fontSize: '20px' }}>Điểm trả</p>
+                        {data.drop_off.map((value, index) => (
+                            <div className="coaches-view__stop-by__from-to__point-info" key={index}>
+                                <p className="coaches-view__stop-by__from-to__point-info__time">{value.time}</p>
+                                <p>{value.name}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* section service */}
+            <div className="coaches-view__description mt-4 pb-4">
+                <p style={{ color: 'blue', fontWeight: 'bold' }}>Tiện ích</p>
+                <span>{data.description}</span>
+            </div>
         </div>
     );
 }

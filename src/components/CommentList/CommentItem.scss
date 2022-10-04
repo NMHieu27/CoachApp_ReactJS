@@ -1,0 +1,30 @@
+.comment-item {
+    &__info {
+        display: flex;
+        margin-bottom: 7px;
+    }
+
+    &__avatar {
+        height: 3%;
+        width: 3%;
+        margin-right: 20px;
+        img {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+    }
+    &__name {
+        color: var(--main-color);
+        font-weight: bold;
+    }
+    &__star {
+    }
+    &__content {
+    }
+    &__created-date {
+        font-size: 14px;
+        // font-style: italic;
+        color: rgb(56, 54, 52);
+    }
+}

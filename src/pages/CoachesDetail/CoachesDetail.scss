@@ -1,9 +1,10 @@
 .coaches-detail {
-    height: 100%;
     width: 80%;
-    background: #ccc;
-    height: 100vh;
-
+    // background: #ccc;
     &__info-container {
+    }
+
+    &__list-comment-container {
+        margin-top: 10px;
     }
 }

@@ -10,6 +10,8 @@ const chuyenxe = [
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
         License_plate: '56E78910',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
@@ -79,7 +81,9 @@ const chuyenxe = [
         image: 'https://static.vexere.com/production/images/1658203853356.jpeg',
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
-        License_plate: '56E78910',
+        License_plate: '56E78911',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
@@ -150,6 +154,8 @@ const chuyenxe = [
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
         License_plate: '56E78910',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
@@ -220,6 +226,8 @@ const chuyenxe = [
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
         License_plate: '56E78910',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
@@ -290,6 +298,8 @@ const chuyenxe = [
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
         License_plate: '56E78910',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
@@ -360,6 +370,8 @@ const chuyenxe = [
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
         License_plate: '56E78910',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
@@ -430,6 +442,8 @@ const chuyenxe = [
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
         License_plate: '56E78910',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
@@ -500,6 +514,8 @@ const chuyenxe = [
         start: 'TP Hồ Chí Minh',
         end: 'Thái Nguyên',
         License_plate: '56E78910',
+        description:
+            'Nhà xe có phục vụ thức ăn nhẹ trên xe, trên xe có trang bị dây đai an toàn cho hành khách khi ngồi trên xe. Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid. Nhà xe có phục vụ nước cho hành khách. Trên xe có trang bị gối nằm.',
         images: [
             {
                 id: 1,
