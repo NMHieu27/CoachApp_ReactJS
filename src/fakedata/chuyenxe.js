@@ -36,36 +36,40 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
+            { id: 3, name: 'Tràng An Cổ', time: '10:30' },
             {
-                name: 'Tràng An Cổ',
-                time: '10:30',
-            },
-            {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },
@@ -108,36 +112,44 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
             {
+                id: 3,
                 name: 'Tràng An Cổ',
                 time: '10:30',
             },
             {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },
@@ -180,36 +192,40 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
+            { id: 3, name: 'Tràng An Cổ', time: '10:30' },
             {
-                name: 'Tràng An Cổ',
-                time: '10:30',
-            },
-            {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },
@@ -252,36 +268,40 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
+            { id: 3, name: 'Tràng An Cổ', time: '10:30' },
             {
-                name: 'Tràng An Cổ',
-                time: '10:30',
-            },
-            {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },
@@ -324,36 +344,40 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
+            { id: 3, name: 'Tràng An Cổ', time: '10:30' },
             {
-                name: 'Tràng An Cổ',
-                time: '10:30',
-            },
-            {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },
@@ -396,36 +420,40 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
+            { id: 3, name: 'Tràng An Cổ', time: '10:30' },
             {
-                name: 'Tràng An Cổ',
-                time: '10:30',
-            },
-            {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },
@@ -468,36 +496,40 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
+            { id: 3, name: 'Tràng An Cổ', time: '10:30' },
             {
-                name: 'Tràng An Cổ',
-                time: '10:30',
-            },
-            {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },
@@ -540,36 +572,40 @@ const chuyenxe = [
         ],
         pick_up: [
             {
+                id: 1,
                 name: 'Công viên Cầu Giấy',
                 time: '06:00',
             },
             {
+                id: 2,
                 name: 'Chung cư CC2 Đồng Tàu',
                 time: '06:30',
             },
             {
+                id: 3,
                 name: '58A Trần Nhân Tông',
                 time: '06:30',
             },
             {
+                id: 4,
                 name: 'Văn phòng 93 Phố Vọng',
                 time: '07:30',
             },
         ],
         drop_off: [
             {
+                id: 1,
                 name: 'Văn phòng Ninh Bình',
                 time: '09:00',
             },
             {
+                id: 2,
                 name: 'Cửa Hàng Xăng Dầu Hoàng Hà',
                 time: '09:30',
             },
+            { id: 3, name: 'Tràng An Cổ', time: '10:30' },
             {
-                name: 'Tràng An Cổ',
-                time: '10:30',
-            },
-            {
+                id: 4,
                 name: 'Vườn chim Thung Nham',
                 time: '11:30',
             },

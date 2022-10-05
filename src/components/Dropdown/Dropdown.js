@@ -8,6 +8,8 @@ function Dropdown({
     isIcon = false,
     isEdit = false,
     placeholder = '',
+    maxHeight = '200px',
+    top = '110%',
 }) {
     const [isActive, setIsActive] = useState(false);
 
@@ -40,7 +42,7 @@ function Dropdown({
             result = [...options];
         }
         return (
-            <div ref={dropdown_content_el} className="dropdown-content">
+            <div ref={dropdown_content_el} style={{ maxHeight: maxHeight, top: top }} className="dropdown-content">
                 {result.map((option) => (
                     <div
                         key={option.id}
@@ -104,7 +106,11 @@ function Dropdown({
             {isEdit && isActive
                 ? renderDropdownItem()
                 : isActive && (
-                      <div ref={dropdown_content_el} className="dropdown-content">
+                      <div
+                          ref={dropdown_content_el}
+                          style={{ maxHeight: maxHeight, top: top }}
+                          className="dropdown-content"
+                      >
                           {options.map((option) => (
                               <div
                                   key={option.id}

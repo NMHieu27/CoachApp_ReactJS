@@ -4,7 +4,7 @@ import CoachImagesSlider from '../CoachImagesSlider/CoachImagesSlider';
 import numberWithCommas from '~/utils/numberWithCommas';
 import ReactStars from 'react-stars';
 import './CoachesView.scss';
-function CoachesView({ data }) {
+function CoachesView({ data, onClickBooking, onClickShipping }) {
     return (
         <div className="coaches-view">
             {/* section breadcrumb */}
@@ -53,7 +53,7 @@ function CoachesView({ data }) {
                                     <b> ★ </b>
                                 </span>
                             </p>
-                            <button className="coaches-view__detail__btn btn-shipping">
+                            <button className="coaches-view__detail__btn btn-shipping" onClick={onClickShipping}>
                                 <span>Gửi hàng </span>
                             </button>
                         </div>
@@ -62,7 +62,7 @@ function CoachesView({ data }) {
                                 {numberWithCommas(data.price)}đ
                             </p>
                             <p style={{ textAlign: 'right', fontStyle: 'italic' }}>Còn {data.empty_seat} chỗ trống</p>
-                            <button className="coaches-view__detail__btn btn-booking">
+                            <button className="coaches-view__detail__btn btn-booking" onClick={onClickBooking}>
                                 <span>Đặt vé</span>
                             </button>
                         </div>
@@ -93,7 +93,7 @@ function CoachesView({ data }) {
                         <p style={{ fontWeight: 'bold', color: '#2c3e50', fontSize: '20px' }}>Điểm trả</p>
                         {data.drop_off.map((value, index) => (
                             <div className="coaches-view__stop-by__from-to__point-info" key={index}>
-                                <p className="coaches-view__stop-by__from-to__point-info__time">{value.time}</p>
+                                <p className="coaches-view__stop-by__from-to__point-info__time">{value.time} • </p>
                                 <p>{value.name}</p>
                             </div>
                         ))}

@@ -19,7 +19,7 @@ function CommentList({ comments, fiveStar, fourStar, threeStar, twoStar, oneStar
                 <button onClick={() => handleClick(1)}>1★{`(${oneStar})`}</button>
             </div>
             <div className="comment-list__items">
-                {data.reverse().map((comment) => (
+                {data.map((comment) => (
                     <div className="comment-list__item" key={comment.id}>
                         <CommentItem comment={comment} />
                     </div>

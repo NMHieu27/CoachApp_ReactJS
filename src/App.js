@@ -4,6 +4,7 @@ import { publicRoutes, privateRoutes, authRoutes } from '~/routes';
 import { Page404 } from './pages/Page404';
 import DefaultLayout from '~/layouts';
 import { ToastContainer } from 'react-toastify';
+import ScrollButton from '~/components/ScrollButton/ScrollButton';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                                     element={
                                         <Layout>
                                             <Page />
+                                            <ScrollButton />
                                         </Layout>
                                     }
                                 />
@@ -50,6 +52,7 @@ function App() {
                                     element={
                                         <Layout>
                                             <Page />
+                                            <ScrollButton />
                                         </Layout>
                                     }
                                 />
@@ -71,6 +74,7 @@ function App() {
                                     element={
                                         <Layout>
                                             <Page />
+                                            <ScrollButton />
                                         </Layout>
                                     }
                                 />
