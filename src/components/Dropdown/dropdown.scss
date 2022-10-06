@@ -4,10 +4,11 @@
     position: relative;
     .dropdown-btn {
         height: 100%;
-        padding: 15px 20px;
+        // padding: 15px 20px;
         background: #fff;
-        box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-        font-weight: bold;
+        // border: 1px solid #ccc;
+        // box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+        // font-weight: bold;
         color: #333;
         display: flex;
         align-items: center;
@@ -15,7 +16,7 @@
         justify-content: space-between;
         .dropdown-input {
             width: 100%;
-            font-weight: bold;
+            // font-weight: bold;
             color: #2c3e50;
         }
     }

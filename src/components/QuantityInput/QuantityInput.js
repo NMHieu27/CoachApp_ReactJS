@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './QuantityInput.scss';
-function QuantityInput() {
-    const [quantity, setQuantity] = useState(8);
+const defaultFn = () => {};
+function QuantityInput({ onChange = defaultFn, maxValue = 100 }) {
+    const [quantity, setQuantity] = useState(1);
 
     const handleDecrement = () => {
         if (quantity !== 1) {
@@ -10,8 +11,12 @@ function QuantityInput() {
     };
 
     const handleIncrement = () => {
-        setQuantity(quantity + 1);
+        if (quantity < maxValue) setQuantity(quantity + 1);
     };
+
+    useEffect(() => {
+        onChange({ value: quantity });
+    }, [quantity, onChange]);
 
     return (
         <div className="quantity-container">

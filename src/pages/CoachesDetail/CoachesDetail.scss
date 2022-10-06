@@ -53,3 +53,22 @@
         // margin-top: 40px;
     }
 }
+
+.modal-booking,
+.modal-shipping {
+    &__input-field {
+        &__content {
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+
+        &__label {
+            color: var(--main-color);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    }
+    .input-field__required {
+        color: red;
+    }
+}

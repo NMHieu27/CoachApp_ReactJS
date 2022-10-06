@@ -1,40 +1,76 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import config from '~/config';
 import Helmet from '~/components/Helmet/Helmet';
+import { toast } from 'react-toastify';
+import signinAPI from '~/api/signinAPI';
 import './signin.scss';
 function Signin(props) {
+    const navigate = useNavigate();
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [isShowPass, setIsShowPass] = useState(false);
 
-    const handleLogin = () => {
-        console.log(phone);
-        console.log(password);
+    let handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const params = {
+                phone: phone,
+                password: password,
+            };
+            const response = await signinAPI.postSignIn(params);
+            if (response.code === 200) {
+                // localStorage.setItem('token', response.token);
+                localStorage.setItem('roleId', response.data.roleId);
+                localStorage.setItem('fullname', response.data.fullname);
+                localStorage.setItem('phone', response.data.phone);
+                localStorage.setItem('email', response.data.email);
+                localStorage.setItem('avatar', response.data.avatar);
+                localStorage.setItem('userId', response.data.id);
+                setPhone('');
+                setPassword('');
+                if (response.data.roleId === 1) navigate('/admin');
+                else if (response.data.roleId === 2) navigate('/');
+            } else {
+                toast.error('Đăng nhập thất bại, vui lòng kiểm tra thông tin !', { theme: 'colored' });
+            }
+        } catch (error) {
+            console.log('Thất bại khi gửi dữ liệu: ', error.message);
+            toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
+        }
     };
+    useEffect(() => {
+        if (localStorage.getItem('roleId')) {
+            if (localStorage.getItem('roleId') === 1) navigate('/admin');
+            if (localStorage.getItem('roleId') === 2) navigate('/');
+        } else navigate('/dang-nhap');
+    }, [navigate]);
+
     return (
         <Helmet title="Đăng nhập">
             <div className="login-background">
                 <div className="login-container">
-                    <div className="login-content">
+                    <form className="login-content" onSubmit={handleLogin}>
                         <div className="col-12 text-login">Đăng nhập</div>
 
                         <div className="col-12 form-group input-login">
-                            <label>Số điện thoại</label>
+                            <label for="phone">Số điện thoại</label>
                             <input
+                                type="tel"
                                 value={phone}
                                 onChange={(e) => {
                                     setPhone(e.target.value);
                                 }}
-                                type="text"
                                 className="form-control"
+                                id="phone"
                             />
                         </div>
 
                         <div className="col-12 form-group input-login">
-                            <label>Mật khẩu</label>
+                            <label for="pass">Mật khẩu</label>
                             <div className="custom-input-password">
                                 <input
+                                    id="pass"
                                     className="form-control"
                                     value={password}
                                     onChange={(e) => {
@@ -53,7 +89,7 @@ function Signin(props) {
                         </div>
 
                         <div className="col-12">
-                            <button className="btn-login" onClick={handleLogin}>
+                            <button type="submit" className="btn-login">
                                 Đăng nhập
                             </button>
                         </div>
@@ -79,7 +115,7 @@ function Signin(props) {
                                 Đăng kí
                             </Link>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </Helmet>

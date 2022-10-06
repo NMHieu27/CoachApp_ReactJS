@@ -6,7 +6,6 @@ function Modal({
     setIsShowing,
     hide,
     width = '700px',
-    height = '100%',
     children,
     btnLeft = 'Trở lại',
     btnRight = 'Hoàn tất',
@@ -30,7 +29,7 @@ function Modal({
               <React.Fragment>
                   <div className="modal-overlay" />
                   <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
-                      <div ref={modal_el} className="modal" style={{ width: width, height: height }}>
+                      <div ref={modal_el} className="modal" style={{ width: width }}>
                           <div className="modal-header">
                               <button
                                   type="button"

@@ -10,6 +10,9 @@ function Dropdown({
     placeholder = '',
     maxHeight = '200px',
     top = '110%',
+    fontWeightInput,
+    paddingDropDown = '15px 20px',
+    borderDropDown = 'none',
 }) {
     const [isActive, setIsActive] = useState(false);
 
@@ -83,10 +86,11 @@ function Dropdown({
     clickOutsideRef(dropdown_content_el, dropdown_toggle_el);
     return (
         <div ref={dropdown_toggle_el} className="dropdown">
-            <div className="dropdown-btn">
+            <div className="dropdown-btn" style={{ padding: paddingDropDown, border: borderDropDown }}>
                 {isEdit ? (
                     <input
                         className="dropdown-input"
+                        style={{ fontWeight: fontWeightInput }}
                         ref={dropdown_input_el}
                         type="text"
                         value={selected}

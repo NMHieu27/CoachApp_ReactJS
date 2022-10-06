@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import useModal from '~/hooks/useModal';
 import Helmet from '~/components/Helmet/Helmet';
 import CommentList from '~/components/CommentList/CommentList';
 import ReactStars from 'react-stars';
+import numberWithCommas from '~/utils/numberWithCommas';
 import './CoachesDetail.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -37,14 +38,34 @@ function CoachesDetail() {
         return result;
     });
 
+    // get point
     const [selectedPickUp, setSelectedPickUp] = useState(coach.pick_up[0].name);
     const [selectedDropOff, setSelectedDropOff] = useState(coach.drop_off[0].name);
+
+    // get seat
+    const [quantitySeat, setQuantitySeat] = useState(1);
 
     // useModal
     const { isShowing: isShowingBooking, setIsShowing: setIsShowingBooking, toggle: toggleBooking } = useModal();
     const { isShowing: isShowingShipping, setIsShowing: setIsShowingShipping, toggle: toggleShipping } = useModal();
 
     console.log(commentList);
+
+    // useRef
+    // booking
+    const fullNameBooking_input_el = useRef();
+    const phoneBooking_input_el = useRef();
+    const emailBooking_input_el = useRef();
+
+    // shipping
+    const nameOrder_input_el = useRef();
+    const fullNameShippingSender_input_el = useRef();
+    const phoneShippingSender_input_el = useRef();
+    const emailShippingSender_input_el = useRef();
+    const fullNameShippingReceiver_input_el = useRef();
+    const phoneShippingReceiver_input_el = useRef();
+    const emailShippingReceiver_input_el = useRef();
+    const freight_input_el = useRef();
 
     //handle when rating change
     const ratingChanged = (newRating) => {
@@ -56,6 +77,35 @@ function CoachesDetail() {
         const content = document.querySelector('textarea');
         console.log(content.value.trim());
     };
+
+    // Handle Booking ticket
+    const handleBooking = () => {
+        const bookingInfo = {
+            name: fullNameBooking_input_el.current.value,
+            phone: phoneBooking_input_el.current.value,
+            email: emailBooking_input_el.current.value,
+            pick_up: selectedPickUp,
+            drop_off: selectedDropOff,
+            seat: quantitySeat,
+        };
+        console.log(bookingInfo);
+    };
+
+    // Handle Shipping
+    const handleShipping = () => {
+        const shippingInfo = {
+            name: nameOrder_input_el.current.value,
+            senderName: fullNameShippingSender_input_el.current.value,
+            senderPhone: phoneShippingSender_input_el.value,
+            senderEmail: emailShippingSender_input_el.value,
+            receiverName: fullNameShippingReceiver_input_el.current.value,
+            receiverPhone: phoneShippingReceiver_input_el.value,
+            receiverEmail: emailShippingReceiver_input_el.current.value,
+            freight: freight_input_el.current.value,
+        };
+        console.log(shippingInfo);
+    };
+
     return (
         <Helmet title="Đặt vé">
             <div className="coaches-detail container mt-0 p-0">
@@ -117,7 +167,7 @@ function CoachesDetail() {
                     setIsShowing={setIsShowingBooking}
                     hide={toggleBooking}
                     title="Đặt vé"
-                    onClickAction={() => console.log('Đặt vé')}
+                    onClickAction={handleBooking}
                 >
                     <div className="modal-booking">
                         <div className="modal-booking__input-field">
@@ -125,30 +175,35 @@ function CoachesDetail() {
                                 <span>Họ tên</span>
                                 <span className="input-field__required">*</span>
                             </div>
-                            <input className="modal-booking__input-field__content" />
+                            <input ref={fullNameBooking_input_el} className="modal-booking__input-field__content" />
                         </div>
                         <div className="modal-booking__input-field">
                             <div className="modal-booking__input-field__label">
                                 <span>Số điện thoại</span>
                                 <span className="input-field__required">*</span>
                             </div>
-                            <input className="modal-booking__input-field__content" />
+                            <input
+                                type="tel"
+                                ref={phoneBooking_input_el}
+                                className="modal-booking__input-field__content"
+                            />
                         </div>
                         <div className="modal-booking__input-field">
                             <div className="modal-booking__input-field__label">
                                 <span>Email</span>
                                 <span className="input-field__required">*</span>
                             </div>
-                            <input className="modal-booking__input-field__content" />
-                        </div>
-                        <div className="modal-booking__quantity-seat">
-                            <div>Số ghế</div>
-                            <div className="quantity-seat__choose" style={{ width: '50%' }}>
-                                <QuantityInput />
-                            </div>
+                            <input
+                                type="email"
+                                ref={emailBooking_input_el}
+                                className="modal-booking__input-field__content"
+                            />
                         </div>
                         <div className="modal-booking__pick-up">
-                            <div>Chọn điểm đón</div>
+                            <div className="modal-booking__input-field__label">
+                                <span>Chọn điểm đón</span>
+                                <span className="input-field__required">*</span>
+                            </div>
                             <div>
                                 <Dropdown
                                     maxHeight={'150px'}
@@ -158,11 +213,16 @@ function CoachesDetail() {
                                     isEdit
                                     placeholder="Chọn điểm đón"
                                     top={'100%'}
+                                    paddingDropDown="0px 20px"
+                                    borderDropDown="1px solid #ccc"
                                 />
                             </div>
                         </div>
                         <div className="modal-booking__drop-off">
-                            <div>Chọn điểm trả</div>
+                            <div className="modal-booking__input-field__label">
+                                <span>Chọn điểm trả</span>
+                                <span className="input-field__required">*</span>
+                            </div>
                             <div>
                                 <Dropdown
                                     maxHeight={'150px'}
@@ -172,8 +232,22 @@ function CoachesDetail() {
                                     isEdit
                                     placeholder="Chọn điểm trả"
                                     top={'100%'}
+                                    paddingDropDown="0px 20px"
+                                    borderDropDown="1px solid #ccc"
                                 />
                             </div>
+                        </div>
+                        <div className="modal-booking__quantity-seat">
+                            <div className="modal-booking__input-field__label">Số ghế</div>
+                            <div className="quantity-seat__choose" style={{ width: '50%' }}>
+                                <QuantityInput
+                                    onChange={({ value }) => setQuantitySeat(value)}
+                                    maxValue={coach.empty_seat}
+                                />
+                            </div>
+                        </div>
+                        <div className="modal-booking__input-field__label" style={{ textAlign: 'right' }}>
+                            Tổng tiền: {numberWithCommas(+quantitySeat * coach.price)}đ
                         </div>
                     </div>
                 </Modal>
@@ -184,8 +258,93 @@ function CoachesDetail() {
                     setIsShowing={setIsShowingShipping}
                     hide={toggleShipping}
                     title="Gửi hàng"
-                    onClickAction={() => console.log('Gửi hàng')}
-                ></Modal>
+                    onClickAction={handleShipping}
+                >
+                    <div className="modal-shipping">
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Tên đơn hàng</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input ref={nameOrder_input_el} className="modal-booking__input-field__content" />
+                        </div>
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Họ tên nguời gửi</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input
+                                ref={fullNameShippingSender_input_el}
+                                className="modal-booking__input-field__content"
+                            />
+                        </div>
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Số điện thoại người gửi</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input
+                                type="tel"
+                                ref={phoneShippingSender_input_el}
+                                className="modal-booking__input-field__content"
+                            />
+                        </div>
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Email người gửi</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input
+                                type="email"
+                                ref={emailShippingSender_input_el}
+                                className="modal-booking__input-field__content"
+                            />
+                        </div>
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Họ tên người nhận</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input
+                                ref={fullNameShippingReceiver_input_el}
+                                className="modal-booking__input-field__content"
+                            />
+                        </div>
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Số điện thoại người nhận</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input
+                                type="tel"
+                                ref={phoneShippingReceiver_input_el}
+                                className="modal-booking__input-field__content"
+                            />
+                        </div>
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Email người nhận</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input
+                                type="email"
+                                ref={emailShippingReceiver_input_el}
+                                className="modal-booking__input-field__content"
+                            />
+                        </div>
+                        <div className="modal-booking__input-field">
+                            <div className="modal-booking__input-field__label">
+                                <span>Giá</span>
+                                <span className="input-field__required">*</span>
+                            </div>
+                            <input
+                                type="number"
+                                ref={freight_input_el}
+                                className="modal-booking__input-field__content"
+                            />
+                        </div>
+                    </div>
+                </Modal>
             </div>
         </Helmet>
     );

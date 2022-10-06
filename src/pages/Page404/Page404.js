@@ -15,7 +15,7 @@ function Page404() {
                     textAlign: 'center',
                 }}
             >
-                <p>Xin lỗi ! Trang không tìm thấy</p>
+                <p>Xin lỗi! Trang không tìm thấy</p>
                 <p>Page not found!</p>
             </div>
         </Helmet>

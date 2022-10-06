@@ -72,6 +72,7 @@ function SearchCoach() {
                             isEdit
                             icon="fa-solid fa-location-dot"
                             placeholder="Địa điểm đi"
+                            fontWeightInput={'bold'}
                         />
                     </div>
                     <div className="search-item to-where">
@@ -83,6 +84,7 @@ function SearchCoach() {
                             isEdit
                             icon="fa-solid fa-location-dot"
                             placeholder="Địa điểm đến"
+                            fontWeightInput={'bold'}
                         />
                     </div>
                     <div className="search-item date">
