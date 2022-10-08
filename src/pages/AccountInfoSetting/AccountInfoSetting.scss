@@ -1,0 +1,102 @@
+.account-setting-wrapper {
+    height: 100%;
+    background: url('../../../src/assets/images/banner.png');
+
+    .account-setting-container {
+        width: 70%;
+        height: 100%;
+        padding: 2.5rem 0;
+        .account-setting-content {
+            border-radius: 5px;
+            background: white;
+            height: 100%;
+
+            &__left {
+                // border-right: 1px solid;
+
+                .image-input-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    // min-height: 100vh;
+                    // background-color: rgb(255, 240, 222);
+                    .preview {
+                        padding: 30px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        width: 100%;
+                        max-width: 350px;
+                        margin: auto;
+                        // background-color: rgb(255, 255, 255);
+                        // box-shadow: 0 0 20px rgba(170, 170, 170, 0.2);
+                        #file-input {
+                            display: none;
+                        }
+
+                        #img-preview {
+                            width: 100%;
+                            object-fit: cover;
+                            margin-bottom: 20px;
+                        }
+                        label {
+                            font-weight: 600;
+                            cursor: pointer;
+                            color: #fff;
+                            border-radius: 8px;
+                            padding: 10px 20px;
+                            background-color: var(--main-color);
+                        }
+                    }
+                }
+            }
+            &__right {
+                height: 100%;
+                padding-bottom: 16px;
+                .title-update-info {
+                    margin: 16px;
+                    font-size: 30px;
+                    color: var(--main-color);
+                    font-weight: bold;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: rgb(43, 87, 148);
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom right, rgb(44, 62, 80), rgb(43, 87, 148));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right, rgb(44, 62, 80), rgb(43, 87, 148));
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 18px;
+    line-height: 2;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+}
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.form-input-password {
+    position: relative;
+    .eye {
+        position: absolute;
+        right: 7%;
+        bottom: 25%;
+        cursor: pointer;
+    }
+}
+.btn-signup {
+    background: var(--main-color);
+    color: var(--white);
+}

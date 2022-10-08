@@ -13,6 +13,8 @@ import { Signin } from '~/pages/Auth/Signin';
 import { Contract } from '~/pages/Contract';
 import { GoodsManagement } from '~/pages/GoodsManagement';
 import CoachesDetail from '~/pages/CoachesDetail/CoachesDetail';
+import AccountInfo from '~/pages/AccountInfo/AccountInfo';
+import AccountInfoSetting from '~/pages/AccountInfoSetting/AccountInfoSetting';
 
 // Public routes
 const publicRoutes = [
@@ -21,6 +23,8 @@ const publicRoutes = [
     { path: config.routes.goodsmanagement, component: GoodsManagement, layout: DefaultLayout },
     { path: config.routes.booking, component: Booking, layout: DefaultLayout },
     { path: config.routes.coachesdetail, component: CoachesDetail, layout: DefaultLayout },
+    { path: config.routes.accountinfo, component: AccountInfo, layout: DefaultLayout },
+    { path: config.routes.accountinfosetting, component: AccountInfoSetting, layout: DefaultLayout },
 ];
 
 //Admin routes

@@ -10,8 +10,8 @@ import Image from '~/components/Image';
 import './Header.scss';
 function Header() {
     const [isShowBurger, setIsShowBurger] = useState(false);
-    const [isLogin, setIsLogin] = useState(true);
     const [isRoleSuplier, setIsRoleSuplier] = useState(false);
+    const [isSignIn, setIsSignIn] = useState(false);
 
     const handleSignout = () => {
         localStorage.removeItem('fullname');
@@ -20,13 +20,19 @@ function Header() {
         localStorage.removeItem('phone');
         localStorage.removeItem('avatar');
         localStorage.removeItem('userId');
-        setIsLogin(false);
         toast.success('Đã đăng xuất', { theme: 'colored' });
+        setIsSignIn(false);
     };
 
     const fullname = localStorage.getItem('fullname');
     const avatar = localStorage.getItem('avatar');
     const roleId = localStorage.getItem('roleId');
+
+    useEffect(() => {
+        if (roleId) {
+            setIsSignIn(true);
+        }
+    }, [roleId]);
 
     const userMenu = [
         {
@@ -35,13 +41,13 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'Thông tin cá nhân',
-            to: '/@hoaa',
+            to: config.routes.accountinfo,
             separate: true,
         },
         {
             icon: <FontAwesomeIcon icon={faGear} />,
             title: 'Sửa thông tin',
-            to: '/settings',
+            to: config.routes.accountinfosetting,
         },
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
@@ -85,7 +91,7 @@ function Header() {
                     </li>
                 )}
 
-                {!isLogin ? (
+                {!isSignIn ? (
                     <li>
                         <NavLink className="nav-item" to={config.routes.signin}>
                             Đăng nhập

@@ -8,6 +8,8 @@ const routes = {
     goodsmanagement: '/don-hang',
     booking: '/dat-ve',
     coachesdetail: '/chi-tiet-chuyen-xe/:coachesID',
+    accountinfo: '/thong-tin-ca-nhan',
+    accountinfosetting: '/thong-tin-ca-nhan/chinh-sua',
 };
 
 export default routes;
