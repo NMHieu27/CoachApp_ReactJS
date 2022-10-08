@@ -3,6 +3,8 @@ import { useState, useRef } from 'react';
 function Dropdown({
     selected,
     setSelected,
+    selectedId,
+    setSelectedId,
     options = [],
     icon = 'fas fa-caret-down',
     isIcon = false,
@@ -13,6 +15,8 @@ function Dropdown({
     fontWeightInput,
     paddingDropDown = '15px 20px',
     borderDropDown = 'none',
+    borderRadiusDropDown = 'none',
+    borderContentDropDown = 'none',
 }) {
     const [isActive, setIsActive] = useState(false);
 
@@ -45,11 +49,16 @@ function Dropdown({
             result = [...options];
         }
         return (
-            <div ref={dropdown_content_el} style={{ maxHeight: maxHeight, top: top }} className="dropdown-content">
+            <div
+                ref={dropdown_content_el}
+                style={{ maxHeight: maxHeight, top: top, border: borderContentDropDown }}
+                className="dropdown-content"
+            >
                 {result.map((option) => (
                     <div
                         key={option.id}
                         onClick={(e) => {
+                            setSelectedId(option.id);
                             console.log(option.id);
                             setSelected(option.name);
                             setIsActive(false);
@@ -86,7 +95,10 @@ function Dropdown({
     clickOutsideRef(dropdown_content_el, dropdown_toggle_el);
     return (
         <div ref={dropdown_toggle_el} className="dropdown">
-            <div className="dropdown-btn" style={{ padding: paddingDropDown, border: borderDropDown }}>
+            <div
+                className="dropdown-btn"
+                style={{ padding: paddingDropDown, border: borderDropDown, borderRadius: borderRadiusDropDown }}
+            >
                 {isEdit ? (
                     <input
                         className="dropdown-input"
@@ -112,7 +124,7 @@ function Dropdown({
                 : isActive && (
                       <div
                           ref={dropdown_content_el}
-                          style={{ maxHeight: maxHeight, top: top }}
+                          style={{ maxHeight: maxHeight, top: top, border: borderContentDropDown }}
                           className="dropdown-content"
                       >
                           {options.map((option) => (
@@ -120,6 +132,7 @@ function Dropdown({
                                   key={option.id}
                                   onClick={(e) => {
                                       setSelected(option.name);
+                                      setSelectedId(option.id);
                                       setIsActive(false);
                                   }}
                                   className="dropdown-item"
