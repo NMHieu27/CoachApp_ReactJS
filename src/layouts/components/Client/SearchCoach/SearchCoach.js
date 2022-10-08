@@ -46,11 +46,17 @@ const to = [
     },
 ];
 function SearchCoach() {
-    const [selectedFrom, setSelectedFrom] = useState(from[0].name);
-    const [selectedTo, setSelectedTo] = useState(to[0].name);
+    // const [selectedFrom, setSelectedFrom] = useState(from[0].name);
+    // const [selectedTo, setSelectedTo] = useState(to[0].name);
+    let selectedFrom = '';
+    let selectedFromId = '';
+    let selectedTo = '';
+    let selectedToId = '';
 
     const nav = useNavigate();
     const handleSearch = () => {
+        // Test
+        console.log(selectedFrom, selectedFromId, selectedTo, selectedToId);
         nav(config.routes.booking);
     };
     return (
@@ -65,8 +71,12 @@ function SearchCoach() {
                 <div className="search-items">
                     <div className="search-item from-where">
                         <Dropdown
-                            selected={selectedFrom}
-                            setSelected={setSelectedFrom}
+                            // selected={selectedFrom}
+                            // setSelected={setSelectedFrom}
+                            onChange={({ selected, selectedId }) => {
+                                selectedFrom = selected;
+                                selectedFromId = selectedId;
+                            }}
                             options={from}
                             isIcon
                             isEdit
@@ -77,8 +87,12 @@ function SearchCoach() {
                     </div>
                     <div className="search-item to-where">
                         <Dropdown
-                            selected={selectedTo}
-                            setSelected={setSelectedTo}
+                            // selected={selectedTo}
+                            // setSelected={setSelectedTo}
+                            onChange={({ selected, selectedId }) => {
+                                selectedTo = selected;
+                                selectedToId = selectedId;
+                            }}
                             options={to}
                             isIcon
                             isEdit

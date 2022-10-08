@@ -68,12 +68,12 @@ function Signup() {
                     if (response.code === 200) {
                         toast.success('Đăng ký thành công !', { theme: 'colored' });
                         setTimeout(() => navigate(config.routes.signin), 1000);
-                    } else {
-                        console.log(response.code);
-                        toast.error('Đăng ký thất bại! ' + response.message, {
-                            theme: 'colored',
-                        });
-                    }
+                        } else {
+                            console.log(response.code);
+                            toast.error('Đăng ký thất bại! ' + response.message, {
+                                theme: 'colored',
+                            });
+                        }
                 }
             } catch (error) {
                 console.log('Thất bại khi gửi dữ liệu: ', error.message);

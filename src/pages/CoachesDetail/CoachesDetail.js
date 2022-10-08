@@ -39,8 +39,12 @@ function CoachesDetail() {
     });
 
     // get point
-    const [selectedPickUp, setSelectedPickUp] = useState(coach.pick_up[0].name);
-    const [selectedDropOff, setSelectedDropOff] = useState(coach.drop_off[0].name);
+    // const [selectedPickUp, setSelectedPickUp] = useState(coach.pick_up[0].name);
+    // const [selectedDropOff, setSelectedDropOff] = useState(coach.drop_off[0].name);
+    let selectedPickUp = '';
+    let selectedPickUpId = '';
+    let selectedDropOff = '';
+    let selectedDropOffId = '';
 
     // get seat
     const [quantitySeat, setQuantitySeat] = useState(1);
@@ -84,8 +88,8 @@ function CoachesDetail() {
             name: fullNameBooking_input_el.current.value,
             phone: phoneBooking_input_el.current.value,
             email: emailBooking_input_el.current.value,
-            pick_up: selectedPickUp,
-            drop_off: selectedDropOff,
+            pick_up_id: selectedPickUpId,
+            drop_off_id: selectedDropOffId,
             seat: quantitySeat,
         };
         console.log(bookingInfo);
@@ -208,8 +212,10 @@ function CoachesDetail() {
                                 <Dropdown
                                     maxHeight={'150px'}
                                     options={coach.pick_up}
-                                    selected={selectedPickUp}
-                                    setSelected={setSelectedPickUp}
+                                    onChange={({ selected, selectedId }) => {
+                                        selectedPickUp = selected;
+                                        selectedPickUpId = selectedId;
+                                    }}
                                     isEdit
                                     placeholder="Chọn điểm đón"
                                     top={'100%'}
@@ -227,8 +233,10 @@ function CoachesDetail() {
                                 <Dropdown
                                     maxHeight={'150px'}
                                     options={coach.drop_off}
-                                    selected={selectedDropOff}
-                                    setSelected={setSelectedDropOff}
+                                    onChange={({ selected, selectedId }) => {
+                                        selectedDropOff = selected;
+                                        selectedDropOffId = selectedId;
+                                    }}
                                     isEdit
                                     placeholder="Chọn điểm trả"
                                     top={'100%'}

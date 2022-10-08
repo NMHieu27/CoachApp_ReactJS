@@ -1,10 +1,7 @@
 import './dropdown.scss';
 import { useState, useRef } from 'react';
+import { useEffect } from 'react';
 function Dropdown({
-    selected,
-    setSelected,
-    selectedId,
-    setSelectedId,
     options = [],
     icon = 'fas fa-caret-down',
     isIcon = false,
@@ -17,12 +14,16 @@ function Dropdown({
     borderDropDown = 'none',
     borderRadiusDropDown = 'none',
     borderContentDropDown = 'none',
+    onChange = () => {},
 }) {
     const [isActive, setIsActive] = useState(false);
 
     const dropdown_toggle_el = useRef(null);
     const dropdown_content_el = useRef(null);
     const dropdown_input_el = useRef(null);
+
+    const [selected, setSelected] = useState(options[0].name);
+    const [selectedId, setSelectedId] = useState(options[0].id);
 
     const compareIgnore = (str1, str2) => {
         return str1
@@ -59,7 +60,6 @@ function Dropdown({
                         key={option.id}
                         onClick={(e) => {
                             setSelectedId(option.id);
-                            console.log(option.id);
                             setSelected(option.name);
                             setIsActive(false);
                         }}
@@ -93,6 +93,10 @@ function Dropdown({
         });
     };
     clickOutsideRef(dropdown_content_el, dropdown_toggle_el);
+
+    useEffect(() => {
+        onChange({ selected: selected, selectedId: selectedId });
+    }, [selectedId, selected, onChange]);
     return (
         <div ref={dropdown_toggle_el} className="dropdown">
             <div
