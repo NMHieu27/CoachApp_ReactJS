@@ -1,16 +1,22 @@
-import classNames from 'classnames/bind';
-import { AdminFooter, AdminHeader } from '../components/Admin';
-import styles from './Admin.module.scss';
-const cx = classNames.bind(styles);
+import AdminHeader from '~/layouts/components/Admin/Header/AdminHeader';
+import AdminFooter from '~/layouts/components/Admin/Footer/AdminFooter';
+import SideBar from '../components/Admin/Sidebar/SideBar';
+import './AdminLayout.scss';
 function AdminLayout({ children }) {
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('container')}>
-                <AdminHeader />
-                <div className={cx('content')}>{children}</div>
-                <AdminFooter />
+        <SideBar>
+            <div className="admin-layout">
+                <div className="admin-layout__header">
+                    <AdminHeader />
+                </div>
+                <div className="admin-layout__content">
+                    <div className="admin-layout__content__container container">{children}</div>
+                </div>
+                <div className="admin-layout__footer">
+                    <AdminFooter />
+                </div>
             </div>
-        </div>
+        </SideBar>
     );
 }
 

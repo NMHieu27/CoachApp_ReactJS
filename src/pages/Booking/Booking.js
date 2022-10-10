@@ -28,7 +28,7 @@ function Booking() {
                         <Link style={{ color: 'blue' }} to={config.routes.home}>
                             Vé xe H & L
                         </Link>
-                        <span>{` > `} Xe đi từ địa điểm A đến địa điểm B</span>
+                        <span>{` / `} Xe đi từ địa điểm A đến địa điểm B</span>
                     </div>
 
                     {/* Body result */}

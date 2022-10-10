@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
@@ -16,7 +16,7 @@ function Header() {
     const handleSignout = () => {
         localStorage.removeItem('fullname');
         localStorage.removeItem('email');
-        localStorage.removeItem('roleId');
+        localStorage.removeItem('role');
         localStorage.removeItem('phone');
         localStorage.removeItem('avatar');
         localStorage.removeItem('userId');
@@ -26,13 +26,11 @@ function Header() {
 
     const fullname = localStorage.getItem('fullname');
     const avatar = localStorage.getItem('avatar');
-    const roleId = localStorage.getItem('roleId');
+    const role = localStorage.getItem('role');
 
     useEffect(() => {
-        if (roleId) {
-            setIsSignIn(true);
-        }
-    }, [roleId]);
+        role && setIsSignIn(true);
+    }, [role]);
 
     const userMenu = [
         {
@@ -58,23 +56,23 @@ function Header() {
     ];
     return (
         <nav>
-            <NavLink className="logo" to={config.routes.home}>
+            <Link className="logo" to={config.routes.home}>
                 H & L
-            </NavLink>
+            </Link>
             <ul className={isShowBurger ? 'show' : ''}>
                 <li>
                     <NavLink className="nav-item" to={config.routes.home}>
                         Trang chủ
                     </NavLink>
                 </li>
-                {/* <li>
-                    <NavLink className="nav-item" to={config.routes.admin}>
-                        Amin
-                    </NavLink>
-                </li> */}
                 <li>
                     <NavLink className="nav-item" to={config.routes.goodsmanagement}>
-                        Quản lí kiện hàng
+                        Lịch sử mua vé
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink className="nav-item" to={config.routes.goodsmanagement}>
+                        Lịch sử gửi hàng
                     </NavLink>
                 </li>
                 {!isRoleSuplier ? (

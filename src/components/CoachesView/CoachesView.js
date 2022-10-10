@@ -3,6 +3,7 @@ import config from '~/config';
 import CoachImagesSlider from '../CoachImagesSlider/CoachImagesSlider';
 import numberWithCommas from '~/utils/numberWithCommas';
 import ReactStars from 'react-stars';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import './CoachesView.scss';
 function CoachesView({ data, onClickBooking, onClickShipping }) {
     return (
@@ -13,10 +14,10 @@ function CoachesView({ data, onClickBooking, onClickShipping }) {
                     Vé xe H & L
                 </Link>
                 <Link style={{ color: 'blue' }} to={config.routes.booking}>
-                    {` > `} Vé xe
+                    {` / `} Vé xe
                 </Link>
                 <span>
-                    {` > `} Chuyến {data.id} đi từ {data.start} đến {data.end}
+                    {` / `} Chuyến {data.id} đi từ {data.start} đến {data.end}
                 </span>
             </div>
 
@@ -53,9 +54,11 @@ function CoachesView({ data, onClickBooking, onClickShipping }) {
                                     <b> ★ </b>
                                 </span>
                             </p>
-                            <button className="coaches-view__detail__btn btn-shipping" onClick={onClickShipping}>
-                                <span>Gửi hàng </span>
-                            </button>
+                            {data.isShip && (
+                                <button className="coaches-view__detail__btn btn-shipping" onClick={onClickShipping}>
+                                    <span>Gửi hàng </span>
+                                </button>
+                            )}
                         </div>
                         <div className="coaches-view__detail__booking">
                             <p style={{ fontSize: '36px', fontWeight: 'bold', color: '#2c3e50', textAlign: 'right' }}>

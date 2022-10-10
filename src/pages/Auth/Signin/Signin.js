@@ -21,7 +21,7 @@ function Signin(props) {
             const response = await signinAPI.postSignIn(params);
             if (response.code === 200) {
                 // localStorage.setItem('token', response.token);
-                localStorage.setItem('roleId', response.data.roleId);
+                localStorage.setItem('role', response.data.role);
                 localStorage.setItem('fullname', response.data.fullname);
                 localStorage.setItem('phone', response.data.phone);
                 localStorage.setItem('email', response.data.email);
@@ -29,8 +29,8 @@ function Signin(props) {
                 localStorage.setItem('userId', response.data.id);
                 setPhone('');
                 setPassword('');
-                if (response.data.roleId === 1) navigate('/admin');
-                else if (response.data.roleId === 2) navigate('/');
+                if (response.data.role === 'admin') navigate('/admin');
+                else if (response.data.role === 'user') navigate('/');
             } else {
                 toast.error('Đăng nhập thất bại, vui lòng kiểm tra thông tin !', { theme: 'colored' });
             }
@@ -40,9 +40,9 @@ function Signin(props) {
         }
     };
     useEffect(() => {
-        if (localStorage.getItem('roleId')) {
-            if (localStorage.getItem('roleId') === 1) navigate('/admin');
-            if (localStorage.getItem('roleId') === 2) navigate('/');
+        if (localStorage.getItem('role')) {
+            if (localStorage.getItem('role') === 'admin') navigate('/admin');
+            if (localStorage.getItem('role') === 'user') navigate('/');
         } else navigate('/dang-nhap');
     }, [navigate]);
 

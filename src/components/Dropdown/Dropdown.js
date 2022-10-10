@@ -86,7 +86,8 @@ function Dropdown({
                 if (content_ref.current && !content_ref.current.contains(e.target)) {
                     setIsActive(false);
                     if (isEdit && !options.some((option) => option.name.includes(dropdown_input_el.current.value))) {
-                        setSelected('');
+                        setSelected(options[0].name);
+                        setSelectedId(options[0].id);
                     }
                 }
             }

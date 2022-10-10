@@ -1,0 +1,24 @@
+.admin-home {
+    height: 100%;
+    // background: purple;
+
+    &__container {
+        height: 100%;
+    }
+    &__content {
+        height: 100%;
+
+        &__card-stats {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+
+            .card-stat-item {
+                width: 30%;
+                height: 120px;
+                margin-bottom: 5%;
+            }
+        }
+    }
+}

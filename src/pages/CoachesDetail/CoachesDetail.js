@@ -60,6 +60,7 @@ function CoachesDetail() {
     const fullNameBooking_input_el = useRef();
     const phoneBooking_input_el = useRef();
     const emailBooking_input_el = useRef();
+    const quantityBooking_input_el = useRef();
 
     // shipping
     const nameOrder_input_el = useRef();
@@ -84,6 +85,9 @@ function CoachesDetail() {
 
     // Handle Booking ticket
     const handleBooking = () => {
+        if (+quantitySeat === 0) {
+            alert('Seat not zero');
+        }
         const bookingInfo = {
             name: fullNameBooking_input_el.current.value,
             phone: phoneBooking_input_el.current.value,
@@ -247,10 +251,23 @@ function CoachesDetail() {
                         </div>
                         <div className="modal-booking__quantity-seat">
                             <div className="modal-booking__input-field__label">Số ghế</div>
-                            <div className="quantity-seat__choose" style={{ width: '50%' }}>
-                                <QuantityInput
-                                    onChange={({ value }) => setQuantitySeat(value)}
-                                    maxValue={coach.empty_seat}
+                            <div className="quantity-seat__choose">
+                                <input
+                                    value={quantitySeat}
+                                    min={1}
+                                    type="number"
+                                    ref={quantityBooking_input_el}
+                                    className="modal-booking__input-field__content"
+                                    onChange={(e) => {
+                                        setQuantitySeat(
+                                            e.target.value === 0
+                                                ? 1
+                                                : e.target.value < 0
+                                                ? Math.abs(e.target.value)
+                                                : e.target.value,
+                                        );
+                                    }}
+                                    max={coach.empty_seat}
                                 />
                             </div>
                         </div>

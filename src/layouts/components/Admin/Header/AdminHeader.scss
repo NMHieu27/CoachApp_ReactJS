@@ -1,0 +1,26 @@
+.admin-header {
+    height: 100%;
+    width: 100%;
+    // background: var(--main-color);
+    // background: #113d68;
+    background: transparent;
+
+    &__container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        &__search-box {
+            width: 30%;
+        }
+
+        &__right-box {
+            font-size: 20px;
+            color: #ccc;
+            padding-left: 55%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 70%;
+        }
+    }
+}

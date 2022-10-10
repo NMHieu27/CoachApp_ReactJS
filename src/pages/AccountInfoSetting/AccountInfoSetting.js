@@ -85,7 +85,8 @@ function AccountInfoSetting() {
                 } else {
                     const response = await accountAPI.postUpdateInfo(params);
                     if (response.code === 200) {
-                        toast.success('Cập nhật thông tin thành côngcông !', { theme: 'colored' });
+                        toast.success('Cập nhật thông tin thành công !', { theme: 'colored' });
+                        localStorage.setItem('fullname', 'A');
                         setTimeout(() => navigate(config.routes.accountinfo), 1000);
                     } else {
                         console.log(response.code);

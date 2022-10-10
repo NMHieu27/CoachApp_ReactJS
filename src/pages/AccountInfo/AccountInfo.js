@@ -43,13 +43,19 @@ function AccountInfo() {
                             <div className="row">
                                 <div className="col-md-4">
                                     <div className="account-info__header__img">
-                                        <Image className="user-info-avatar" src={accountInfo.avatar} alt={fullname} />
+                                        <Image
+                                            className="user-info-avatar"
+                                            src={accountInfo.avatar}
+                                            alt={accountInfo.fullname}
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="account-info__header__name-and-role">
-                                        <p style={{ fontWeight: 'bold', color: '#2c3e50', fontSize: '30px' }}>Tên</p>
-                                        <p style={{ color: 'blue' }}>Phân quyền: {accountInfo.roleId}</p>
+                                        <p style={{ fontWeight: 'bold', color: '#2c3e50', fontSize: '30px' }}>
+                                            {accountInfo.fullname}
+                                        </p>
+                                        <p style={{ color: 'blue' }}>Phân quyền: {accountInfo.role}</p>
                                         <span>Ngày tạo: {accountInfo.createdDate}</span>
                                     </div>
                                 </div>
