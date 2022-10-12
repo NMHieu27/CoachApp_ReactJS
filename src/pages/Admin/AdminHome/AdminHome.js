@@ -39,6 +39,18 @@ function AdminHome() {
             icon: <i class="fa-solid fa-sack-dollar"></i>,
             colorCard: 'pink',
         },
+        {
+            title: 'Thu nhập (hàng tháng)',
+            value: '5.000.000đ',
+            icon: <i class="fa-solid fa-sack-dollar"></i>,
+            colorCard: 'cyan',
+        },
+        {
+            title: 'Thu nhập (hàng tháng)',
+            value: '5.000.000đ',
+            icon: <i class="fa-solid fa-sack-dollar"></i>,
+            colorCard: '',
+        },
     ];
     return (
         <div className="admin-home">

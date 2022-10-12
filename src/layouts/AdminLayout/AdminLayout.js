@@ -10,7 +10,7 @@ function AdminLayout({ children }) {
                     <AdminHeader />
                 </div>
                 <div className="admin-layout__content">
-                    <div className="admin-layout__content__container container">{children}</div>
+                    <div className="admin-layout__content__container">{children}</div>
                 </div>
                 <div className="admin-layout__footer">
                     <AdminFooter />

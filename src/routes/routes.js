@@ -6,7 +6,7 @@ import { AdminLayout, DefaultLayout } from '~/layouts';
 // Pages
 import Home from '~/pages/Home';
 import AdminHome from '~/pages/Admin/AdminHome/AdminHome';
-import Accounts from '~/pages/Admin/Accounts';
+import AccountsManagement from '~/pages/Admin/AccountsManagement/AccountsManagement';
 import Signup from '~/pages/Auth/Signup/Signup';
 import Booking from '~/pages/Booking/Booking';
 import { Signin } from '~/pages/Auth/Signin';
@@ -30,7 +30,7 @@ const publicRoutes = [
 //Admin routes
 const privateRoutes = [
     { path: config.routes.admin, component: AdminHome, layout: AdminLayout },
-    { path: config.routes.accounts, component: Accounts, layout: AdminLayout },
+    { path: config.routes.accounts, component: AccountsManagement, layout: AdminLayout },
 ];
 
 //Auth Routes

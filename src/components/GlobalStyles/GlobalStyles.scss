@@ -144,3 +144,33 @@ body {
 .signin-signup__errorMsg {
     color: red;
 }
+
+//btn-default
+.btn-handle {
+    padding: 6px 11px;
+    margin: 0 3px;
+    color: var(--txt-white);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-handle:hover {
+    filter: brightness(120%);
+}
+
+.btn-handle-danger {
+    background-color: var(--main-color-red);
+}
+
+.btn-handle-success {
+    background-color: var(--main-color-green);
+}
+
+.btn-handle-primary {
+    background-color: var(--main-color-blue);
+}
+
+.btn-handle-warning {
+    background-color: var(--main-color-orange);
+}

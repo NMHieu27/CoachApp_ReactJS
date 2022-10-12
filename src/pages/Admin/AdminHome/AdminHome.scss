@@ -1,5 +1,6 @@
 .admin-home {
     height: 100%;
+    width: 100%;
     // background: purple;
 
     &__container {
@@ -9,15 +10,14 @@
         height: 100%;
 
         &__card-stats {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-
+            display: grid;
+            grid-template-columns: calc(100% / 4 - 10px) calc(100% / 4 - 10px) calc(100% / 4 - 10px) calc(
+                    100% / 4 - 10px
+                );
+            grid-template-rows: 120px 120px;
+            column-gap: 10px;
+            row-gap: 10px;
             .card-stat-item {
-                width: 30%;
-                height: 120px;
-                margin-bottom: 5%;
             }
         }
     }

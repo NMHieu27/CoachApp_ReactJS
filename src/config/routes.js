@@ -1,7 +1,7 @@
 const routes = {
     home: '/',
     admin: '/admin',
-    accounts: '/admin/accounts',
+    accounts: '/admin/nguoi-dung',
     signin: '/dang-nhap',
     signup: '/dang-ki',
     contract: '/mo-ban-ve',

@@ -1,0 +1,18 @@
+.table-filter {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+    input {
+        outline: 1px solid #ccc;
+        border-radius: 3px;
+        margin-left: 10px;
+    }
+    &__limit {
+        display: flex;
+        align-items: center;
+    }
+    &__search {
+        display: flex;
+    }
+}

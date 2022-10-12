@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from 'react-icons/fa';
 import { ImStatsDots, ImStatsBars2 } from 'react-icons/im';
 import { AiTwotoneFileExclamation } from 'react-icons/ai';
@@ -22,7 +22,7 @@ const routes = [
         icon: <FaHome />,
     },
     {
-        path: '/users',
+        path: config.routes.accounts,
         name: 'Quản lý người dùng',
         icon: <FaUser />,
     },

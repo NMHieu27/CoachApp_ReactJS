@@ -65,7 +65,7 @@ function AdminHeader() {
                         <input
                             type="text"
                             className="form-control"
-                            style={{ border: 'none' }}
+                            // style={{ border: 'none' }}
                             placeholder="Tìm kiếm"
                             aria-label="Recipient's username"
                             aria-describedby="basic-addon2"
