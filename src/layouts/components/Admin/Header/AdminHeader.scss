@@ -9,18 +9,25 @@
         height: 100%;
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         &__search-box {
             width: 30%;
+            display: none;
         }
 
         &__right-box {
             font-size: 20px;
-            color: #ccc;
-            padding-left: 55%;
+            color: #fff;
+            // padding-left: 55%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
+            // justify-content: space-between;
             align-items: center;
             width: 70%;
+
+            &__item {
+                margin-left: 2rem;
+            }
         }
     }
 }

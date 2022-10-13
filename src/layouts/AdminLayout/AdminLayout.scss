@@ -7,12 +7,14 @@
         position: sticky;
         top: 0;
         height: 58px;
+        background: #349eff;
         // background: var(--main-color);
         // background: #113d68;
-        background: white;
+        // background: white;
         // box-shadow: 0px -10px 24px 1px rgba(57, 57, 57, 0.75);
 
         padding: 0 1.5rem;
+        z-index: 1000;
     }
 
     &__content {

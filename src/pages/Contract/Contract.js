@@ -1,5 +1,5 @@
 import './contract.scss';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Helmet from '~/components/Helmet/Helmet';
 import Image from '~/components/Image';
@@ -10,8 +10,28 @@ import * as Yup from 'yup';
 import coachGarageAPI from '~/api/coachGarageAPI';
 import config from '~/config';
 
-import country from '~/fakedata/country';
+import districtAPI from '~/api/districtAPI';
+
 function Contract() {
+    const [district, setDistrict] = useState();
+    useEffect(() => {
+        const fetchAllDistrict = async () => {
+            try {
+                const response = await districtAPI.getAll();
+                if (response.code === 200) {
+                    console.log('fetch district success');
+                    setDistrict(response.data);
+                } else {
+                    console.log('fetchDistrict error');
+                    throw new Error(response.message);
+                }
+            } catch (err) {
+                console.log('fetch district failed' + err.message);
+            }
+        };
+        fetchAllDistrict();
+    }, []);
+
     const currentUserId = localStorage.getItem('userId');
     const nav = useNavigate();
     useEffect(() => {
@@ -37,7 +57,7 @@ function Contract() {
             phone: '',
             email: '',
             address: '',
-            districId: '',
+            districtId: '',
             userId: '',
         },
         validationSchema: Yup.object({
@@ -56,8 +76,8 @@ function Contract() {
         }),
         onSubmit: async (values) => {
             console.log(currentUserId, selectedDistrictId);
-            values.userId = currentUserId;
-            values.districId = selectedDistrictId;
+            values.userId = +currentUserId;
+            values.districtId = selectedDistrictId;
             if (!values.userId) {
                 toast.error('Vui lòng đăng nhập để thực hiện đăng kí ', {
                     theme: 'colored',
@@ -66,10 +86,13 @@ function Contract() {
                 try {
                     const params = {
                         name: values.name_garage,
+                        owner: values.fullname,
                         phone: values.phone,
                         address: values.address,
-                        districId: +selectedDistrictId,
-                        userId: +currentUserId,
+                        districtId: values.districtId,
+                        userId: values.userId,
+                        contract: '',
+                        email: values.email,
                     };
                     const response = await coachGarageAPI.postAddGarage(params);
                     if (response.code === 200) {
@@ -78,6 +101,7 @@ function Contract() {
                         toast.error('Đăng ký thất bại! ' + response.message, {
                             theme: 'colored',
                         });
+                        throw new Error(response.message);
                     }
                 } catch (error) {
                     console.log('Thất bại khi gửi dữ liệu: ', error.message);
@@ -105,16 +129,16 @@ function Contract() {
                             <div className="col-7 contract-content__container__right">
                                 <div className="contract-left_box">
                                     <form onSubmit={formik.handleSubmit}>
-                                        <div class="col-md-11 mb-2 pb-2">
-                                            <label class="form-label" for="fullname">
+                                        <div className="col-md-11 mb-2 pb-2">
+                                            <label className="form-label" htmlFor="fullname">
                                                 Họ và tên
                                             </label>
-                                            <div class="form-outline">
+                                            <div className="form-outline">
                                                 <input
                                                     type="text"
                                                     id="fullname"
                                                     name="fullname"
-                                                    class="form-control form-control-lg"
+                                                    className="form-control form-control-lg"
                                                     value={formik.values.fullname}
                                                     onChange={formik.handleChange}
                                                 />
@@ -123,16 +147,16 @@ function Contract() {
                                                 <p className="signin-signup__errorMsg">{formik.errors.fullname}</p>
                                             )}
                                         </div>
-                                        <div class="col-md-11 mb-2 pb-2">
-                                            <label class="form-label" for="name_garage">
+                                        <div className="col-md-11 mb-2 pb-2">
+                                            <label className="form-label" htmlFor="name_garage">
                                                 Tên nhà xe
                                             </label>
-                                            <div class="form-outline">
+                                            <div className="form-outline">
                                                 <input
                                                     type="text"
                                                     id="name_garage"
                                                     name="name_garage"
-                                                    class="form-control form-control-lg"
+                                                    className="form-control form-control-lg"
                                                     value={formik.values.name_garage}
                                                     onChange={formik.handleChange}
                                                 />
@@ -141,38 +165,40 @@ function Contract() {
                                                 <p className="signin-signup__errorMsg">{formik.errors.name_garage}</p>
                                             )}
                                         </div>
-                                        <div class="col-md-11 mb-2 pb-2">
-                                            <div class="form-outline">
-                                                <label class="form-label">Tỉnh, thành phố</label>
+                                        <div className="col-md-11 mb-2 pb-2">
+                                            <div className="form-outline">
+                                                <label className="form-label">Tỉnh, thành phố</label>
                                                 <div style={{ height: '56px' }}>
-                                                    <Dropdown
-                                                        maxHeight={'150px'}
-                                                        options={country}
-                                                        onChange={({ selected, selectedId }) => {
-                                                            selectedDistrict = selected;
-                                                            selectedDistrictId = selectedId;
-                                                        }}
-                                                        isEdit
-                                                        placeholder="Chọn điểm đón"
-                                                        top={'100%'}
-                                                        paddingDropDown="0px 20px"
-                                                        borderDropDown="1px solid #ccc"
-                                                        borderRadiusDropDown="5px"
-                                                        borderContentDropDown="1px solid #ccc"
-                                                    />
+                                                    {district && (
+                                                        <Dropdown
+                                                            maxHeight={'150px'}
+                                                            options={district}
+                                                            onChange={({ selected, selectedId }) => {
+                                                                selectedDistrict = selected;
+                                                                selectedDistrictId = selectedId;
+                                                            }}
+                                                            isEdit
+                                                            placeholder="Chọn điểm đón"
+                                                            top={'100%'}
+                                                            paddingDropDown="0px 20px"
+                                                            borderDropDown="1px solid #ccc"
+                                                            borderRadiusDropDown="5px"
+                                                            borderContentDropDown="1px solid #ccc"
+                                                        />
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-11 mb-2 pb-2">
-                                            <label class="form-label" for="address">
+                                        <div className="col-md-11 mb-2 pb-2">
+                                            <label className="form-label" htmlFor="address">
                                                 Địa chỉ cụ thể
                                             </label>
-                                            <div class="form-outline">
+                                            <div className="form-outline">
                                                 <input
                                                     type="text"
                                                     id="address"
                                                     name="address"
-                                                    class="form-control form-control-lg"
+                                                    className="form-control form-control-lg"
                                                     value={formik.values.address}
                                                     onChange={formik.handleChange}
                                                 />
@@ -181,16 +207,16 @@ function Contract() {
                                                 <p className="signin-signup__errorMsg">{formik.errors.address}</p>
                                             )}
                                         </div>
-                                        <div class="col-md-11 mb-2 pb-2">
-                                            <div class="form-outline">
-                                                <label class="form-label" for="emailAddress">
+                                        <div className="col-md-11 mb-2 pb-2">
+                                            <div className="form-outline">
+                                                <label className="form-label" htmlFor="emailAddress">
                                                     Email
                                                 </label>
                                                 <input
                                                     type="email"
                                                     name="email"
                                                     id="emailAddress"
-                                                    class="form-control form-control-lg"
+                                                    className="form-control form-control-lg"
                                                     value={formik.values.email}
                                                     onChange={formik.handleChange}
                                                 />
@@ -199,16 +225,16 @@ function Contract() {
                                                 <p className="signin-signup__errorMsg">{formik.errors.email}</p>
                                             )}
                                         </div>
-                                        <div class="col-md-11 mb-2 pb-2">
-                                            <div class="form-outline">
-                                                <label class="form-label" for="phoneNumber">
+                                        <div className="col-md-11 mb-2 pb-2">
+                                            <div className="form-outline">
+                                                <label className="form-label" htmlFor="phoneNumber">
                                                     Số điện thoại
                                                 </label>
                                                 <input
                                                     type="tel"
                                                     name="phone"
                                                     id="phoneNumber"
-                                                    class="form-control form-control-lg"
+                                                    className="form-control form-control-lg"
                                                     value={formik.values.phone}
                                                     onChange={formik.handleChange}
                                                 />
@@ -218,11 +244,11 @@ function Contract() {
                                             )}
                                         </div>
 
-                                        <div class="col-md-11 pt-2" style={{ textAlign: 'right' }}>
-                                            <input class=" btn-lg btn-signup" type="submit" value="Đăng kí" />
+                                        <div className="col-md-11 pt-2" style={{ textAlign: 'right' }}>
+                                            <input className=" btn-lg btn-signup" type="submit" value="Đăng kí" />
                                         </div>
                                     </form>
-                                    {/* <button class=" btn-lg btn-signup" onClick={handleClick}>
+                                    {/* <button className=" btn-lg btn-signup" onClick={handleClick}>
                                         Dk
                                     </button> */}
                                 </div>

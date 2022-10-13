@@ -109,7 +109,7 @@ function AccountInfoSetting() {
                 if (response.code === 200) {
                     toast.success('Lấy dữ liệu tài khoản thành công !', { theme: 'colored' });
                     formik.values.fullname = response.data.fullname;
-                    response.gender ? setSexChecked(1) : setSexChecked(0);
+                    response.data.gender ? setSexChecked(1) : setSexChecked(0);
                     formik.values.gender = response.data.gender;
                     formik.values.email = response.data.email;
                     formik.values.phone = response.data.phone;

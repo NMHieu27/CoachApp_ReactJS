@@ -2,7 +2,7 @@ import './dropdown.scss';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
 function Dropdown({
-    options = [],
+    options = [{ name: 'Empty', id: 0 }],
     icon = 'fas fa-caret-down',
     isIcon = false,
     isEdit = false,

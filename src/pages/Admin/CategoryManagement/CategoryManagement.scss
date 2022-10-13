@@ -1,0 +1,8 @@
+.category-management {
+    &__breadcrumb {
+        grid-area: accounts-management__breadcrumb;
+        background: white;
+        border-radius: 5px;
+        padding: 15px;
+    }
+}

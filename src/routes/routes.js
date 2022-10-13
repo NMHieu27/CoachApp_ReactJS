@@ -7,6 +7,13 @@ import { AdminLayout, DefaultLayout } from '~/layouts';
 import Home from '~/pages/Home';
 import AdminHome from '~/pages/Admin/AdminHome/AdminHome';
 import AccountsManagement from '~/pages/Admin/AccountsManagement/AccountsManagement';
+import AddAccount from '~/pages/Admin/AccountsManagement/AddAccount';
+import EditAccount from '~/pages/Admin/AccountsManagement/EditAccount';
+import RegisterManagement from '~/pages/Admin/RegisterManagement/RegisterManagement';
+import CategoryManagement from '~/pages/Admin/CategoryManagement/CategoryManagement';
+import AddCategory from '~/pages/Admin/CategoryManagement/AddCategory';
+import EditCategory from '~/pages/Admin/CategoryManagement/EditCategory';
+
 import Signup from '~/pages/Auth/Signup/Signup';
 import Booking from '~/pages/Booking/Booking';
 import { Signin } from '~/pages/Auth/Signin';
@@ -29,8 +36,18 @@ const publicRoutes = [
 
 //Admin routes
 const privateRoutes = [
+    // Admin home
     { path: config.routes.admin, component: AdminHome, layout: AdminLayout },
+    // Admin account
     { path: config.routes.accounts, component: AccountsManagement, layout: AdminLayout },
+    { path: config.routes.addNewAccount, component: AddAccount, layout: AdminLayout },
+    { path: config.routes.editAccount, component: EditAccount, layout: AdminLayout },
+    //  Admin register coach garage
+    { path: config.routes.registerManagement, component: RegisterManagement, layout: AdminLayout },
+    // Admin category
+    { path: config.routes.categoryManagement, component: CategoryManagement, layout: AdminLayout },
+    { path: config.routes.addCategory, component: AddCategory, layout: AdminLayout },
+    { path: config.routes.editCategory, component: EditCategory, layout: AdminLayout },
 ];
 
 //Auth Routes

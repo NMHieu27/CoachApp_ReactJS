@@ -16,6 +16,7 @@ function AccountInfo() {
     const [accountInfo, setAccountInfo] = useState({});
 
     useEffect(() => {
+        console.log(1);
         const fetchAccount = async () => {
             try {
                 const response = await userAPI.getUserById(currentUserId);
@@ -43,6 +44,7 @@ function AccountInfo() {
                             <div className="row">
                                 <div className="col-md-4">
                                     <div className="account-info__header__img">
+                                        {console.log(3)}
                                         <Image
                                             className="user-info-avatar"
                                             src={accountInfo.avatar}

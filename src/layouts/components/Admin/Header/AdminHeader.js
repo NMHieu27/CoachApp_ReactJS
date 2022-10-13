@@ -78,13 +78,13 @@ function AdminHeader() {
                     </div>
                 </div>
                 <div className="admin-header__container__right-box">
-                    <div>
+                    <div className="admin-header__container__right-box__item">
                         <i class="fa-solid fa-bell"></i>
                     </div>
-                    <div>
+                    <div className="admin-header__container__right-box__item">
                         <i class="fa-solid fa-envelope"></i>
                     </div>
-                    <div>
+                    <div className="admin-header__container__right-box__item">
                         <Menu items={userMenu} onChange={handleSignout}>
                             <img
                                 src={images.noImage}

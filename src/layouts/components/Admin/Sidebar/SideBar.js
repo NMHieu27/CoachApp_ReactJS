@@ -1,10 +1,9 @@
-import { NavLink, Link } from 'react-router-dom';
-import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from 'react-icons/fa';
-import { ImStatsDots, ImStatsBars2 } from 'react-icons/im';
+import { NavLink } from 'react-router-dom';
+import { FaBars, FaHome, FaUser } from 'react-icons/fa';
+import { ImStatsDots } from 'react-icons/im';
 import { AiTwotoneFileExclamation } from 'react-icons/ai';
-import { FaBusAlt } from 'react-icons/fa';
-import { BsCashCoin, BsFilePost } from 'react-icons/bs';
-import { BiLogOut, BiCategory } from 'react-icons/bi';
+import { BsFilePost } from 'react-icons/bs';
+import { BiLogOut } from 'react-icons/bi';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SidebarMenu from './SidebarMenu';
@@ -27,7 +26,7 @@ const routes = [
         icon: <FaUser />,
     },
     {
-        path: '/users',
+        path: config.routes.registerManagement,
         name: 'Phê duyệt nhà xe',
         icon: <BsFilePost />,
     },
@@ -37,7 +36,7 @@ const routes = [
         icon: <AiTwotoneFileExclamation />,
         subRoutes: [
             {
-                path: '/settings/profile',
+                path: config.routes.categoryManagement,
                 name: 'Phân loại xe',
                 // icon: <BiCategory />,
             },

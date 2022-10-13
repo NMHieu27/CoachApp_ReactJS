@@ -1,9 +1,23 @@
 const routes = {
-    home: '/',
-    admin: '/admin',
-    accounts: '/admin/nguoi-dung',
+    // Auth routes
     signin: '/dang-nhap',
     signup: '/dang-ki',
+
+    // Admin routes
+    admin: '/admin',
+    // -- Admin - account
+    accounts: '/admin/nguoi-dung',
+    addNewAccount: '/admin/nguoi-dung/them-nguoi-dung',
+    editAccount: '/admin/nguoi-dung/chinh-sua/:id',
+    // -- Admin - register coach garage
+    registerManagement: '/admin/danh-sach-dang-ki-nha-xe',
+    // -- Admin - category management
+    categoryManagement: '/admin/phan-loai-xe',
+    addCategory: '/admin/phan-loai-xe/them-phan-loai-xe',
+    editCategory: '/admin/phan-loai-xe/chinh-sua/:id',
+
+    // Client routes
+    home: '/',
     contract: '/mo-ban-ve',
     goodsmanagement: '/don-hang',
     booking: '/dat-ve',
