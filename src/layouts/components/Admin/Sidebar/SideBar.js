@@ -36,6 +36,11 @@ const routes = [
         icon: <AiTwotoneFileExclamation />,
         subRoutes: [
             {
+                path: config.routes.coachGarageManagement,
+                name: 'Nhà xe',
+                // icon: <BiCategory />,
+            },
+            {
                 path: config.routes.categoryManagement,
                 name: 'Phân loại xe',
                 // icon: <BiCategory />,

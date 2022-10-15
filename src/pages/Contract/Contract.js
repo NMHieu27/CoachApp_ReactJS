@@ -39,8 +39,10 @@ function Contract() {
             nav(config.routes.signin);
         }
     }, [currentUserId, nav]);
-    let selectedDistrict = '';
-    let selectedDistrictId = '';
+    const [selectedDistrict, setSelectedDistrict] = useState();
+    const [selectedDistrictId, setSelectedDistrictId] = useState(district && district.id);
+    // let selectedDistrict = '';
+    // let selectedDistrictId = '';
 
     // Test
     // let countryName = '';
@@ -173,10 +175,14 @@ function Contract() {
                                                         <Dropdown
                                                             maxHeight={'150px'}
                                                             options={district}
-                                                            onChange={({ selected, selectedId }) => {
-                                                                selectedDistrict = selected;
-                                                                selectedDistrictId = selectedId;
-                                                            }}
+                                                            // onChange={({ selected, selectedId }) => {
+                                                            //     selectedDistrict = selected;
+                                                            //     selectedDistrictId = selectedId;
+                                                            // }}
+                                                            selected={selectedDistrict}
+                                                            setSelected={setSelectedDistrict}
+                                                            selectedId={selectedDistrictId}
+                                                            setSelectedId={setSelectedDistrictId}
                                                             isEdit
                                                             placeholder="Chọn điểm đón"
                                                             top={'100%'}

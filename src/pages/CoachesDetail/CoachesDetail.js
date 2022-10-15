@@ -41,10 +41,15 @@ function CoachesDetail() {
     // get point
     // const [selectedPickUp, setSelectedPickUp] = useState(coach.pick_up[0].name);
     // const [selectedDropOff, setSelectedDropOff] = useState(coach.drop_off[0].name);
-    let selectedPickUp = '';
-    let selectedPickUpId = '';
-    let selectedDropOff = '';
-    let selectedDropOffId = '';
+    const [selectedPickUp, setSelectedPickUp] = useState();
+    const [selectedPickUpId, setSelectedPickUpId] = useState(coach.pick_up[0].id);
+    const [selectedDropOff, setSelectedDropOff] = useState();
+    const [selectedDropOffId, setSelectedDropOffId] = useState(coach.drop_off[0].id);
+
+    // let selectedPickUp = '';
+    // let selectedPickUpId = '';
+    // let selectedDropOff = '';
+    // let selectedDropOffId = '';
 
     // get seat
     const [quantitySeat, setQuantitySeat] = useState(1);
@@ -216,10 +221,14 @@ function CoachesDetail() {
                                 <Dropdown
                                     maxHeight={'150px'}
                                     options={coach.pick_up}
-                                    onChange={({ selected, selectedId }) => {
-                                        selectedPickUp = selected;
-                                        selectedPickUpId = selectedId;
-                                    }}
+                                    // onChange={({ selected, selectedId }) => {
+                                    //     selectedPickUp = selected;
+                                    //     selectedPickUpId = selectedId;
+                                    // }}
+                                    selected={selectedPickUp}
+                                    setSelected={setSelectedPickUp}
+                                    selectedId={selectedPickUpId}
+                                    setSelectedId={setSelectedPickUpId}
                                     isEdit
                                     placeholder="Chọn điểm đón"
                                     top={'100%'}
@@ -237,10 +246,14 @@ function CoachesDetail() {
                                 <Dropdown
                                     maxHeight={'150px'}
                                     options={coach.drop_off}
-                                    onChange={({ selected, selectedId }) => {
-                                        selectedDropOff = selected;
-                                        selectedDropOffId = selectedId;
-                                    }}
+                                    // onChange={({ selected, selectedId }) => {
+                                    //     selectedDropOff = selected;
+                                    //     selectedDropOffId = selectedId;
+                                    // }}
+                                    selected={selectedDropOff}
+                                    setSelected={setSelectedDropOff}
+                                    selectedId={selectedDropOffId}
+                                    setSelectedId={setSelectedDropOffId}
                                     isEdit
                                     placeholder="Chọn điểm trả"
                                     top={'100%'}

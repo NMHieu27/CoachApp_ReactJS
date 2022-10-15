@@ -46,12 +46,14 @@ const to = [
     },
 ];
 function SearchCoach() {
-    // const [selectedFrom, setSelectedFrom] = useState(from[0].name);
-    // const [selectedTo, setSelectedTo] = useState(to[0].name);
-    let selectedFrom = '';
-    let selectedFromId = '';
-    let selectedTo = '';
-    let selectedToId = '';
+    const [selectedFrom, setSelectedFrom] = useState();
+    const [selectedTo, setSelectedTo] = useState();
+    const [selectedFromId, setSelectedFromId] = useState(from[0].id);
+    const [selectedToId, setSelectedToId] = useState(to[0].id);
+    // let selectedFrom = '';
+    // let selectedFromId = '';
+    // let selectedTo = '';
+    // let selectedToId = '';
 
     const nav = useNavigate();
     const handleSearch = () => {
@@ -71,13 +73,15 @@ function SearchCoach() {
                 <div className="search-items">
                     <div className="search-item from-where">
                         <Dropdown
-                            // selected={selectedFrom}
-                            // setSelected={setSelectedFrom}
-                            onChange={({ selected, selectedId }) => {
-                                selectedFrom = selected;
-                                selectedFromId = selectedId;
-                            }}
+                            selected={selectedFrom}
+                            setSelected={setSelectedFrom}
+                            selectedId={selectedFromId}
+                            setSelectedId={setSelectedFromId}
                             options={from}
+                            // onChange={({ selected, selectedId }) => {
+                            //     selectedFrom = selected;
+                            //     selectedFromId = selectedId;
+                            // }}
                             isIcon
                             isEdit
                             icon="fa-solid fa-location-dot"
@@ -87,12 +91,14 @@ function SearchCoach() {
                     </div>
                     <div className="search-item to-where">
                         <Dropdown
-                            // selected={selectedTo}
-                            // setSelected={setSelectedTo}
-                            onChange={({ selected, selectedId }) => {
-                                selectedTo = selected;
-                                selectedToId = selectedId;
-                            }}
+                            selected={selectedTo}
+                            setSelected={setSelectedTo}
+                            selectedId={selectedToId}
+                            setSelectedId={setSelectedToId}
+                            // onChange={({ selected, selectedId }) => {
+                            //     selectedTo = selected;
+                            //     selectedToId = selectedId;
+                            // }}
                             options={to}
                             isIcon
                             isEdit

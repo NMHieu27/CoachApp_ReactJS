@@ -15,6 +15,10 @@ const routes = {
     categoryManagement: '/admin/phan-loai-xe',
     addCategory: '/admin/phan-loai-xe/them-phan-loai-xe',
     editCategory: '/admin/phan-loai-xe/chinh-sua/:id',
+    // -- Admin - Coach garage management
+    coachGarageManagement: '/admin/danh-sach-nha-xe',
+    addCoachGarage: '/admin/danh-sach-nha-xe/them-nha-xe',
+    editCoachGarage: '/admin/danh-sach-nha-xe/chinh-sua/:id',
 
     // Client routes
     home: '/',

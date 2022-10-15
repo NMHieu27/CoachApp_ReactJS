@@ -14,13 +14,17 @@ function RegisterManagement() {
                 // Chua co api nen lay tam get all coach garage
                 const response = await coachGarageAPI.getAll();
                 if (response.code === 200) {
-                    toast.success('Lấy đữ liệu thành công !', { theme: 'colored' });
+                    toast.success('Lấy đữ liệu thành công !', {
+                        theme: 'colored',
+                    });
                     setRegisterList(response.data);
                 } else {
                     toast.error('Lấy dữ liệu thất bại !', { theme: 'colored' });
                 }
             } catch (err) {
-                toast.error('Thất bại khi lấy dữ liệu' + err.message, { theme: 'colored' });
+                toast.error('Thất bại khi lấy dữ liệu' + err.message, {
+                    theme: 'colored',
+                });
             }
         };
         fetchRegisterList();
@@ -32,7 +36,11 @@ function RegisterManagement() {
         { title: 'Phone', field: 'phone' },
         { title: 'Email', field: 'email' },
         { title: 'Địa chỉ', field: 'address' },
-        { title: 'Trạng thái', field: 'status', render: (item) => (item.status === 2 ? 'Chờ xét duyệt' : item.status) },
+        {
+            title: 'Trạng thái',
+            field: 'status',
+            render: (item) => (item.status === 2 ? 'Chờ xét duyệt' : item.status),
+        },
         {
             title: 'Action',
             field: 'action',
@@ -61,15 +69,21 @@ function RegisterManagement() {
                     const arrCopy = [...registerList];
                     arrCopy.splice(index, 1);
                     setRegisterList(arrCopy);
-                    toast.success(`Đã chấp nhận nhà xe ${coachGarage.name}`, { theme: 'colored' });
+                    toast.success(`Đã chấp nhận nhà xe ${coachGarage.name}`, {
+                        theme: 'colored',
+                    });
                     console.log(`Đã chấp nhận nhà xe ${coachGarage.name}`);
                 } else {
-                    toast.error('Chấp nhận thất bại !' + response.message, { theme: 'colored' });
+                    toast.error('Chấp nhận thất bại !' + response.message, {
+                        theme: 'colored',
+                    });
                     throw new Error('Error: ' + response.message);
                 }
             }
         } catch (err) {
-            toast.error('Chấp nhận thất bại !' + err.message, { theme: 'colored' });
+            toast.error('Chấp nhận thất bại !' + err.message, {
+                theme: 'colored',
+            });
         }
     };
     const handleDenyRequest = async (coachGarage) => {
@@ -81,15 +95,21 @@ function RegisterManagement() {
                     const arrCopy = [...registerList];
                     arrCopy.splice(index, 1);
                     setRegisterList(arrCopy);
-                    toast.success(`Đã từ chối nhà xe ${coachGarage.name}`, { theme: 'colored' });
+                    toast.success(`Đã từ chối nhà xe ${coachGarage.name}`, {
+                        theme: 'colored',
+                    });
                     console.log(`Đã từ chối nhà xe ${coachGarage.name}`);
                 } else {
-                    toast.error('Từ chối thất bại !' + response.message, { theme: 'colored' });
+                    toast.error('Từ chối thất bại !' + response.message, {
+                        theme: 'colored',
+                    });
                     throw new Error('Error: ' + response.message);
                 }
             }
         } catch (err) {
-            toast.error('Từ chối thất bại !' + err.message, { theme: 'colored' });
+            toast.error('Từ chối thất bại !' + err.message, {
+                theme: 'colored',
+            });
         }
     };
     return (

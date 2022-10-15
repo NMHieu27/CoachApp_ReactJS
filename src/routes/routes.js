@@ -13,6 +13,7 @@ import RegisterManagement from '~/pages/Admin/RegisterManagement/RegisterManagem
 import CategoryManagement from '~/pages/Admin/CategoryManagement/CategoryManagement';
 import AddCategory from '~/pages/Admin/CategoryManagement/AddCategory';
 import EditCategory from '~/pages/Admin/CategoryManagement/EditCategory';
+import CoachGarageManagement from '~/pages/Admin/CoachGarageManagement/CoachGarageManagement';
 
 import Signup from '~/pages/Auth/Signup/Signup';
 import Booking from '~/pages/Booking/Booking';
@@ -22,6 +23,8 @@ import { GoodsManagement } from '~/pages/GoodsManagement';
 import CoachesDetail from '~/pages/CoachesDetail/CoachesDetail';
 import AccountInfo from '~/pages/AccountInfo/AccountInfo';
 import AccountInfoSetting from '~/pages/AccountInfoSetting/AccountInfoSetting';
+import AddCoachGarage from '~/pages/Admin/CoachGarageManagement/AddCoachGarage';
+import EditCoachGarage from '~/pages/Admin/CoachGarageManagement/EditCoachGarage';
 
 // Public routes
 const publicRoutes = [
@@ -48,6 +51,10 @@ const privateRoutes = [
     { path: config.routes.categoryManagement, component: CategoryManagement, layout: AdminLayout },
     { path: config.routes.addCategory, component: AddCategory, layout: AdminLayout },
     { path: config.routes.editCategory, component: EditCategory, layout: AdminLayout },
+    // Admin coach garage
+    { path: config.routes.coachGarageManagement, component: CoachGarageManagement, layout: AdminLayout },
+    { path: config.routes.addCoachGarage, component: AddCoachGarage, layout: AdminLayout },
+    { path: config.routes.editCoachGarage, component: EditCoachGarage, layout: AdminLayout },
 ];
 
 //Auth Routes

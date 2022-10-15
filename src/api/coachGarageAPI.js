@@ -16,5 +16,17 @@ const coachGarageAPI = {
         const url = `/coachgarage/deny/${id}`;
         return axiosClient.delete(url);
     },
+    deleteCoachGarage: (id) => {
+        const url = `/coachgarage/delete/${id}`;
+        return axiosClient.delete(url);
+    },
+    getCoachGarageById: (id) => {
+        const url = `/coachgarage/${id}`;
+        return axiosClient.get(url);
+    },
+    updateCoachGarage: (params) => {
+        const url = '/coachgarage/update';
+        return axiosClient.put(url, params);
+    },
 };
 export default coachGarageAPI;

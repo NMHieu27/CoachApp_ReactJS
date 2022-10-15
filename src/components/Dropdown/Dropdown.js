@@ -1,8 +1,9 @@
 import './dropdown.scss';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
+import { Select } from '@mui/material';
 function Dropdown({
-    options = [{ name: 'Empty', id: 0 }],
+    options = [{ name: 'Empty', id: 1 }],
     icon = 'fas fa-caret-down',
     isIcon = false,
     isEdit = false,
@@ -14,7 +15,11 @@ function Dropdown({
     borderDropDown = 'none',
     borderRadiusDropDown = 'none',
     borderContentDropDown = 'none',
-    onChange = () => {},
+    // onChange = () => {},
+    selected,
+    setSelected,
+    selectedId = options[0].id,
+    setSelectedId,
 }) {
     const [isActive, setIsActive] = useState(false);
 
@@ -22,8 +27,12 @@ function Dropdown({
     const dropdown_content_el = useRef(null);
     const dropdown_input_el = useRef(null);
 
-    const [selected, setSelected] = useState(options[0].name);
-    const [selectedId, setSelectedId] = useState(options[0].id);
+    // const [selected, setSelected] = useState(options[0].name);
+    // const [selectedId, setSelectedId] = useState(options[0].id);
+    useEffect(() => {
+        setSelected(options.find((option) => option.id === selectedId).name);
+    }, []);
+    console.log(selected);
 
     const compareIgnore = (str1, str2) => {
         return str1
@@ -86,7 +95,6 @@ function Dropdown({
                 if (content_ref.current && !content_ref.current.contains(e.target)) {
                     setIsActive(false);
                     if (isEdit && !options.some((option) => option.name.includes(dropdown_input_el.current.value))) {
-                        setSelected(options[0].name);
                         setSelectedId(options[0].id);
                     }
                 }
@@ -95,9 +103,9 @@ function Dropdown({
     };
     clickOutsideRef(dropdown_content_el, dropdown_toggle_el);
 
-    useEffect(() => {
-        onChange({ selected: selected, selectedId: selectedId });
-    }, [selectedId, selected, onChange]);
+    // useEffect(() => {
+    //     onChange({ selected: selected, selectedId: selectedId });
+    // }, [selectedId, selected, onChange]);
     return (
         <div ref={dropdown_toggle_el} className="dropdown">
             <div
