@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
@@ -9,6 +9,7 @@ import Image from '~/components/Image';
 
 import './Header.scss';
 function Header() {
+    const nav = useNavigate();
     const [isShowBurger, setIsShowBurger] = useState(false);
     const [isRoleSuplier, setIsRoleSuplier] = useState(false);
     const [isSignIn, setIsSignIn] = useState(false);
@@ -22,6 +23,7 @@ function Header() {
         localStorage.removeItem('userId');
         toast.success('Đã đăng xuất', { theme: 'colored' });
         setIsSignIn(false);
+        nav(config.routes.signin);
     };
 
     const fullname = localStorage.getItem('fullname');

@@ -19,6 +19,14 @@ const routes = {
     coachGarageManagement: '/admin/danh-sach-nha-xe',
     addCoachGarage: '/admin/danh-sach-nha-xe/them-nha-xe',
     editCoachGarage: '/admin/danh-sach-nha-xe/chinh-sua/:id',
+    // --Admin - Coach management
+    coachManagement: '/admin/danh-sach-xe',
+    addCoach: '/admin/danh-sach-xe/them-xe',
+    editCoach: '/admin/danh-sach-xe/chinh-sua/:id',
+    // --Admin - Coaches management
+    coachesManagement: '/admin/danh-sach-chuyen-xe',
+    addCoaches: '/admin/danh-sach-chuyen-xe/them-xe',
+    editCoaches: '/admin/danh-sach-chuyen-xe/chinh-sua/:id',
 
     // Client routes
     home: '/',

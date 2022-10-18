@@ -46,12 +46,12 @@ const routes = [
                 // icon: <BiCategory />,
             },
             {
-                path: '/settings/2fa',
+                path: config.routes.coachManagement,
                 name: 'Xe',
                 // icon: <FaBusAlt />,
             },
             {
-                path: '/settings/billing',
+                path: config.routes.coachesManagement,
                 name: 'Chuyến xe',
                 // icon: <FaMoneyBill />,
             },

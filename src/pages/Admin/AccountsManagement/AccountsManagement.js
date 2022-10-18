@@ -62,7 +62,12 @@ function AccountsManagement() {
         {
             title: 'Status',
             field: 'status',
-            render: (item) => (item.status === 1 ? 'Hoạt động' : 'Vô hiệu'),
+            render: (item) =>
+                item.status === 1 ? (
+                    <i class="fa-solid fa-circle-check" style={{ color: 'green' }}></i>
+                ) : (
+                    <i class="fa-sharp fa-solid fa-circle-xmark" style={{ color: 'red' }}></i>
+                ),
         },
         { title: 'Role', field: 'role' },
         {

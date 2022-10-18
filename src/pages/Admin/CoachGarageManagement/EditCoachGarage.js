@@ -39,7 +39,7 @@ function EditCoachGarage() {
         }
     }, [currentUserId, nav]);
     const [selectedDistrict, setSelectedDistrict] = useState();
-    const [selectedDistrictId, setSelectedDistrictId] = useState(district && district.id);
+    const [selectedDistrictId, setSelectedDistrictId] = useState();
     const status = [
         { id: 0, name: 'banned', title: 'Vô hiệu' },
         { id: 1, name: 'active', title: 'Hoạt động' },
@@ -137,8 +137,13 @@ function EditCoachGarage() {
                     formik.values.contract = response.data.contract;
                     response.data.status ? setStatusChecked(1) : setStatusChecked(0);
                     formik.values.status = statusChecked;
+                } else {
+                    toast.error('Lấy dữ liệu thất bại ! ' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
                 }
-            } catch (err) {}
+            } catch (err) {
+                toast.error('Thất bại khi lấy dữ liệu ! ' + err.message, { theme: 'colored' });
+            }
         };
         fetchCoachGarageById(id);
     }, []);
@@ -171,7 +176,7 @@ function EditCoachGarage() {
                         Sửa nhà xe
                     </h3>
                     <form onSubmit={formik.handleSubmit}>
-                        <div className="col-md-11 mb-2 pb-2">
+                        <div className="col-md-12 mb-2 pb-2">
                             <label className="form-label" htmlFor="fullname">
                                 Họ và tên
                             </label>
@@ -189,7 +194,7 @@ function EditCoachGarage() {
                                 <p className="signin-signup__errorMsg">{formik.errors.fullname}</p>
                             )}
                         </div>
-                        <div className="col-md-11 mb-2 pb-2">
+                        <div className="col-md-12 mb-2 pb-2">
                             <label className="form-label" htmlFor="name_garage">
                                 Tên nhà xe
                             </label>
@@ -207,7 +212,7 @@ function EditCoachGarage() {
                                 <p className="signin-signup__errorMsg">{formik.errors.name_garage}</p>
                             )}
                         </div>
-                        <div className="col-md-11 mb-2 pb-2">
+                        <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
                                 <label className="form-label">Tỉnh, thành phố</label>
                                 <div style={{ height: '56px' }}>
@@ -235,7 +240,7 @@ function EditCoachGarage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-11 mb-2 pb-2">
+                        <div className="col-md-12 mb-2 pb-2">
                             <label className="form-label" htmlFor="address">
                                 Địa chỉ cụ thể
                             </label>
@@ -253,7 +258,7 @@ function EditCoachGarage() {
                                 <p className="signin-signup__errorMsg">{formik.errors.address}</p>
                             )}
                         </div>
-                        <div className="col-md-11 mb-2 pb-2">
+                        <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
                                 <label className="form-label" htmlFor="emailAddress">
                                     Email
@@ -269,7 +274,7 @@ function EditCoachGarage() {
                             </div>
                             {formik.errors.email && <p className="signin-signup__errorMsg">{formik.errors.email}</p>}
                         </div>
-                        <div className="col-md-11 mb-2 pb-2">
+                        <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
                                 <label className="form-label" htmlFor="phoneNumber">
                                     Số điện thoại
@@ -286,7 +291,7 @@ function EditCoachGarage() {
                             {formik.errors.phone && <p className="signin-signup__errorMsg">{formik.errors.phone}</p>}
                         </div>
 
-                        <div className="col-md-11 mb-2 pb-2">
+                        <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
                                 <label className="form-label" htmlFor="contract">
                                     Hợp đồng
@@ -328,7 +333,7 @@ function EditCoachGarage() {
                                 ))}
                             </div>
                         </div>
-                        <div className="col-md-11 pt-2" style={{ textAlign: 'center' }}>
+                        <div className="col-md-12 pt-2" style={{ textAlign: 'center' }}>
                             <input className=" btn-lg btn-handle-primary text-light" type="submit" value="Thêm" />
                         </div>
                     </form>

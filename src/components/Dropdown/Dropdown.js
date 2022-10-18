@@ -30,8 +30,8 @@ function Dropdown({
     // const [selected, setSelected] = useState(options[0].name);
     // const [selectedId, setSelectedId] = useState(options[0].id);
     useEffect(() => {
-        setSelected(options.find((option) => option.id === selectedId).name);
-    }, []);
+        setSelected(options.find((option) => +option.id === +selectedId).name);
+    }, [selectedId]);
     console.log(selected);
 
     const compareIgnore = (str1, str2) => {

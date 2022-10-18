@@ -14,6 +14,10 @@ import CategoryManagement from '~/pages/Admin/CategoryManagement/CategoryManagem
 import AddCategory from '~/pages/Admin/CategoryManagement/AddCategory';
 import EditCategory from '~/pages/Admin/CategoryManagement/EditCategory';
 import CoachGarageManagement from '~/pages/Admin/CoachGarageManagement/CoachGarageManagement';
+import AddCoachGarage from '~/pages/Admin/CoachGarageManagement/AddCoachGarage';
+import EditCoachGarage from '~/pages/Admin/CoachGarageManagement/EditCoachGarage';
+import CoachManagement from '~/pages/Admin/CoachManagement/CoachManagement';
+import AddCoach from '~/pages/Admin/CoachManagement/AddCoach';
 
 import Signup from '~/pages/Auth/Signup/Signup';
 import Booking from '~/pages/Booking/Booking';
@@ -23,8 +27,10 @@ import { GoodsManagement } from '~/pages/GoodsManagement';
 import CoachesDetail from '~/pages/CoachesDetail/CoachesDetail';
 import AccountInfo from '~/pages/AccountInfo/AccountInfo';
 import AccountInfoSetting from '~/pages/AccountInfoSetting/AccountInfoSetting';
-import AddCoachGarage from '~/pages/Admin/CoachGarageManagement/AddCoachGarage';
-import EditCoachGarage from '~/pages/Admin/CoachGarageManagement/EditCoachGarage';
+import EditCoach from '~/pages/Admin/CoachManagement/EditCoach';
+import CoachesManagement from '~/pages/Admin/CoachesManagement/CoachesManagement';
+import AddCoaches from '~/pages/Admin/CoachesManagement/AddCoaches';
+import EditCoaches from '~/pages/Admin/CoachesManagement/EditCoaches';
 
 // Public routes
 const publicRoutes = [
@@ -55,6 +61,14 @@ const privateRoutes = [
     { path: config.routes.coachGarageManagement, component: CoachGarageManagement, layout: AdminLayout },
     { path: config.routes.addCoachGarage, component: AddCoachGarage, layout: AdminLayout },
     { path: config.routes.editCoachGarage, component: EditCoachGarage, layout: AdminLayout },
+    // Admin coach
+    { path: config.routes.coachManagement, component: CoachManagement, layout: AdminLayout },
+    { path: config.routes.addCoach, component: AddCoach, layout: AdminLayout },
+    { path: config.routes.editCoach, component: EditCoach, layout: AdminLayout },
+    //Admin coaches
+    { path: config.routes.coachesManagement, component: CoachesManagement, layout: AdminLayout },
+    { path: config.routes.addCoaches, component: AddCoaches, layout: AdminLayout },
+    { path: config.routes.editCoaches, component: EditCoaches, layout: AdminLayout },
 ];
 
 //Auth Routes

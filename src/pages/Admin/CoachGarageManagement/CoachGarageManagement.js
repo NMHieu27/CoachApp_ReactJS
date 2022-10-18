@@ -35,11 +35,19 @@ function CoachGarageManagement() {
         { title: 'Tên chủ nhà xe', field: 'owner' },
         { title: 'Phone', field: 'phone' },
         { title: 'Email', field: 'email' },
+        { title: 'Mã quận/ huyện', field: 'districtId' },
         { title: 'Địa chỉ', field: 'address' },
         {
             title: 'Trạng thái',
             field: 'status',
-            render: (item) => (item.status === 1 ? 'Hoạt động' : item.status === 0 ? 'vô hiệu' : item.status),
+            render: (item) =>
+                item.status === 1 ? (
+                    <i class="fa-solid fa-circle-check" style={{ color: 'green' }}></i>
+                ) : item.status === 0 ? (
+                    <i class="fa-sharp fa-solid fa-circle-xmark" style={{ color: 'red' }}></i>
+                ) : (
+                    item.status
+                ),
         },
         {
             title: 'Action',
