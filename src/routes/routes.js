@@ -31,6 +31,9 @@ import EditCoach from '~/pages/Admin/CoachManagement/EditCoach';
 import CoachesManagement from '~/pages/Admin/CoachesManagement/CoachesManagement';
 import AddCoaches from '~/pages/Admin/CoachesManagement/AddCoaches';
 import EditCoaches from '~/pages/Admin/CoachesManagement/EditCoaches';
+import RevenueStat from '~/pages/Admin/Stats/RevenueStat';
+import GarageLayout from '~/layouts/GarageLayout/GarageLayout';
+import GarageHome from '~/pages/Garage/GarageHone/GarageHome';
 
 // Public routes
 const publicRoutes = [
@@ -69,6 +72,13 @@ const privateRoutes = [
     { path: config.routes.coachesManagement, component: CoachesManagement, layout: AdminLayout },
     { path: config.routes.addCoaches, component: AddCoaches, layout: AdminLayout },
     { path: config.routes.editCoaches, component: EditCoaches, layout: AdminLayout },
+    // Admin Revenue Stat
+    { path: config.routes.revenueStat, component: RevenueStat, layout: AdminLayout },
+];
+// Garage Routes
+const garageRoutes = [
+    // Garage Home
+    { path: config.routes.garage, component: GarageHome, layout: GarageLayout },
 ];
 
 //Auth Routes
@@ -77,4 +87,4 @@ const authRoutes = [
     { path: config.routes.signup, component: Signup, layout: null },
 ];
 
-export { publicRoutes, privateRoutes, authRoutes };
+export { publicRoutes, privateRoutes, authRoutes, garageRoutes };

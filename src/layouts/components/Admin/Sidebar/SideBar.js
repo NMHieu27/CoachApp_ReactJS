@@ -1,111 +1,17 @@
 import { NavLink } from 'react-router-dom';
-import { FaBars, FaHome, FaUser } from 'react-icons/fa';
-import { ImStatsDots } from 'react-icons/im';
-import { AiTwotoneFileExclamation } from 'react-icons/ai';
-import { BsFilePost } from 'react-icons/bs';
-import { BiLogOut } from 'react-icons/bi';
+import { FaBars } from 'react-icons/fa';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SidebarMenu from './SidebarMenu';
 import styles from './SideBar.module.scss';
 import classNames from 'classnames/bind';
 import './SidebarNavActive.scss';
-import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-const routes = [
-    {
-        path: config.routes.admin,
-        name: 'Admin Home',
-        icon: <FaHome />,
-    },
-    {
-        path: config.routes.accounts,
-        name: 'Quản lý người dùng',
-        icon: <FaUser />,
-    },
-    {
-        path: config.routes.registerManagement,
-        name: 'Phê duyệt nhà xe',
-        icon: <BsFilePost />,
-    },
-    {
-        path: '/file-manager',
-        name: 'Quản lí thông tin',
-        icon: <AiTwotoneFileExclamation />,
-        subRoutes: [
-            {
-                path: config.routes.coachGarageManagement,
-                name: 'Nhà xe',
-                // icon: <BiCategory />,
-            },
-            {
-                path: config.routes.categoryManagement,
-                name: 'Phân loại xe',
-                // icon: <BiCategory />,
-            },
-            {
-                path: config.routes.coachManagement,
-                name: 'Xe',
-                // icon: <FaBusAlt />,
-            },
-            {
-                path: config.routes.coachesManagement,
-                name: 'Chuyến xe',
-                // icon: <FaMoneyBill />,
-            },
-        ],
-    },
-    {
-        path: '/settings',
-        name: 'Thống kê',
-        icon: <ImStatsDots />,
-        exact: true,
-        subRoutes: [
-            {
-                path: '/settings/profile',
-                name: 'Thống kê doanh thu ',
-                // icon: <BsCashCoin />,
-            },
-            {
-                path: '/settings/2fa',
-                name: 'Thống kê mật độ chuyến',
-                // icon: <ImStatsBars2 />,
-            },
-            {
-                path: '/settings/billing',
-                name: 'Top ....',
-                // icon: <FaMoneyBill />,
-            },
-        ],
-    },
-    {
-        path: config.routes.home,
-        name: 'Về trang chủ',
-        icon: <BiLogOut />,
-    },
-];
-
-const SideBar = ({ children }) => {
+const SideBar = ({ children, routes }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const inputAnimation = {
-        hidden: {
-            width: 0,
-            padding: 0,
-            transition: {
-                duration: 0.2,
-            },
-        },
-        show: {
-            width: '140px',
-            padding: '5px 15px',
-            transition: {
-                duration: 0.2,
-            },
-        },
-    };
 
     const showAnimation = {
         hidden: {

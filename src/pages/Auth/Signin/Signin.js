@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import config from '~/config';
 import Helmet from '~/components/Helmet/Helmet';
 import { toast } from 'react-toastify';
 import signinAPI from '~/api/signinAPI';
 import './signin.scss';
+// import useAuth from '~/hooks/useAuth';
 function Signin(props) {
+    // const { setAuth } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [isShowPass, setIsShowPass] = useState(false);
@@ -27,10 +31,21 @@ function Signin(props) {
                 localStorage.setItem('email', response.data.email);
                 localStorage.setItem('avatar', response.data.avatar);
                 localStorage.setItem('userId', response.data.id);
+
+                // const accessToken = response?.data?.accessToken;
+                // const role = response?.data?.role;
+                // setAuth({ phone, password, role, accessToken });
+
                 setPhone('');
                 setPassword('');
-                if (response.data.role === 'admin') navigate('/admin');
-                else if (response.data.role === 'user') navigate('/');
+                // navigate(from, { replace: true });
+                if (response.data.role === 'admin') {
+                    navigate(config.routes.admin);
+                } else if (response.data.role === 'user') {
+                    navigate(config.routes.home);
+                } else if (response.data.role === 'coachGarage') {
+                    navigate(config.routes.garage);
+                } else navigate(config.routes.unauthorized);
             } else {
                 toast.error('Đăng nhập thất bại, vui lòng kiểm tra thông tin !', { theme: 'colored' });
             }
@@ -39,12 +54,6 @@ function Signin(props) {
             toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
         }
     };
-    useEffect(() => {
-        if (localStorage.getItem('role')) {
-            if (localStorage.getItem('role') === 'admin') navigate('/admin');
-            if (localStorage.getItem('role') === 'user') navigate('/');
-        } else navigate('/dang-nhap');
-    }, [navigate]);
 
     return (
         <Helmet title="Đăng nhập">

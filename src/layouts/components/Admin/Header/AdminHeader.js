@@ -24,11 +24,6 @@ function AdminHeader() {
     const avatar = localStorage.getItem('avatar');
     const role = localStorage.getItem('role');
 
-    useEffect(() => {
-        if (!role || role !== 'admin') {
-            nav(config.routes.signin);
-        }
-    });
     const userMenu = [
         {
             title: `Hi, ${fullname}`,

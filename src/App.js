@@ -1,11 +1,15 @@
 import { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes, privateRoutes, authRoutes } from '~/routes';
+import { publicRoutes, privateRoutes, authRoutes, garageRoutes } from '~/routes';
 import { Page404 } from './pages/Page404';
-import DefaultLayout from '~/layouts';
+import DefaultLayout, { AdminLayout } from '~/layouts';
 import { ToastContainer } from 'react-toastify';
 import ScrollButton from '~/components/ScrollButton/ScrollButton';
 import 'react-toastify/dist/ReactToastify.css';
+import RequireAuth from './components/RequireAuth/RequireAuth';
+import GarageLayout from './layouts/GarageLayout/GarageLayout';
+import config from './config';
+import PageUnauthorized from './pages/PageUnauthorized/PageUnauthorized';
 
 function App() {
     return (
@@ -14,72 +18,75 @@ function App() {
             <Router>
                 <div className="App">
                     <Routes>
-                        {/* Public routes */}
-                        {publicRoutes.map((route, index) => {
-                            let Layout = DefaultLayout;
-                            if (route.layout) {
-                                Layout = route.layout;
-                            } else if (route.layout === null) {
-                                Layout = Fragment;
-                            }
-                            const Page = route.component;
-                            return (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    element={
-                                        <Layout>
-                                            <Page />
-                                            <ScrollButton />
-                                        </Layout>
-                                    }
-                                />
-                            );
-                        })}
-                        {/* Auth routes */}
-                        {authRoutes.map((route, index) => {
-                            let Layout = DefaultLayout;
-                            if (route.layout) {
-                                Layout = route.layout;
-                            } else if (route.layout === null) {
-                                Layout = Fragment;
-                            }
-                            const Page = route.component;
-                            return (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    element={
-                                        <Layout>
-                                            <Page />
-                                            <ScrollButton />
-                                        </Layout>
-                                    }
-                                />
-                            );
-                        })}
-                        {/* Private routes */}
-                        {privateRoutes.map((route, index) => {
-                            let Layout = DefaultLayout;
-                            if (route.layout) {
-                                Layout = route.layout;
-                            } else if (route.layout === null) {
-                                Layout = Fragment;
-                            }
-                            const Page = route.component;
-                            return (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    element={
-                                        <Layout>
-                                            <Page />
-                                            <ScrollButton />
-                                        </Layout>
-                                    }
-                                />
-                            );
-                        })}
+                        <Route path="/" element={<DefaultLayout />}>
+                            {publicRoutes.map((route, index) => {
+                                const Page = route.component;
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={
+                                            <>
+                                                <Page /> <ScrollButton />
+                                            </>
+                                        }
+                                    />
+                                );
+                            })}
+                        </Route>
+                        <Route path="/auth">
+                            {authRoutes.map((route, index) => {
+                                const Page = route.component;
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={
+                                            <>
+                                                <Page /> <ScrollButton />
+                                            </>
+                                        }
+                                    />
+                                );
+                            })}
+                        </Route>
+                        <Route element={<AdminLayout />}>
+                            <Route element={<RequireAuth allowedRoles="admin" />}>
+                                {privateRoutes.map((route, index) => {
+                                    const Page = route.component;
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            element={
+                                                <>
+                                                    <Page /> <ScrollButton />
+                                                </>
+                                            }
+                                        />
+                                    );
+                                })}
+                            </Route>
+                        </Route>
+                        <Route element={<GarageLayout />}>
+                            <Route element={<RequireAuth allowedRoles="coachGarage" />}>
+                                {garageRoutes.map((route, index) => {
+                                    const Page = route.component;
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            element={
+                                                <>
+                                                    <Page /> <ScrollButton />
+                                                </>
+                                            }
+                                        />
+                                    );
+                                })}
+                            </Route>
+                        </Route>
+                        <Route path={config.routes.unauthorized} element={<PageUnauthorized />} />
                         <Route path="*" element={<Page404 />} />
                     </Routes>
                 </div>

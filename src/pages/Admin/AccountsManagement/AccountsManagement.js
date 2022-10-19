@@ -11,7 +11,7 @@ import './AccountsManagement.scss';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import Helmet from '~/components/Helmet/Helmet';
 function AccountsManagement() {
-    const [accountList, setAccountList] = useState([]);
+    const [accountList, setAccountList] = useState();
     //Random color
     let colors = [];
     let borderColors = [];
@@ -145,25 +145,29 @@ function AccountsManagement() {
                     </div>
                 </div>
 
-                <div className="accounts-management__card-stats">
-                    <CardStat
-                        title={'Tổng số tài khoản'}
-                        value={accountList.length}
-                        icon={<i class="fa-solid fa-user"></i>}
-                        colorCard="blue"
-                    />
-                    <CardStat
-                        title={'Số tài khoản khóa'}
-                        value={accountList.filter((acc) => acc.status === 0).length}
-                        icon={<i class="fa-solid fa-user-lock"></i>}
-                        colorCard="red"
-                    />
-                </div>
-                <div className="accounts-management__chart">
-                    <div style={{ width: 700 }}>
-                        <BarChart chartData={dataStat} />
+                {accountList && (
+                    <div className="accounts-management__card-stats">
+                        <CardStat
+                            title={'Tổng số tài khoản'}
+                            value={accountList?.length}
+                            icon={<i class="fa-solid fa-user"></i>}
+                            colorCard="blue"
+                        />
+                        <CardStat
+                            title={'Số tài khoản khóa'}
+                            value={accountList?.filter((acc) => acc.status === 0).length}
+                            icon={<i class="fa-solid fa-user-lock"></i>}
+                            colorCard="red"
+                        />
                     </div>
-                </div>
+                )}
+                {accountList && (
+                    <div className="accounts-management__chart">
+                        <div style={{ width: 700 }}>
+                            <BarChart chartData={dataStat} />
+                        </div>
+                    </div>
+                )}
             </div>
         </Helmet>
     );

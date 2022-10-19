@@ -1,7 +1,7 @@
 const routes = {
     // Auth routes
-    signin: '/dang-nhap',
-    signup: '/dang-ki',
+    signin: '/auth/dang-nhap',
+    signup: '/auth/dang-ki',
 
     // Admin routes
     admin: '/admin',
@@ -27,6 +27,11 @@ const routes = {
     coachesManagement: '/admin/danh-sach-chuyen-xe',
     addCoaches: '/admin/danh-sach-chuyen-xe/them-xe',
     editCoaches: '/admin/danh-sach-chuyen-xe/chinh-sua/:id',
+    // --Admin - Stats - revenue
+    revenueStat: '/admin/thong-ke-doanh-thu',
+
+    // --Coach Garage
+    garage: '/garage',
 
     // Client routes
     home: '/',
@@ -36,6 +41,9 @@ const routes = {
     coachesdetail: '/chi-tiet-chuyen-xe/:coachesID',
     accountinfo: '/thong-tin-ca-nhan',
     accountinfosetting: '/thong-tin-ca-nhan/chinh-sua',
+
+    //unauthorized
+    unauthorized: '/unauthorized',
 };
 
 export default routes;
