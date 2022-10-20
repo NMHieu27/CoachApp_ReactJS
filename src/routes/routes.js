@@ -34,51 +34,68 @@ import EditCoaches from '~/pages/Admin/CoachesManagement/EditCoaches';
 import RevenueStat from '~/pages/Admin/Stats/RevenueStat';
 import GarageLayout from '~/layouts/GarageLayout/GarageLayout';
 import GarageHome from '~/pages/Garage/GarageHone/GarageHome';
+import GarageCoachManagement from '~/pages/Garage/GarageManageCoach/GarageCoachManagement';
+import GarageAddCoach from '~/pages/Garage/GarageManageCoach/GarageAddCoach';
+import GarageEditCoach from '~/pages/Garage/GarageManageCoach/GarageEditCoach';
+import GarageCoachesManagement from '~/pages/Garage/GarageManageCoaches/GarageCoachesManagement';
+import GarageAddCoaches from '~/pages/Garage/GarageManageCoaches/GarageAddCoaches';
+import GarageEditCoaches from '~/pages/Garage/GarageManageCoaches/GarageEditCoaches';
+import GarageRevenueStat from '~/pages/Garage/GarageStats/GarageRevenueStat';
 
 // Public routes
 const publicRoutes = [
-    { path: config.routes.home, component: Home, layout: DefaultLayout },
-    { path: config.routes.contract, component: Contract, layout: DefaultLayout },
-    { path: config.routes.goodsmanagement, component: GoodsManagement, layout: DefaultLayout },
-    { path: config.routes.booking, component: Booking, layout: DefaultLayout },
-    { path: config.routes.coachesdetail, component: CoachesDetail, layout: DefaultLayout },
-    { path: config.routes.accountinfo, component: AccountInfo, layout: DefaultLayout },
-    { path: config.routes.accountinfosetting, component: AccountInfoSetting, layout: DefaultLayout },
+    { path: config.routes.home, component: Home },
+    { path: config.routes.contract, component: Contract },
+    { path: config.routes.goodsmanagement, component: GoodsManagement },
+    { path: config.routes.booking, component: Booking },
+    { path: config.routes.coachesdetail, component: CoachesDetail },
+    { path: config.routes.accountinfo, component: AccountInfo },
+    { path: config.routes.accountinfosetting, component: AccountInfoSetting },
 ];
 
 //Admin routes
 const privateRoutes = [
     // Admin home
-    { path: config.routes.admin, component: AdminHome, layout: AdminLayout },
+    { path: config.routes.admin, component: AdminHome },
     // Admin account
-    { path: config.routes.accounts, component: AccountsManagement, layout: AdminLayout },
-    { path: config.routes.addNewAccount, component: AddAccount, layout: AdminLayout },
-    { path: config.routes.editAccount, component: EditAccount, layout: AdminLayout },
+    { path: config.routes.accounts, component: AccountsManagement },
+    { path: config.routes.addNewAccount, component: AddAccount },
+    { path: config.routes.editAccount, component: EditAccount },
     //  Admin register coach garage
-    { path: config.routes.registerManagement, component: RegisterManagement, layout: AdminLayout },
+    { path: config.routes.registerManagement, component: RegisterManagement },
     // Admin category
-    { path: config.routes.categoryManagement, component: CategoryManagement, layout: AdminLayout },
-    { path: config.routes.addCategory, component: AddCategory, layout: AdminLayout },
-    { path: config.routes.editCategory, component: EditCategory, layout: AdminLayout },
+    { path: config.routes.categoryManagement, component: CategoryManagement },
+    { path: config.routes.addCategory, component: AddCategory },
+    { path: config.routes.editCategory, component: EditCategory },
     // Admin coach garage
-    { path: config.routes.coachGarageManagement, component: CoachGarageManagement, layout: AdminLayout },
-    { path: config.routes.addCoachGarage, component: AddCoachGarage, layout: AdminLayout },
-    { path: config.routes.editCoachGarage, component: EditCoachGarage, layout: AdminLayout },
+    { path: config.routes.coachGarageManagement, component: CoachGarageManagement },
+    { path: config.routes.addCoachGarage, component: AddCoachGarage },
+    { path: config.routes.editCoachGarage, component: EditCoachGarage },
     // Admin coach
-    { path: config.routes.coachManagement, component: CoachManagement, layout: AdminLayout },
-    { path: config.routes.addCoach, component: AddCoach, layout: AdminLayout },
-    { path: config.routes.editCoach, component: EditCoach, layout: AdminLayout },
+    { path: config.routes.coachManagement, component: CoachManagement },
+    { path: config.routes.addCoach, component: AddCoach },
+    { path: config.routes.editCoach, component: EditCoach },
     //Admin coaches
-    { path: config.routes.coachesManagement, component: CoachesManagement, layout: AdminLayout },
-    { path: config.routes.addCoaches, component: AddCoaches, layout: AdminLayout },
-    { path: config.routes.editCoaches, component: EditCoaches, layout: AdminLayout },
+    { path: config.routes.coachesManagement, component: CoachesManagement },
+    { path: config.routes.addCoaches, component: AddCoaches },
+    { path: config.routes.editCoaches, component: EditCoaches },
     // Admin Revenue Stat
-    { path: config.routes.revenueStat, component: RevenueStat, layout: AdminLayout },
+    { path: config.routes.revenueStat, component: RevenueStat },
 ];
 // Garage Routes
 const garageRoutes = [
     // Garage Home
-    { path: config.routes.garage, component: GarageHome, layout: GarageLayout },
+    { path: config.routes.garage, component: GarageHome },
+    // Garage coach
+    { path: config.routes.garageManageCoach, component: GarageCoachManagement },
+    { path: config.routes.garageAddCoach, component: GarageAddCoach },
+    { path: config.routes.garageEditCoach, component: GarageEditCoach },
+    //Garage coaches
+    { path: config.routes.garageManageCoaches, component: GarageCoachesManagement },
+    { path: config.routes.garageAddCoaches, component: GarageAddCoaches },
+    { path: config.routes.garageEditCoaches, component: GarageEditCoaches },
+    // Garage Stats
+    { path: config.routes.garageRevenueStat, component: GarageRevenueStat },
 ];
 
 //Auth Routes

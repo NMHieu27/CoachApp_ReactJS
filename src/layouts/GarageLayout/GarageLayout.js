@@ -18,16 +18,16 @@ const routes = [
         name: 'Quản lí thông tin',
         icon: <AiTwotoneFileExclamation />,
         subRoutes: [
+            // {
+            //     path: config.routes.coachGarageManagement,
+            //     name: 'Nhà xe',
+            // },
             {
-                path: config.routes.coachGarageManagement,
-                name: 'Nhà xe',
-            },
-            {
-                path: config.routes.coachManagement,
+                path: config.routes.garageManageCoach,
                 name: 'Xe',
             },
             {
-                path: config.routes.coachesManagement,
+                path: config.routes.garageManageCoaches,
                 name: 'Chuyến xe',
             },
         ],
@@ -38,7 +38,7 @@ const routes = [
         exact: true,
         subRoutes: [
             {
-                path: config.routes.revenueStat,
+                path: config.routes.garageRevenueStat,
                 name: 'Thống kê doanh thu ',
                 // icon: <BsCashCoin />,
             },

@@ -30,8 +30,18 @@ const routes = {
     // --Admin - Stats - revenue
     revenueStat: '/admin/thong-ke-doanh-thu',
 
-    // --Coach Garage
+    // Coach Garage routes
     garage: '/garage',
+    // --Garage - Coach management
+    garageManageCoach: '/garage/danh-sach-xe',
+    garageAddCoach: '/garage/danh-sach-xe/them-xe',
+    garageEditCoach: '/garage/danh-sach-xe/chinh-sua/:id',
+    // --Garage - Coaches management
+    garageManageCoaches: '/garage/danh-sach-chuyen-xe',
+    garageAddCoaches: '/garage/danh-sach-chuyen-xe/them-xe',
+    garageEditCoaches: '/garage/danh-sach-chuyen-xe/chinh-sua/:id',
+    // --Garage - Stats
+    garageRevenueStat: '/garage/thong-ke-doanh-thu',
 
     // Client routes
     home: '/',
