@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import MaterialTable from 'material-table';
-function TableCustom({ data, columns, title = '', link, isAddButton }) {
+function TableCustom({ data, columns, title = '', link, isAddButton, ...props }) {
     return (
         <div>
             {isAddButton && (
@@ -25,6 +25,7 @@ function TableCustom({ data, columns, title = '', link, isAddButton }) {
                         fontSize: '16px',
                     },
                 }}
+                {...props}
             />
         </div>
     );

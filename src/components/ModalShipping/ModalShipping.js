@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Dropdown from '../Dropdown/Dropdown';
 import './ModalShipping.scss';
 import { toast } from 'react-toastify';
 import Modal from '../Modal/Modal';

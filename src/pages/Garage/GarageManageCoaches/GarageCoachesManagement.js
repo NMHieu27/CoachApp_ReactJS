@@ -9,7 +9,8 @@ import './GarageCoachesManagement.scss';
 function GarageCoachesManagement() {
     const currentOwnerId = localStorage.getItem('userId');
     const [coachesList, setCoachesList] = useState();
-    const columns = [
+    const [ticketList, setTicketList] = useState();
+    const columnsCoaches = [
         { title: 'Id', field: 'id' },
         {
             title: 'Khởi chạy',
@@ -105,6 +106,9 @@ function GarageCoachesManagement() {
             toast.error('Thất bại khi xóa ' + err.message, { theme: 'colored' });
         }
     };
+    const handleRowClick = (e, rowData) => {
+        console.log(rowData.id);
+    };
     return (
         <Helmet title="Quản lí chuyến xe">
             <div className="coaches-management">
@@ -129,9 +133,10 @@ function GarageCoachesManagement() {
                                 <TableCustom
                                     isAddButton
                                     title={'Danh sách chuyến xe'}
-                                    columns={columns}
+                                    columns={columnsCoaches}
                                     data={coachesList}
                                     link={config.routes.garageAddCoaches}
+                                    onRowClick={(event, rowData) => handleRowClick(event, rowData)}
                                 />
                             ) : (
                                 <p>loading...</p>
