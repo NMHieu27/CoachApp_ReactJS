@@ -175,16 +175,12 @@ function Contract() {
                                                         <Dropdown
                                                             maxHeight={'150px'}
                                                             options={district}
-                                                            // onChange={({ selected, selectedId }) => {
-                                                            //     selectedDistrict = selected;
-                                                            //     selectedDistrictId = selectedId;
-                                                            // }}
                                                             selected={selectedDistrict}
                                                             setSelected={setSelectedDistrict}
                                                             selectedId={selectedDistrictId}
                                                             setSelectedId={setSelectedDistrictId}
                                                             isEdit
-                                                            placeholder="Chọn điểm đón"
+                                                            placeholder="Chọn quận, huyện"
                                                             top={'100%'}
                                                             paddingDropDown="0px 20px"
                                                             borderDropDown="1px solid #ccc"

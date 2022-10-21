@@ -11,6 +11,7 @@ function Modal({
     btnRight = 'Hoàn tất',
     title = 'Modal',
     onClickAction,
+    isFooter = false,
 }) {
     const modal_el = useRef();
 
@@ -43,14 +44,16 @@ function Modal({
                           </div>
                           <div className="modal-title-custom">{title}</div>
                           <div className="modal-body-custom">{children}</div>
-                          <div className="modal-footer-custom">
-                              <button className="modal-footer-custom__btn-left" onClick={hide}>
-                                  {btnLeft}
-                              </button>
-                              <button className="modal-footer-custom__btn-right" onClick={onClickAction}>
-                                  {btnRight}
-                              </button>
-                          </div>
+                          {isFooter && (
+                              <div className="modal-footer-custom">
+                                  <button className="modal-footer-custom__btn-left" onClick={hide}>
+                                      {btnLeft}
+                                  </button>
+                                  <button className="modal-footer-custom__btn-right" onClick={onClickAction}>
+                                      {btnRight}
+                                  </button>
+                              </div>
+                          )}
                       </div>
                   </div>
               </React.Fragment>,
