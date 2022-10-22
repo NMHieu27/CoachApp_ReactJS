@@ -1,3 +1,4 @@
+import './TableCustom.scss';
 import { Link } from 'react-router-dom';
 import MaterialTable from 'material-table';
 function TableCustom({ data, columns, title = '', link, isAddButton, ...props }) {

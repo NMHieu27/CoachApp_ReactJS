@@ -18,7 +18,7 @@ function Dropdown({
     // onChange = () => {},
     selected,
     setSelected,
-    selectedId = options[0].id,
+    selectedId = options[0]?.id,
     setSelectedId,
 }) {
     const [isActive, setIsActive] = useState(false);

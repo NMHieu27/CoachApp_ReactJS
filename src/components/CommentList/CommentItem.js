@@ -1,5 +1,6 @@
 import './CommentItem.scss';
 import ReactStars from 'react-stars';
+import Moment from 'react-moment';
 function CommentItem({ comment }) {
     return (
         <div className="comment-item">
@@ -16,7 +17,9 @@ function CommentItem({ comment }) {
             </div>
             <div className="comment-item__content">{comment.content}</div>
             <div className="comment-item__created-date">
-                Đăng lúc {new Date(comment.created_date).toLocaleString('vi-VI')}
+                {/* Đăng lúc {new Date(comment.created_date).toLocaleString('vi-VI')} */}
+                Đăng lúc <Moment fromNow>{comment.created_date}</Moment>{' '}
+                {new Date(comment.created_date).toLocaleString('vi-VI')}
             </div>
         </div>
     );

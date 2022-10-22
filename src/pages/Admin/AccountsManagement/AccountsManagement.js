@@ -10,6 +10,7 @@ import BarChart from '~/components/Chart/BarChart';
 import './AccountsManagement.scss';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import Helmet from '~/components/Helmet/Helmet';
+import Image from '~/components/Image';
 function AccountsManagement() {
     const [accountList, setAccountList] = useState();
     //Random color
@@ -56,6 +57,11 @@ function AccountsManagement() {
     const columns = [
         { title: 'Id', field: 'id' },
         { title: 'Full name', field: 'fullname' },
+        {
+            field: 'avatar',
+            title: 'Avatar',
+            render: (rowData) => <Image src={rowData.avatar} style={{ width: 50, height: 50, borderRadius: '50%' }} />,
+        },
         { title: 'Email', field: 'email' },
         { title: 'Phone', field: 'phone' },
         { title: 'Gender', field: 'gender', render: (item) => (item.gender === true ? 'Nữ' : 'Nam') },

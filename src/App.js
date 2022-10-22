@@ -10,6 +10,10 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 import GarageLayout from './layouts/GarageLayout/GarageLayout';
 import config from './config';
 import PageUnauthorized from './pages/PageUnauthorized/PageUnauthorized';
+import 'moment-timezone';
+import moment from 'moment';
+import 'moment/locale/vi';
+moment().local('vi');
 
 function App() {
     return (
