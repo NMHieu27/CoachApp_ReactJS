@@ -13,6 +13,7 @@ import PageUnauthorized from './pages/PageUnauthorized/PageUnauthorized';
 import 'moment-timezone';
 import moment from 'moment';
 import 'moment/locale/vi';
+import EditTicket from './pages/Admin/TicketManagement/EditTicket';
 moment().local('vi');
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                                 );
                             })}
                         </Route>
+                        {/* Admin */}
                         <Route element={<AdminLayout />}>
                             <Route element={<RequireAuth allowedRoles="admin" />}>
                                 {privateRoutes.map((route, index) => {
@@ -72,6 +74,42 @@ function App() {
                                 })}
                             </Route>
                         </Route>
+
+                        <Route element={<AdminLayout />}>
+                            <Route element={<RequireAuth allowedRoles="admin" />}>
+                                <Route
+                                    path="/admin/ve-xe/chinh-sua"
+                                    element={
+                                        <>
+                                            <EditTicket />
+                                            <ScrollButton />
+                                        </>
+                                    }
+                                >
+                                    <Route
+                                        path=":ticketId"
+                                        element={
+                                            <>
+                                                <EditTicket />
+                                                <ScrollButton />
+                                            </>
+                                        }
+                                    >
+                                        <Route
+                                            path=":coachesId"
+                                            element={
+                                                <>
+                                                    <EditTicket />
+                                                    <ScrollButton />
+                                                </>
+                                            }
+                                        ></Route>
+                                    </Route>
+                                </Route>
+                            </Route>
+                        </Route>
+
+                        {/* Garage */}
                         <Route element={<GarageLayout />}>
                             <Route element={<RequireAuth allowedRoles="coachGarage" />}>
                                 {garageRoutes.map((route, index) => {
