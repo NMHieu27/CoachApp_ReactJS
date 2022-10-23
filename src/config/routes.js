@@ -29,6 +29,7 @@ const routes = {
     editCoaches: '/admin/danh-sach-chuyen-xe/chinh-sua/:id',
     // --Admin - Stats - revenue
     revenueStat: '/admin/thong-ke-doanh-thu',
+    coachesStat: '/admin/thong-ke-mat-do-chuyen-xe',
 
     // Coach Garage routes
     garage: '/garage',
@@ -42,6 +43,7 @@ const routes = {
     garageEditCoaches: '/garage/danh-sach-chuyen-xe/chinh-sua/:id',
     // --Garage - Stats
     garageRevenueStat: '/garage/thong-ke-doanh-thu',
+    garageCoachesStat: '/garage/thong-ke-mat-do-chuyen-xe',
 
     // Client routes
     home: '/',

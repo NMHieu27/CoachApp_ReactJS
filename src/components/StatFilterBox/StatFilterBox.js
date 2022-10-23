@@ -1,12 +1,8 @@
 import './StatFilterBox.scss';
 function StatFilterBox({
-    setRevenueData,
+    setData,
     filterSelected,
     setFilterSelected,
-    fromDate,
-    setFromDate,
-    toDate,
-    setToDate,
     monthFilterByMonth,
     setMonthFilterByMonth,
     quarterFilterByQuarter,
@@ -16,10 +12,9 @@ function StatFilterBox({
     onClick,
 }) {
     const statFilter = [
-        { id: 1, name: 'day', title: 'Theo ngày' },
-        { id: 2, name: 'month', title: 'Theo tháng' },
-        { id: 3, name: 'quarter', title: 'Theo quý' },
-        { id: 4, name: 'year', title: 'Theo năm' },
+        { id: 1, name: 'month', title: 'Theo tháng' },
+        { id: 2, name: 'quarter', title: 'Theo quý' },
+        { id: 3, name: 'year', title: 'Theo năm' },
     ];
     return (
         <div class="row">
@@ -33,7 +28,7 @@ function StatFilterBox({
                     aria-label=".form-select-lg example"
                     onChange={(e) => {
                         setFilterSelected(+e.target.value);
-                        setRevenueData();
+                        setData();
                     }}
                 >
                     {statFilter.map((filter) => (
@@ -44,44 +39,8 @@ function StatFilterBox({
                 </select>
             </div>
             <div class="col-md-7">
-                {/* filter by day */}
-                {filterSelected === 1 && (
-                    <div className="row">
-                        <div className="col-md-6 mb-2 pb-2">
-                            <label className="form-label" htmlFor="fromDate">
-                                Từ ngày
-                            </label>
-                            <div className="form-outline">
-                                <input
-                                    type="date"
-                                    id="fromDate"
-                                    name="fromDate"
-                                    className="form-control form-control-lg"
-                                    value={fromDate}
-                                    onChange={(e) => setFromDate(e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-6 mb-2 pb-2">
-                            <label className="form-label" htmlFor="toDate">
-                                Đến ngày
-                            </label>
-                            <div className="form-outline">
-                                <input
-                                    type="date"
-                                    id="toDate"
-                                    name="toDate"
-                                    className="form-control form-control-lg"
-                                    value={toDate}
-                                    onChange={(e) => setToDate(e.target.value)}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                )}
-
                 {/* filter by month*/}
-                {filterSelected === 2 && (
+                {filterSelected === 1 && (
                     <div className="row">
                         <div className="col-md-6 mb-2 pb-2">
                             <label className="form-label" htmlFor="monthFilterByMonth">
@@ -121,7 +80,7 @@ function StatFilterBox({
                 )}
 
                 {/* filter by quarter*/}
-                {filterSelected === 3 && (
+                {filterSelected === 2 && (
                     <div className="row">
                         <div className="col-md-6 mb-2 pb-2">
                             <label className="form-label" htmlFor="quarterFilterByQuarter">
@@ -161,7 +120,7 @@ function StatFilterBox({
                 )}
 
                 {/* filter by quarter*/}
-                {filterSelected === 4 && (
+                {filterSelected === 3 && (
                     <div className="col-md-12 mb-2 pb-2">
                         <label className="form-label" htmlFor="year">
                             Năm

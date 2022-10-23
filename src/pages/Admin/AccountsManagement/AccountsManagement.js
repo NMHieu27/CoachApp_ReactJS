@@ -5,7 +5,6 @@ import userAPI from '~/api/userAPI';
 import { toast } from 'react-toastify';
 import CardStat from '~/components/CardStat/CardStat';
 import UserData from './UserData';
-import BarChart from '~/components/Chart/BarChart';
 
 import './AccountsManagement.scss';
 import TableCustom from '~/components/TableCustom/TableCustom';
@@ -13,30 +12,6 @@ import Helmet from '~/components/Helmet/Helmet';
 import Image from '~/components/Image';
 function AccountsManagement() {
     const [accountList, setAccountList] = useState();
-    //Random color
-    let colors = [];
-    let borderColors = [];
-    let r, g, b;
-    for (const data in UserData) {
-        r = Math.random() * 255;
-        g = Math.random() * 255;
-        b = Math.random() * 255;
-        colors.push(`rgba(${r}, ${g}, ${b}, 0.4)`);
-        borderColors.push(`rgba(${r}, ${g}, ${b}, 1)`);
-    }
-    const [dataStat, setDataStat] = useState({
-        labels: UserData.map((data) => data.year),
-        datasets: [
-            {
-                label: 'Users Gained',
-                data: UserData.map((data) => data.userGain),
-                backgroundColor: colors,
-                borderColor: borderColors,
-                borderWidth: 1,
-            },
-        ],
-    });
-
     useEffect(() => {
         const fetchListUser = async () => {
             try {
@@ -125,7 +100,10 @@ function AccountsManagement() {
     return (
         <Helmet title="Quản lí người dùng">
             <div className="accounts-management">
-                <div className="accounts-management__breadcrumb">
+                <div
+                    className="accounts-management__breadcrumb"
+                    style={{ background: 'white', borderRadius: '5px', padding: '15px' }}
+                >
                     <Link style={{ color: 'blue' }} to={config.routes.admin}>
                         Admin home
                     </Link>
@@ -133,7 +111,28 @@ function AccountsManagement() {
                     <span>Quản lý người dùng</span>
                 </div>
 
-                <div className="accounts-management__data-table">
+                {accountList && (
+                    <div className="accounts-management__card-stats mt-2 d-flex justify-content-between">
+                        <div className="accounts-management__card-stats__item">
+                            <CardStat
+                                title={'Tổng số tài khoản'}
+                                value={accountList?.length}
+                                icon={<i class="fa-solid fa-user"></i>}
+                                colorCard="blue"
+                            />
+                        </div>
+                        <div className="accounts-management__card-stats__item">
+                            <CardStat
+                                title={'Số tài khoản khóa'}
+                                value={accountList?.filter((acc) => acc.status === 0).length}
+                                icon={<i class="fa-solid fa-user-lock"></i>}
+                                colorCard="red"
+                            />
+                        </div>
+                    </div>
+                )}
+
+                <div className="accounts-management__data-table mt-2">
                     <div className="card" style={{ position: 'static' }}>
                         <div className="card__body">
                             {accountList ? (
@@ -150,30 +149,6 @@ function AccountsManagement() {
                         </div>
                     </div>
                 </div>
-
-                {accountList && (
-                    <div className="accounts-management__card-stats">
-                        <CardStat
-                            title={'Tổng số tài khoản'}
-                            value={accountList?.length}
-                            icon={<i class="fa-solid fa-user"></i>}
-                            colorCard="blue"
-                        />
-                        <CardStat
-                            title={'Số tài khoản khóa'}
-                            value={accountList?.filter((acc) => acc.status === 0).length}
-                            icon={<i class="fa-solid fa-user-lock"></i>}
-                            colorCard="red"
-                        />
-                    </div>
-                )}
-                {accountList && (
-                    <div className="accounts-management__chart">
-                        <div style={{ width: 700 }}>
-                            <BarChart chartData={dataStat} />
-                        </div>
-                    </div>
-                )}
             </div>
         </Helmet>
     );

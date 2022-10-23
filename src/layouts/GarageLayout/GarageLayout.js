@@ -43,14 +43,9 @@ const routes = [
                 // icon: <BsCashCoin />,
             },
             {
-                path: '/settings/2fa',
+                path: config.routes.garageCoachesStat,
                 name: 'Thống kê mật độ chuyến',
                 // icon: <ImStatsBars2 />,
-            },
-            {
-                path: '/settings/billing',
-                name: 'Top ....',
-                // icon: <FaMoneyBill />,
             },
         ],
     },

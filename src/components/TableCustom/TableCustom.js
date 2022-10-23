@@ -1,7 +1,9 @@
 import './TableCustom.scss';
 import { Link } from 'react-router-dom';
 import MaterialTable from 'material-table';
+import { useState } from 'react';
 function TableCustom({ data, columns, title = '', link, isAddButton, ...props }) {
+    const [selectedRow, setSelectedRow] = useState(null);
     return (
         <div>
             {isAddButton && (
@@ -16,6 +18,7 @@ function TableCustom({ data, columns, title = '', link, isAddButton, ...props })
                 title={title}
                 columns={columns}
                 data={data}
+                onRowClick={(evt, selectedRow) => setSelectedRow(selectedRow.tableData.id)}
                 options={{
                     exportButton: true,
                     headerStyle: {

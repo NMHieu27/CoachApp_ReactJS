@@ -1,3 +1,7 @@
 .MuiTypography-h6 {
     white-space: normal !important;
 }
+tbody > tr:hover {
+    background-color: var(--main-color) !important;
+    color: var(--txt-white) !important;
+}

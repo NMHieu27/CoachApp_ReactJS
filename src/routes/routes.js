@@ -18,6 +18,8 @@ import AddCoachGarage from '~/pages/Admin/CoachGarageManagement/AddCoachGarage';
 import EditCoachGarage from '~/pages/Admin/CoachGarageManagement/EditCoachGarage';
 import CoachManagement from '~/pages/Admin/CoachManagement/CoachManagement';
 import AddCoach from '~/pages/Admin/CoachManagement/AddCoach';
+import RevenueStat from '~/pages/Admin/RevenueStat/RevenueStat';
+import CoachesStat from '~/pages/Admin/CoachesStat/CoachesStat';
 
 import Signup from '~/pages/Auth/Signup/Signup';
 import Booking from '~/pages/Booking/Booking';
@@ -31,8 +33,6 @@ import EditCoach from '~/pages/Admin/CoachManagement/EditCoach';
 import CoachesManagement from '~/pages/Admin/CoachesManagement/CoachesManagement';
 import AddCoaches from '~/pages/Admin/CoachesManagement/AddCoaches';
 import EditCoaches from '~/pages/Admin/CoachesManagement/EditCoaches';
-import RevenueStat from '~/pages/Admin/Stats/RevenueStat';
-import GarageLayout from '~/layouts/GarageLayout/GarageLayout';
 import GarageHome from '~/pages/Garage/GarageHone/GarageHome';
 import GarageCoachManagement from '~/pages/Garage/GarageManageCoach/GarageCoachManagement';
 import GarageAddCoach from '~/pages/Garage/GarageManageCoach/GarageAddCoach';
@@ -40,7 +40,8 @@ import GarageEditCoach from '~/pages/Garage/GarageManageCoach/GarageEditCoach';
 import GarageCoachesManagement from '~/pages/Garage/GarageManageCoaches/GarageCoachesManagement';
 import GarageAddCoaches from '~/pages/Garage/GarageManageCoaches/GarageAddCoaches';
 import GarageEditCoaches from '~/pages/Garage/GarageManageCoaches/GarageEditCoaches';
-import GarageRevenueStat from '~/pages/Garage/GarageStats/GarageRevenueStat';
+import GarageRevenueStat from '~/pages/Garage/GarageRevenueStat/GarageRevenueStat';
+import GarageCoachesStat from '~/pages/Garage/GarageCoachesStat/GarageCoachesStat';
 
 // Public routes
 const publicRoutes = [
@@ -81,6 +82,7 @@ const privateRoutes = [
     { path: config.routes.editCoaches, component: EditCoaches },
     // Admin Revenue Stat
     { path: config.routes.revenueStat, component: RevenueStat },
+    { path: config.routes.coachesStat, component: CoachesStat },
 ];
 // Garage Routes
 const garageRoutes = [
@@ -96,6 +98,7 @@ const garageRoutes = [
     { path: config.routes.garageEditCoaches, component: GarageEditCoaches },
     // Garage Stats
     { path: config.routes.garageRevenueStat, component: GarageRevenueStat },
+    { path: config.routes.garageCoachesStat, component: GarageCoachesStat },
 ];
 
 //Auth Routes
