@@ -30,6 +30,8 @@ const routes = {
     // --Admin - Stats - revenue
     revenueStat: '/admin/thong-ke-doanh-thu',
     coachesStat: '/admin/thong-ke-mat-do-chuyen-xe',
+    // --Admin - Shipping
+    editShipping: '/admin/don-hang/chinh-sua/:shippingId',
 
     // Coach Garage routes
     garage: '/garage',

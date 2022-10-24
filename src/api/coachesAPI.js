@@ -16,6 +16,10 @@ const coachesAPI = {
         const url = `/coaches/${id}`;
         return axiosClient.get(url);
     },
+    getCoachesByOwnerId: (id) => {
+        const url = `/coaches/owner/${id}`;
+        return axiosClient.get(url);
+    },
     updateCoaches: (params) => {
         const url = '/coaches/update';
         return axiosClient.put(url, params);

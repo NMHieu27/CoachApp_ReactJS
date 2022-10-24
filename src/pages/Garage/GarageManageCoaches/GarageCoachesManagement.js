@@ -2,14 +2,20 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import coachesAPI from '~/api/coachesAPI';
+import ticketAPI from '~/api/ticketAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import config from '~/config';
+import shippingList from '~/fakedata/shippingList';
 import './GarageCoachesManagement.scss';
+import GarageTableShippingList from './GarageTableShippingList';
+import GarageTableTicketList from './GarageTableTicketList';
 function GarageCoachesManagement() {
     const currentOwnerId = localStorage.getItem('userId');
     const [coachesList, setCoachesList] = useState();
-    const [ticketList, setTicketList] = useState();
+    const [coachesId, setCoachesId] = useState();
+    const [ticketListByCoachesId, setTicketListBuyCoachesId] = useState();
+    const [shippingListByCoachesId, setShippingListByCoachesId] = useState();
     const columnsCoaches = [
         { title: 'Id', field: 'id' },
         {
@@ -69,6 +75,7 @@ function GarageCoachesManagement() {
         // Gọi API khác, api get list by userId, không dùng getAll
         const fetchCoachesList = async () => {
             try {
+                // const response = await coachesAPI.getCoachesByOwnerId(currentOwnerId);
                 const response = await coachesAPI.getAll(0, 20);
                 if (response.code === 200) {
                     toast.success('Lấy đữ liệu thành công !', {
@@ -106,8 +113,44 @@ function GarageCoachesManagement() {
             toast.error('Thất bại khi xóa ' + err.message, { theme: 'colored' });
         }
     };
-    const handleRowClick = (e, rowData) => {
+    const handleRowClick = async (e, rowData) => {
+        window.scrollTo({
+            top: 770,
+            left: 0,
+            behavior: 'smooth',
+        });
+        setCoachesId(rowData.id);
         console.log(rowData.id);
+        try {
+            // const responese1 = await ticketAPI.getTicketByCoachesId(rowData.id);
+            const response1 = await ticketAPI.getAllTicket(0, 20);
+            if (response1.code === 200) {
+                console.log('fetch ticket success');
+                setTicketListBuyCoachesId(response1.data);
+            } else {
+                console.log('fetch ticket failed' + response1.message);
+                throw new Error(response1.message);
+            }
+        } catch (err) {
+            console.log('fetch ticket failed' + err.message);
+        }
+
+        //Khi có API sẽ dùng
+        // try {
+        //     const response2 = await shippingAPI.getShippingByCoachesId(rowData.id);
+        //     if (response2.code === 200){
+        //         console.log('fetch shipping success');
+        //         setShippingListByCoachesId(response2.data);
+        //     }
+        //     else {
+        //         console.log('fetch shipping failed' + response2.message);
+        //         throw new Error(response2.message)
+        //     }
+        // }catch(err){
+        //     console.log('fetch shipping failed'+err.message);
+        // }
+        //fake api
+        setShippingListByCoachesId(shippingList);
     };
     return (
         <Helmet title="Quản lí chuyến xe">
@@ -144,6 +187,26 @@ function GarageCoachesManagement() {
                         </div>
                     </div>
                 </div>
+                {ticketListByCoachesId && (
+                    <div className="ticket-management__data-table" style={{ marginTop: '10px' }}>
+                        <h3 style={{ color: 'var(--second-color)' }}>Số vé: {ticketListByCoachesId.length}</h3>
+                        <GarageTableTicketList
+                            ticketListByCoachesId={ticketListByCoachesId}
+                            setTicketListByCoachesId={setTicketListBuyCoachesId}
+                            coachesId={coachesId}
+                        />
+                    </div>
+                )}
+                {shippingListByCoachesId && (
+                    <div className="shipping-management__data-table" style={{ marginTop: '10px' }}>
+                        <h3 style={{ color: 'var(--second-color)' }}>Số đơn hàng: {shippingListByCoachesId.length}</h3>
+                        <GarageTableShippingList
+                            shippingListByCoachesId={shippingListByCoachesId}
+                            setShippingListByCoachesId={setShippingListByCoachesId}
+                            coachesId={coachesId}
+                        />
+                    </div>
+                )}
             </div>
         </Helmet>
     );

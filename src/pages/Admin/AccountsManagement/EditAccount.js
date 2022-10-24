@@ -122,7 +122,9 @@ function EditAccount() {
                         ? setRoleSelected(2)
                         : response.data.role === 'user'
                         ? setRoleSelected(1)
-                        : setRoleSelected(3);
+                        : response.data.role === 'coachGarage'
+                        ? setRoleSelected(3)
+                        : setRoleSelected(4);
                     formik.values.roleId = roleSelected;
                     response.data.status ? setStatusChecked(1) : setStatusChecked(0);
                     formik.values.status = response.data.status;

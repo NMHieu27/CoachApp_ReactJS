@@ -4,6 +4,10 @@ const shippingAPI = {
         const url = `/shipping/get-by-coachesId/${id}`;
         return axiosClient.get(url);
     },
+    getShippingById: (id) => {
+        const url = `/shipping/${id}`;
+        return axiosClient.get(url);
+    },
     getAllShipping: (page, size) => {
         const url = `/shipping/?page=${page}&size=${size}`;
         return axiosClient.get(url);

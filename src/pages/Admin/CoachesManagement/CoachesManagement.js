@@ -184,20 +184,26 @@ function CoachesManagement() {
                         </div>
                     </div>
                 </div>
-                <div className="ticket-management__data-table" style={{ marginTop: '10px' }}>
-                    <TableTicketList
-                        ticketListByCoachesId={ticketListByCoachesId}
-                        setTicketListByCoachesId={setTicketListBuyCoachesId}
-                        coachesId={coachesId}
-                    />
-                </div>
-                <div className="shipping-management__data-table" style={{ marginTop: '10px' }}>
-                    <TableShippingList
-                        shippingListByCoachesId={shippingListByCoachesId}
-                        setShippingListByCoachesId={setShippingListByCoachesId}
-                        coachesId={coachesId}
-                    />
-                </div>
+                {ticketListByCoachesId && (
+                    <div className="ticket-management__data-table" style={{ marginTop: '10px' }}>
+                        <h3 style={{ color: 'var(--second-color)' }}>Số vé: {ticketListByCoachesId.length}</h3>
+                        <TableTicketList
+                            ticketListByCoachesId={ticketListByCoachesId}
+                            setTicketListByCoachesId={setTicketListBuyCoachesId}
+                            coachesId={coachesId}
+                        />
+                    </div>
+                )}
+                {shippingListByCoachesId && (
+                    <div className="shipping-management__data-table" style={{ marginTop: '10px' }}>
+                        <h3 style={{ color: 'var(--second-color)' }}>Số đơn hàng: {shippingListByCoachesId.length}</h3>
+                        <TableShippingList
+                            shippingListByCoachesId={shippingListByCoachesId}
+                            setShippingListByCoachesId={setShippingListByCoachesId}
+                            coachesId={coachesId}
+                        />
+                    </div>
+                )}
             </div>
         </Helmet>
     );

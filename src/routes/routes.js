@@ -1,7 +1,7 @@
 import config from '~/config';
 
 // Layouts
-import { AdminLayout, DefaultLayout } from '~/layouts';
+// import { AdminLayout, DefaultLayout } from '~/layouts';
 
 // Pages
 import Home from '~/pages/Home';
@@ -20,6 +20,7 @@ import CoachManagement from '~/pages/Admin/CoachManagement/CoachManagement';
 import AddCoach from '~/pages/Admin/CoachManagement/AddCoach';
 import RevenueStat from '~/pages/Admin/RevenueStat/RevenueStat';
 import CoachesStat from '~/pages/Admin/CoachesStat/CoachesStat';
+import EditShipping from '~/pages/Admin/ShippingManagement/EditShipping';
 
 import Signup from '~/pages/Auth/Signup/Signup';
 import Booking from '~/pages/Booking/Booking';
@@ -83,6 +84,8 @@ const privateRoutes = [
     // Admin Revenue Stat
     { path: config.routes.revenueStat, component: RevenueStat },
     { path: config.routes.coachesStat, component: CoachesStat },
+    // Admin Shipping
+    { path: config.routes.editShipping, component: EditShipping },
 ];
 // Garage Routes
 const garageRoutes = [

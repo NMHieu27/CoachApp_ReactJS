@@ -32,6 +32,7 @@ function Header() {
 
     useEffect(() => {
         role && setIsSignIn(true);
+        role === 'coachGarage' && setIsRoleSuplier(true);
     }, [role]);
 
     const userMenu = [

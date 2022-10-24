@@ -89,6 +89,7 @@ function AddAccount() {
         { id: 1, name: 'user', title: 'Người dùng' },
         { id: 2, name: 'admin', title: 'Quản trị viên' },
         { id: 3, name: 'coachGarage', title: 'Nhà xe' },
+        { id: 4, name: 'employee', title: 'Nhân viên' },
     ];
     const [sexChecked, setSexChecked] = useState(0);
     const [statusChecked, setStatusChecked] = useState(1);

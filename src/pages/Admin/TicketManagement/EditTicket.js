@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import ticketAPI from '~/api/ticketAPI';
 import config from '~/config';
 import Dropdown from '~/components/Dropdown/Dropdown';
-function EditTicket({}) {
+function EditTicket() {
     const nav = useNavigate();
     const { ticketId, coachesId } = useParams();
     const [pickUpList, setPickUpList] = useState();
@@ -153,10 +153,10 @@ function EditTicket({}) {
         fetchTicketById(ticketId);
     }, []);
     return (
-        <Helmet title="Sửa chuyến xe">
+        <Helmet title="Sửa vé xe">
             <div className="edit-ticket">
                 <div
-                    className="add-coach__breadcrumb"
+                    className="edit-ticket__breadcrumb"
                     style={{ background: '#fff', padding: '15px', borderRadius: '5px' }}
                 >
                     <Link style={{ color: 'blue' }} to={config.routes.admin}>
@@ -171,8 +171,14 @@ function EditTicket({}) {
                 </div>
                 <div
                     className="edit-ticket__form-edit-ticket"
-                    style={{ background: '#fff', borderRadius: '5px', marginTop: '10px', padding: '15px 10%' }}
+                    style={{ background: '#fff', borderRadius: '5px', marginTop: '10px', padding: '15px 20%' }}
                 >
+                    <h3
+                        style={{ fontWeight: 'bold', color: 'var(--second-color)' }}
+                        class="mb-4 pb-2 pb-md-0 mb-md-4 text-center"
+                    >
+                        Sửa vé xe
+                    </h3>
                     <form onSubmit={formik.handleSubmit}>
                         <div className="col-md-12 mb-2 pb-2">
                             <label className="form-label" htmlFor="fullname">
