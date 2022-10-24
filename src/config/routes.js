@@ -47,6 +47,10 @@ const routes = {
     garageRevenueStat: '/garage/thong-ke-doanh-thu',
     garageCoachesStat: '/garage/thong-ke-mat-do-chuyen-xe',
 
+    // Employee routes
+    employeeManageCoaches: '/employee/danh-sach-chuyen-xe',
+    employeeEditShipping: '/employee/don-hang/chinh-sua/:shippingId',
+
     // Client routes
     home: '/',
     contract: '/mo-ban-ve',

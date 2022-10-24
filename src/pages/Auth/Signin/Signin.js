@@ -41,7 +41,7 @@ function Signin(props) {
                 // navigate(from, { replace: true });
                 if (response.data.role === 'admin') {
                     navigate(config.routes.admin);
-                } else if (response.data.role === 'user') {
+                } else if (response.data.role === 'user' || response.data.role === 'employee') {
                     navigate(config.routes.home);
                 } else if (response.data.role === 'coachGarage') {
                     navigate(config.routes.garage);

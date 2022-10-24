@@ -4,6 +4,10 @@ const coachesAPI = {
         const url = `/coaches/?page=${page}&size=${size}`;
         return axiosClient.get(url);
     },
+    getCoachesByDate: (date) => {
+        const url = `/coaches/?date=${date}`;
+        return axiosClient.get(url);
+    },
     deleteCoaches: (id) => {
         const url = `/coaches/delete/${id}`;
         return axiosClient.delete(url);

@@ -43,6 +43,8 @@ import GarageAddCoaches from '~/pages/Garage/GarageManageCoaches/GarageAddCoache
 import GarageEditCoaches from '~/pages/Garage/GarageManageCoaches/GarageEditCoaches';
 import GarageRevenueStat from '~/pages/Garage/GarageRevenueStat/GarageRevenueStat';
 import GarageCoachesStat from '~/pages/Garage/GarageCoachesStat/GarageCoachesStat';
+import EmployeeCoachesManagement from '~/pages/Employee/EmployeeCoachesManagement/EmployeeCoachesManagement';
+import EmployeeEditShipping from '~/pages/Employee/EmployeeShippingManagement/EmployeeEditShipping';
 
 // Public routes
 const publicRoutes = [
@@ -103,11 +105,14 @@ const garageRoutes = [
     { path: config.routes.garageRevenueStat, component: GarageRevenueStat },
     { path: config.routes.garageCoachesStat, component: GarageCoachesStat },
 ];
-
+const employeeRoutes = [
+    { path: config.routes.employeeManageCoaches, component: EmployeeCoachesManagement },
+    { path: config.routes.employeeEditShipping, component: EmployeeEditShipping },
+];
 //Auth Routes
 const authRoutes = [
     { path: config.routes.signin, component: Signin, layout: null },
     { path: config.routes.signup, component: Signup, layout: null },
 ];
 
-export { publicRoutes, privateRoutes, authRoutes, garageRoutes };
+export { publicRoutes, privateRoutes, authRoutes, garageRoutes, employeeRoutes };

@@ -11,7 +11,8 @@ import './Header.scss';
 function Header() {
     const nav = useNavigate();
     const [isShowBurger, setIsShowBurger] = useState(false);
-    const [isRoleSuplier, setIsRoleSuplier] = useState(false);
+    const [isRoleSuplier, setIsRoleSuplier] = useState(true);
+    const [isRoleEmployee, setIsRoleEmployee] = useState(false);
     const [isSignIn, setIsSignIn] = useState(false);
 
     const handleSignout = () => {
@@ -32,7 +33,13 @@ function Header() {
 
     useEffect(() => {
         role && setIsSignIn(true);
-        role === 'coachGarage' && setIsRoleSuplier(true);
+        !role && setIsRoleSuplier(false);
+        role === 'user' && setIsRoleSuplier(false);
+        role === 'employee' && setIsRoleEmployee(true);
+
+        // role === 'coachGarage' && setIsRoleSuplier(true);
+        // role === 'admin' && setIsRoleSuplier(true);
+        // role === 'employee'  && setIsRoleSuplier(true);
     }, [role]);
 
     const userMenu = [
@@ -70,24 +77,20 @@ function Header() {
                 </li>
                 <li>
                     <NavLink className="nav-item" to={config.routes.goodsmanagement}>
-                        Lịch sử mua vé
+                        Lịch sử giao dịch
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink className="nav-item" to={config.routes.goodsmanagement}>
-                        Lịch sử gửi hàng
-                    </NavLink>
-                </li>
-                {!isRoleSuplier ? (
+                {isRoleEmployee && (
+                    <li>
+                        <NavLink className="nav-item" to={config.routes.employeeManageCoaches}>
+                            Quản lý chuyến xe
+                        </NavLink>
+                    </li>
+                )}
+                {!isRoleSuplier && (
                     <li>
                         <NavLink className="nav-item" to={config.routes.contract}>
                             Mở bán vé
-                        </NavLink>
-                    </li>
-                ) : (
-                    <li>
-                        <NavLink className="nav-item" to={config.routes.home}>
-                            Quản lí bán vé
                         </NavLink>
                     </li>
                 )}

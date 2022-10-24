@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes, privateRoutes, authRoutes, garageRoutes } from '~/routes';
+import { publicRoutes, privateRoutes, authRoutes, garageRoutes, employeeRoutes } from '~/routes';
 import { Page404 } from './pages/Page404';
 import DefaultLayout, { AdminLayout } from '~/layouts';
 import { ToastContainer } from 'react-toastify';
@@ -128,6 +128,61 @@ function App() {
                                 })}
                             </Route>
                         </Route>
+
+                        {/* Employee routes */}
+                        <Route element={<DefaultLayout />}>
+                            <Route element={<RequireAuth allowedRoles="employee" />}>
+                                {employeeRoutes.map((route, index) => {
+                                    const Page = route.component;
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            element={
+                                                <>
+                                                    <Page /> <ScrollButton />
+                                                </>
+                                            }
+                                        />
+                                    );
+                                })}
+                            </Route>
+                        </Route>
+
+                        <Route element={<DefaultLayout />}>
+                            <Route element={<RequireAuth allowedRoles="employee" />}>
+                                <Route
+                                    path="/employee/ve-xe/chinh-sua"
+                                    element={
+                                        <>
+                                            <EditTicket />
+                                            <ScrollButton />
+                                        </>
+                                    }
+                                >
+                                    <Route
+                                        path=":ticketId"
+                                        element={
+                                            <>
+                                                <EditTicket />
+                                                <ScrollButton />
+                                            </>
+                                        }
+                                    >
+                                        <Route
+                                            path=":coachesId"
+                                            element={
+                                                <>
+                                                    <EditTicket />
+                                                    <ScrollButton />
+                                                </>
+                                            }
+                                        ></Route>
+                                    </Route>
+                                </Route>
+                            </Route>
+                        </Route>
+
                         <Route path={config.routes.unauthorized} element={<PageUnauthorized />} />
                         <Route path="*" element={<Page404 />} />
                     </Routes>
