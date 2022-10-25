@@ -8,7 +8,7 @@ import Helmet from '~/components/Helmet/Helmet';
 import './EditAccount.scss';
 import Image from '~/components/Image';
 import accountAPI from '~/api/accountAPI';
-import userAPI from '~/api/userAPI';
+import userAPI from '~/api/adminAPI/userAPI';
 
 function EditAccount() {
     const sexs = [
@@ -24,6 +24,7 @@ function EditAccount() {
         { id: 1, name: 'user', title: 'Người dùng' },
         { id: 2, name: 'admin', title: 'Quản trị viên' },
         { id: 3, name: 'coachGarage', title: 'Nhà xe' },
+        { id: 4, name: 'employee', title: 'Nhân viên' },
     ];
 
     const [userNeedEdit, setUserNeedEdit] = useState([]);
@@ -41,6 +42,7 @@ function EditAccount() {
     };
     const formik = useFormik({
         initialValues: {
+            id: 0,
             fullname: '',
             gender: true,
             phone: '',
@@ -72,6 +74,7 @@ function EditAccount() {
 
             values.roleId = +roleSelected;
             values.status = statusChecked;
+            values.id = +id;
 
             // console.log(avatar_el.current.files[0]);
             if (avatar_el.current.files[0]) {
@@ -81,21 +84,24 @@ function EditAccount() {
             }
             try {
                 const params = {
+                    id: values.id,
                     fullname: values.fullname,
                     password: values.password,
                     email: values.email,
                     phone: values.phone,
                     gender: values.gender,
                     avatar: values.avatar,
+                    status: values.status,
+                    roleId: values.roleId,
                 };
-                // if (!values.password.includes(values.confirmPassword)) {
-                //     toast.error('Password xác nhận không chính xác', {
-                //         theme: 'colored',
-                //     });
-                // } else {
-                //     // handle API
-                //     // nav(config.routes.accounts);
-                // }
+                const response = await userAPI.updateUser(params);
+                if (response.code === 200) {
+                    toast.success('Sửa tài khoản thành công !', { theme: 'colored' });
+                    nav(config.routes.accounts);
+                } else {
+                    toast.error('Không thể sửa tài khoản !' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
+                }
             } catch (error) {
                 console.log('Thất bại khi gửi dữ liệu: ', error.message);
                 toast.error('Thất bại khi gửi dữ liệu ! ' + error.message, { theme: 'colored' });

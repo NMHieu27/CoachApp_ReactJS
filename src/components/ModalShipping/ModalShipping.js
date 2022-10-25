@@ -3,7 +3,13 @@ import * as Yup from 'yup';
 import './ModalShipping.scss';
 import { toast } from 'react-toastify';
 import Modal from '../Modal/Modal';
+import { useEffect, useState } from 'react';
 function ModalShipping({ userId, coachesId, isShowingShipping, setIsShowingShipping, toggleShipping }) {
+    const userRole = localStorage.getItem('role');
+    const [isUser, setIsUser] = useState(false);
+    useEffect(() => {
+        (!userRole || userRole === 'user') && setIsUser(true);
+    }, []);
     const formik = useFormik({
         initialValues: {
             userId: 0,
@@ -71,6 +77,34 @@ function ModalShipping({ userId, coachesId, isShowingShipping, setIsShowingShipp
             console.log(values);
         },
     });
+    const handleCashPayment = async () => {
+        formik.values.coachesId = +coachesId;
+        formik.values.userId = +userId;
+        try {
+            const params = {
+                userId: formik.values.userId,
+                coachesId: formik.values.coachesId,
+                name: formik.values.name,
+                senderName: formik.values.senderName,
+                senderPhone: formik.values.senderPhone,
+                senderEmail: formik.values.senderEmail,
+                receiverName: formik.values.receiverName,
+                receiverPhone: formik.values.receiverPhone,
+                receiverEmail: formik.values.receiverEmail,
+                price: formik.values.price,
+            };
+            console.log('params: ', params);
+            // const response = await shippingAPI.postAddShipping(params);
+            // if (response.code === 200) {
+            //     toast.success('Gửi hàng thành công !', { theme: 'colored' });
+            // } else {
+            //     toast.error('Gửi hàng thất bại !' + response.message, { theme: 'colored' });
+            //     throw new Error(response.message);
+            // }
+        } catch (err) {
+            toast.error('Thất bại khi thêm dữ liệu' + err.message, { theme: 'colored' });
+        }
+    };
     return (
         <Modal
             isShowing={isShowingShipping}
@@ -232,9 +266,28 @@ function ModalShipping({ userId, coachesId, isShowingShipping, setIsShowingShipp
                         </div>
                         {formik.errors.price && <p className="signin-signup__errorMsg">{formik.errors.price}</p>}
                     </div>
-                    <div className="col-md-12 pt-2" style={{ textAlign: 'center' }}>
-                        <input className=" btn-lg btn-handle-primary text-light" type="submit" value="Hoàn tất" />
-                    </div>
+                    {isUser ? (
+                        <div className="col-md-12 pt-2" style={{ textAlign: 'center' }}>
+                            <input
+                                className=" btn-lg btn-handle-primary text-light"
+                                type="submit"
+                                value="Thanh toán online"
+                            />
+                        </div>
+                    ) : (
+                        <div className="modal-booking__button">
+                            <div className="modal-booking__button__left" onClick={handleCashPayment}>
+                                Thanh toán tiền mặt
+                            </div>
+                            <div className="modal-booking__button__right">
+                                <input
+                                    className=" btn-lg btn-handle-primary text-light"
+                                    type="submit"
+                                    value="Thanh toán online"
+                                />
+                            </div>
+                        </div>
+                    )}
                 </form>
             </div>
         </Modal>

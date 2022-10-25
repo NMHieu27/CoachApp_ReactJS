@@ -2,11 +2,11 @@ import axiosClient from './axiosClient';
 
 const userAPI = {
     getUserById: (id) => {
-        const url = `/user/${id}`;
+        const url = `/admin/user/${id}`;
         return axiosClient.get(url);
     },
     getAll: (accessToken) => {
-        const url = '/user/getall';
+        const url = '/admin/user/getall';
         return axiosClient.get(url, {
             headers: {
                 Authorization: accessToken,

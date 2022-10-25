@@ -22,6 +22,8 @@ function Header() {
         localStorage.removeItem('phone');
         localStorage.removeItem('avatar');
         localStorage.removeItem('userId');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('expiredTime');
         toast.success('Đã đăng xuất', { theme: 'colored' });
         setIsSignIn(false);
         nav(config.routes.signin);

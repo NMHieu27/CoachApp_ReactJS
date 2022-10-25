@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useModal from '~/hooks/useModal';
 import Helmet from '~/components/Helmet/Helmet';
 import CommentList from '~/components/CommentList/CommentList';
@@ -16,6 +16,7 @@ import comment from '~/fakedata/comment';
 import CoachesView from '~/components/CoachesView/CoachesView';
 import ModalBooking from '~/components/ModalBooking/ModalBooking';
 import ModalShipping from '~/components/ModalShipping/ModalShipping';
+import { toast } from 'react-toastify';
 
 //fake dữ liệu current_user
 const current_user = {
@@ -26,7 +27,14 @@ const current_user = {
 
 function CoachesDetail() {
     const { coachesID } = useParams();
+    const accessToken = localStorage.getItem('accessToken');
+    const role = localStorage.getItem('role');
     const currentUserId = localStorage.getItem('userId');
+    const [isSystemUser, setIsSystemUser] = useState(false);
+
+    useEffect(() => {
+        (role === 'employee' || role === 'admin') && setIsSystemUser(true);
+    }, [role]);
 
     //Chua co API từ back --> fake dữ liệu và tự duyệt
     const [coach, setCoach] = useState(() => {
@@ -54,12 +62,33 @@ function CoachesDetail() {
         const content = document.querySelector('textarea');
         console.log(content.value.trim());
     };
+
+    const handleClickBooking = () => {
+        if (accessToken) {
+            toggleBooking();
+        } else {
+            toast.error('Mời bạn đăng nhập để đặt vé!', { theme: 'colored' });
+        }
+    };
+
+    const handleClickShipping = () => {
+        if (accessToken) {
+            toggleShipping();
+        } else {
+            toast.error('Mời bạn đăng nhập để gửi hàng!', { theme: 'colored' });
+        }
+    };
     return (
         <Helmet title="Đặt vé">
             <div className="coaches-detail container mt-0 p-0">
                 {/* coaches info */}
                 <div className="coaches-detail__info-container">
-                    <CoachesView data={coach} onClickBooking={toggleBooking} onClickShipping={toggleShipping} />
+                    <CoachesView
+                        isSystemUser={isSystemUser}
+                        data={coach}
+                        onClickBooking={handleClickBooking}
+                        onClickShipping={handleClickShipping}
+                    />
                 </div>
 
                 {/* comment input */}

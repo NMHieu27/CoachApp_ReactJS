@@ -1,0 +1,15 @@
+.modal-booking__button {
+    display: flex;
+    justify-content: space-between;
+    &__left {
+        width: 220px;
+        height: 45px;
+        padding: 8px 8px;
+        background: var(--second-color);
+        color: #f8f9fa;
+        text-align: center;
+        border-radius: 4.8px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}

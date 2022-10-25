@@ -9,7 +9,9 @@ import queryString from 'query-string';
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
     headers: {
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*',
     },
     paramsSerializer: (params) => queryString.stringify(params),
 });
@@ -20,10 +22,11 @@ axiosClient.interceptors.request.use(
             return config;
         }
         const { accessToken, expiredTime } = await axiosClient.getLocalAccessToken();
+        config.headers.Authorization = accessToken;
         console.log(`{accessToken, expiredTime}`, { accessToken, expiredTime });
         const now = new Date().getTime();
         console.log(`timeExpired:::${expiredTime} vs::now::${now}`);
-        if (+expiredTime < +now + 5 * 60 * 1000) {
+        if (+expiredTime <= +now + 5 * 60 * 1000) {
             try {
                 console.log('AccessToken expired!!');
                 const params = {
@@ -33,6 +36,7 @@ axiosClient.interceptors.request.use(
                 if (response.code === 200) {
                     const newAccessToken = response.data.accessToken;
                     const newExpiredTime = response.data.expiredTime;
+                    config.headers.Authorization = newAccessToken;
                     console.log({ newAccessToken, newExpiredTime });
                     await axiosClient.setLocalAccessToken(newAccessToken, newExpiredTime);
                     return config;

@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import config from '~/config';
 import Helmet from '~/components/Helmet/Helmet';
 import './AddAccount.scss';
+import userAPI from '~/api/adminAPI/userAPI';
 function AddAccount() {
     const nav = useNavigate();
     const avatar_el = useRef();
@@ -60,14 +61,22 @@ function AddAccount() {
                     phone: values.phone,
                     gender: values.gender,
                     avatar: values.avatar,
+                    status: values.status,
+                    roleId: values.roleId,
                 };
                 if (!values.password.includes(values.confirmPassword)) {
                     toast.error('Password xác nhận không chính xác', {
                         theme: 'colored',
                     });
                 } else {
-                    // handle API
-                    nav(config.routes.accounts);
+                    const response = await userAPI.addUser(params);
+                    if (response.code === 200) {
+                        toast.success('Thêm tài khoản thành công !', { theme: 'colored' });
+                        nav(config.routes.accounts);
+                    } else {
+                        toast.error('Không thể thêm tài khoản !' + response.message, { theme: 'colored' });
+                        throw new Error(response.message);
+                    }
                 }
             } catch (error) {
                 console.log('Thất bại khi gửi dữ liệu: ', error.message);

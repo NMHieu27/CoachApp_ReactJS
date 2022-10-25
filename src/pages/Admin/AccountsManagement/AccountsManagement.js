@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import config from '~/config';
-import userAPI from '~/api/userAPI';
 import { toast } from 'react-toastify';
 import CardStat from '~/components/CardStat/CardStat';
-import UserData from './UserData';
 
 import './AccountsManagement.scss';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import Helmet from '~/components/Helmet/Helmet';
 import Image from '~/components/Image';
+import userAPI from '~/api/adminAPI/userAPI';
 function AccountsManagement() {
     const [accountList, setAccountList] = useState();
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
     const accessToken = localStorage.getItem('accessToken');
     useEffect(() => {
         const fetchListUser = async () => {
             try {
-                const response = await userAPI.getAll(accessToken);
+                const response = await userAPI.getAll();
                 if (response.code === 200) {
-                    toast.success('Lấy dữ liệu thành công', { theme: 'colored' });
+                    // toast.success('Lấy dữ liệu thành công', { theme: 'colored' });
                     setAccountList(response.data);
                 } else {
                     toast.error('Lỗi không thể lấy dữ liệu ' + response.message, { theme: 'colored' });
@@ -28,7 +28,7 @@ function AccountsManagement() {
             }
         };
         fetchListUser();
-    }, []);
+    }, [deleteSuccess]);
 
     const columns = [
         { title: 'Id', field: 'id' },
@@ -83,13 +83,14 @@ function AccountsManagement() {
     const handleDeleteUser = async (id) => {
         try {
             if (window.confirm('Xác nhận xóa ?')) {
-                const response = await userAPI.deleteById(id);
+                const response = await userAPI.deleteUser(id);
                 if (response.code === 200) {
                     toast.success('Xóa thành công', { theme: 'colored' });
-                    const index = accountList.findIndex((value) => value.id === id);
-                    const arrCopy = [...accountList];
-                    arrCopy.splice(index, 1);
-                    setAccountList(arrCopy);
+                    // const index = accountList.findIndex((value) => value.id === id);
+                    // const arrCopy = [...accountList];
+                    // arrCopy.splice(index, 1);
+                    // setAccountList(arrCopy);
+                    setDeleteSuccess(!deleteSuccess);
                 } else {
                     toast.error('Xóa thất bại' + response.message, { theme: 'colored' });
                 }

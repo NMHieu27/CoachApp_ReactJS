@@ -5,7 +5,7 @@ import numberWithCommas from '~/utils/numberWithCommas';
 import ReactStars from 'react-stars';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import './CoachesView.scss';
-function CoachesView({ data, onClickBooking, onClickShipping }) {
+function CoachesView({ data, onClickBooking, onClickShipping, isSystemUser }) {
     return (
         <div className="coaches-view">
             {/* section breadcrumb */}
@@ -54,7 +54,7 @@ function CoachesView({ data, onClickBooking, onClickShipping }) {
                                     <b> ★ </b>
                                 </span>
                             </p>
-                            {data.isShip && (
+                            {data.isShip && isSystemUser && (
                                 <button className="coaches-view__detail__btn btn-shipping" onClick={onClickShipping}>
                                     <span>Gửi hàng </span>
                                 </button>

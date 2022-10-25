@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Dropdown from '../Dropdown/Dropdown';
@@ -6,6 +6,7 @@ import './ModalBooking.scss';
 import { toast } from 'react-toastify';
 import numberWithCommas from '~/utils/numberWithCommas';
 import Modal from '../Modal/Modal';
+import ticketAPI from '~/api/ticketAPI';
 function ModalBooking({
     userId,
     coachesId,
@@ -17,10 +18,17 @@ function ModalBooking({
     setIsShowingBooking,
     toggleBooking,
 }) {
+    const userRole = localStorage.getItem('role');
+    const [isUser, setIsUser] = useState(false);
+    const accessToken = localStorage.getItem('accessToken');
     const [selectedPickUp, setSelectedPickUp] = useState();
     const [selectedPickUpId, setSelectedPickUpId] = useState(1);
     const [selectedDropOff, setSelectedDropOff] = useState();
     const [selectedDropOffId, setSelectedDropOffId] = useState(1);
+
+    useEffect(() => {
+        (!userRole || userRole === 'user') && setIsUser(true);
+    }, []);
 
     const formik = useFormik({
         initialValues: {
@@ -63,6 +71,7 @@ function ModalBooking({
                     seatNum: values.seatNum,
                 };
 
+                // Dung api thanh toan momo
                 // const response = await ticketAPI.postAddTicket(params);
                 // if (response.code === 200) {
                 //     toast.success('Đặt vé thành công !', { theme: 'colored' });
@@ -76,6 +85,34 @@ function ModalBooking({
             console.log(values);
         },
     });
+    const handleCashPayment = async () => {
+        formik.values.coachesId = +coachesId;
+        formik.values.userId = +userId;
+        formik.pickUpId = +selectedPickUpId;
+        formik.dropOffId = +selectedDropOffId;
+        try {
+            const params = {
+                fullname: formik.values.fullname,
+                email: formik.values.email,
+                phone: formik.values.phone,
+                coachesId: formik.values.coachesId,
+                userId: formik.values.userId,
+                pickUpId: formik.values.pickUpId,
+                dropOffId: formik.values.dropOffId,
+                seatNum: formik.values.seatNum,
+            };
+            console.log(params);
+            const response = await ticketAPI.postAddTicket(params);
+            if (response.code === 200) {
+                toast.success('Đặt vé thành công !', { theme: 'colored' });
+            } else {
+                toast.error('Đặt vé thất bại !' + response.message, { theme: 'colored' });
+                throw new Error(response.message);
+            }
+        } catch (err) {
+            toast.error('Thất bại khi thêm dữ liệu' + err.message, { theme: 'colored' });
+        }
+    };
     return (
         <Modal
             isShowing={isShowingBooking}
@@ -210,9 +247,28 @@ function ModalBooking({
                     <div className="modal-booking__input-field__label" style={{ textAlign: 'right' }}>
                         Tổng tiền: {numberWithCommas(+formik.values.seatNum * price)}đ
                     </div>
-                    <div className="col-md-12 pt-2" style={{ textAlign: 'center' }}>
-                        <input className=" btn-lg btn-handle-primary text-light" type="submit" value="Hoàn tất" />
-                    </div>
+                    {isUser ? (
+                        <div className="col-md-12 pt-2" style={{ textAlign: 'center' }}>
+                            <input
+                                className=" btn-lg btn-handle-primary text-light"
+                                type="submit"
+                                value="Thanh toán online"
+                            />
+                        </div>
+                    ) : (
+                        <div className="modal-booking__button">
+                            <div className="modal-booking__button__left" onClick={handleCashPayment}>
+                                Thanh toán tiền mặt
+                            </div>
+                            <div className="modal-booking__button__right">
+                                <input
+                                    className=" btn-lg btn-handle-primary text-light"
+                                    type="submit"
+                                    value="Thanh toán online"
+                                />
+                            </div>
+                        </div>
+                    )}
                 </form>
             </div>
         </Modal>
