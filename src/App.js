@@ -14,6 +14,7 @@ import 'moment-timezone';
 import moment from 'moment';
 import 'moment/locale/vi';
 import EditTicket from './pages/Admin/TicketManagement/EditTicket';
+import EmployeeEditTicket from './pages/Employee/EmployeeTicketManagement/EmployeeEditTicket';
 moment().local('vi');
 
 function App() {
@@ -155,7 +156,7 @@ function App() {
                                     path="/employee/ve-xe/chinh-sua"
                                     element={
                                         <>
-                                            <EditTicket />
+                                            <EmployeeEditTicket />
                                             <ScrollButton />
                                         </>
                                     }
@@ -164,7 +165,7 @@ function App() {
                                         path=":ticketId"
                                         element={
                                             <>
-                                                <EditTicket />
+                                                <EmployeeEditTicket />
                                                 <ScrollButton />
                                             </>
                                         }
@@ -173,7 +174,7 @@ function App() {
                                             path=":coachesId"
                                             element={
                                                 <>
-                                                    <EditTicket />
+                                                    <EmployeeEditTicket />
                                                     <ScrollButton />
                                                 </>
                                             }

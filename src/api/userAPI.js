@@ -5,9 +5,15 @@ const userAPI = {
         const url = `/user/${id}`;
         return axiosClient.get(url);
     },
-    getAll: () => {
+    getAll: (accessToken) => {
         const url = '/user/getall';
-        return axiosClient.get(url);
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: accessToken,
+                'Content-Type': 'application/json',
+                accept: 'application/json',
+            },
+        });
     },
     deleteById: (id) => {
         const url = `/user/delete/${id}`;

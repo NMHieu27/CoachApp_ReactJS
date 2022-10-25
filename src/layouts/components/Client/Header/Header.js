@@ -76,7 +76,7 @@ function Header() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink className="nav-item" to={config.routes.goodsmanagement}>
+                    <NavLink className="nav-item" to={config.routes.history}>
                         Lịch sử giao dịch
                     </NavLink>
                 </li>

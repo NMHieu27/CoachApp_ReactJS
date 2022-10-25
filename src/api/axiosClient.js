@@ -1,6 +1,7 @@
 // api/axiosClient.js
 import axios from 'axios';
 import queryString from 'query-string';
+
 // Set up default config for http requests here
 
 // Please have a look at here `https://github.com/axios/axios#request-config` for the full list of configs
@@ -12,10 +13,41 @@ const axiosClient = axios.create({
     },
     paramsSerializer: (params) => queryString.stringify(params),
 });
-axiosClient.interceptors.request.use(async (config) => {
-    // Handle token here ...
-    return config;
-});
+axiosClient.interceptors.request.use(
+    async (config) => {
+        // Handle refresh token
+        if (config.url.indexOf('/user/signin') >= 0 || config.url.indexOf('/user/token/refresh') >= 0) {
+            return config;
+        }
+        const { accessToken, expiredTime } = await axiosClient.getLocalAccessToken();
+        console.log(`{accessToken, expiredTime}`, { accessToken, expiredTime });
+        const now = new Date().getTime();
+        console.log(`timeExpired:::${expiredTime} vs::now::${now}`);
+        if (+expiredTime < +now + 5 * 60 * 1000) {
+            try {
+                console.log('AccessToken expired!!');
+                const params = {
+                    accessToken: accessToken,
+                };
+                const response = await refreshToken(params);
+                if (response.code === 200) {
+                    const newAccessToken = response.data.accessToken;
+                    const newExpiredTime = response.data.expiredTime;
+                    console.log({ newAccessToken, newExpiredTime });
+                    await axiosClient.setLocalAccessToken(newAccessToken, newExpiredTime);
+                    return config;
+                }
+            } catch (error) {
+                return Promise.reject(error);
+            }
+        }
+        return config;
+    },
+    (err) => {
+        return Promise.reject(err);
+    },
+);
+
 axiosClient.interceptors.response.use(
     (response) => {
         if (response && response.data) {
@@ -28,4 +60,18 @@ axiosClient.interceptors.response.use(
         throw error;
     },
 );
+
+async function refreshToken(params) {
+    const url = '/user/token/refresh';
+    return await axiosClient.post(url, params);
+}
+axiosClient.setLocalAccessToken = async (accessToken, expiredTime) => {
+    window.localStorage.setItem('accessToken', accessToken);
+    window.localStorage.setItem('expiredTime', expiredTime);
+};
+axiosClient.getLocalAccessToken = async () => {
+    const accessToken = window.localStorage.getItem('accessToken');
+    const expiredTime = window.localStorage.getItem('expiredTime');
+    return { accessToken, expiredTime };
+};
 export default axiosClient;

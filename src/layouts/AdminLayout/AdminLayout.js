@@ -1,7 +1,7 @@
 import AdminHeader from '~/layouts/components/Admin/Header/AdminHeader';
 import AdminFooter from '~/layouts/components/Admin/Footer/AdminFooter';
 import SideBar from '../components/Admin/Sidebar/SideBar';
-import { FaHome, FaUser } from 'react-icons/fa';
+import { FaHome, FaUser, FaTicketAlt } from 'react-icons/fa';
 import { ImStatsDots } from 'react-icons/im';
 import { AiTwotoneFileExclamation } from 'react-icons/ai';
 import { BsFilePost } from 'react-icons/bs';
@@ -25,6 +25,11 @@ const routes = [
         path: config.routes.registerManagement,
         name: 'Phê duyệt nhà xe',
         icon: <BsFilePost />,
+    },
+    {
+        path: config.routes.requestCancelTicket,
+        name: 'Yêu cầu hủy vé',
+        icon: <FaTicketAlt />,
     },
     {
         name: 'Quản lí thông tin',

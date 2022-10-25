@@ -11,7 +11,7 @@ function RegisterManagement() {
     useEffect(() => {
         const fetchRegisterList = async () => {
             try {
-                // Chua co api nen lay tam get all coach garage
+                // Chua co api nen lay tam get all coach garage, có thì getCoachGarageRegister status 2
                 const response = await coachGarageAPI.getAll();
                 if (response.code === 200) {
                     toast.success('Lấy đữ liệu thành công !', {

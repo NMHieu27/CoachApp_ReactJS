@@ -26,7 +26,6 @@ import Signup from '~/pages/Auth/Signup/Signup';
 import Booking from '~/pages/Booking/Booking';
 import { Signin } from '~/pages/Auth/Signin';
 import { Contract } from '~/pages/Contract';
-import { GoodsManagement } from '~/pages/GoodsManagement';
 import CoachesDetail from '~/pages/CoachesDetail/CoachesDetail';
 import AccountInfo from '~/pages/AccountInfo/AccountInfo';
 import AccountInfoSetting from '~/pages/AccountInfoSetting/AccountInfoSetting';
@@ -45,16 +44,18 @@ import GarageRevenueStat from '~/pages/Garage/GarageRevenueStat/GarageRevenueSta
 import GarageCoachesStat from '~/pages/Garage/GarageCoachesStat/GarageCoachesStat';
 import EmployeeCoachesManagement from '~/pages/Employee/EmployeeCoachesManagement/EmployeeCoachesManagement';
 import EmployeeEditShipping from '~/pages/Employee/EmployeeShippingManagement/EmployeeEditShipping';
+import History from '~/pages/History/History';
+import CancelTicketManagement from '~/pages/Admin/CancelTicketManagement/CancelTicketManagement';
 
 // Public routes
 const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.contract, component: Contract },
-    { path: config.routes.goodsmanagement, component: GoodsManagement },
     { path: config.routes.booking, component: Booking },
     { path: config.routes.coachesdetail, component: CoachesDetail },
     { path: config.routes.accountinfo, component: AccountInfo },
     { path: config.routes.accountinfosetting, component: AccountInfoSetting },
+    { path: config.routes.history, component: History },
 ];
 
 //Admin routes
@@ -88,6 +89,8 @@ const privateRoutes = [
     { path: config.routes.coachesStat, component: CoachesStat },
     // Admin Shipping
     { path: config.routes.editShipping, component: EditShipping },
+    //Admin Cancel Ticket
+    { path: config.routes.requestCancelTicket, component: CancelTicketManagement },
 ];
 // Garage Routes
 const garageRoutes = [

@@ -119,7 +119,7 @@ function EmployeeEditShipping() {
     }, []);
     return (
         <Helmet title="Sửa đơn hàng">
-            <div className="edit-shipping">
+            <div className="edit-shipping container">
                 <div
                     className="edit-shipping__breadcrumb"
                     style={{ background: '#fff', padding: '15px', borderRadius: '5px' }}
@@ -136,7 +136,7 @@ function EmployeeEditShipping() {
                 </div>
                 <div
                     className="edit-shipping__form-edit-shipping"
-                    style={{ background: '#fff', borderRadius: '5px', marginTop: '10px', padding: '15px 20%' }}
+                    style={{ background: '#fff', borderRadius: '5px', marginTop: '10px', padding: '15px 10%' }}
                 >
                     <h3
                         style={{ fontWeight: 'bold', color: 'var(--second-color)' }}

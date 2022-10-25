@@ -8,6 +8,14 @@ const ticketAPI = {
         const url = `/ticket/${id}`;
         return axiosClient.get(url);
     },
+    getTicketByUserId: (id) => {
+        const url = `/ticket/user/${id}`;
+        return axiosClient.get(url);
+    },
+    getTicketByPhone: (phone) => {
+        const url = `/ticket/?phone=${phone}`;
+        return axiosClient.get(url);
+    },
     getAllTicket: (page, size) => {
         const url = `/ticket/?page=${page}&size=${size}`;
         return axiosClient.get(url);
@@ -22,6 +30,10 @@ const ticketAPI = {
     },
     deleteTicket: (id) => {
         const url = `/ticket/delete/${id}`;
+        return axiosClient.delete(url);
+    },
+    cancelTicket: (id) => {
+        const url = `/ticket/cancel/${id}`;
         return axiosClient.delete(url);
     },
 };

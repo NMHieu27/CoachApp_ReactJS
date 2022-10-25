@@ -154,9 +154,9 @@ function EmployeeEditTicket() {
     }, []);
     return (
         <Helmet title="Sửa vé xe">
-            <div className="edit-ticket">
+            <div className="employee-edit-ticket container">
                 <div
-                    className="edit-ticket__breadcrumb"
+                    className="employee-edit-ticket__breadcrumb"
                     style={{ background: '#fff', padding: '15px', borderRadius: '5px' }}
                 >
                     <Link style={{ color: 'blue' }} to={config.routes.home}>
@@ -170,8 +170,8 @@ function EmployeeEditTicket() {
                     <span>Sửa vé xe</span>
                 </div>
                 <div
-                    className="edit-ticket__form-edit-ticket"
-                    style={{ background: '#fff', borderRadius: '5px', marginTop: '10px', padding: '15px 20%' }}
+                    className="employee-edit-ticket__form-edit-ticket"
+                    style={{ background: '#fff', borderRadius: '5px', marginTop: '10px', padding: '15px 10%' }}
                 >
                     <h3
                         style={{ fontWeight: 'bold', color: 'var(--second-color)' }}

@@ -32,6 +32,8 @@ const routes = {
     coachesStat: '/admin/thong-ke-mat-do-chuyen-xe',
     // --Admin - Shipping
     editShipping: '/admin/don-hang/chinh-sua/:shippingId',
+    // --Admin - Cancel Ticket
+    requestCancelTicket: '/admin/danh-sach-yeu-cau-huy-ve',
 
     // Coach Garage routes
     garage: '/garage',
@@ -54,7 +56,7 @@ const routes = {
     // Client routes
     home: '/',
     contract: '/mo-ban-ve',
-    goodsmanagement: '/don-hang',
+    history: '/lich-su-giao-dich',
     booking: '/dat-ve',
     coachesdetail: '/chi-tiet-chuyen-xe/:coachesID',
     accountinfo: '/thong-tin-ca-nhan',

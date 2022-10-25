@@ -8,6 +8,14 @@ const shippingAPI = {
         const url = `/shipping/${id}`;
         return axiosClient.get(url);
     },
+    getShippingByUserId: (id) => {
+        const url = `/shipping/user/${id}`;
+        return axiosClient.get(url);
+    },
+    getShippingByPhone: (phone) => {
+        const url = `/shipping/?phone=${phone}`;
+        return axiosClient.get(url);
+    },
     getAllShipping: (page, size) => {
         const url = `/shipping/?page=${page}&size=${size}`;
         return axiosClient.get(url);

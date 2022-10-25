@@ -28,9 +28,10 @@ function Signin(props) {
                 localStorage.setItem('role', response.data.role);
                 localStorage.setItem('fullname', response.data.fullname);
                 localStorage.setItem('phone', response.data.phone);
-                localStorage.setItem('email', response.data.email);
                 localStorage.setItem('avatar', response.data.avatar);
                 localStorage.setItem('userId', response.data.id);
+                localStorage.setItem('accessToken', response?.data?.accessToken);
+                localStorage.setItem('expiredTime', response?.data?.expiredTime);
 
                 // const accessToken = response?.data?.accessToken;
                 // const role = response?.data?.role;

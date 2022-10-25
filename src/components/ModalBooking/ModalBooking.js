@@ -18,9 +18,9 @@ function ModalBooking({
     toggleBooking,
 }) {
     const [selectedPickUp, setSelectedPickUp] = useState();
-    const [selectedPickUpId, setSelectedPickUpId] = useState();
+    const [selectedPickUpId, setSelectedPickUpId] = useState(1);
     const [selectedDropOff, setSelectedDropOff] = useState();
-    const [selectedDropOffId, setSelectedDropOffId] = useState();
+    const [selectedDropOffId, setSelectedDropOffId] = useState(1);
 
     const formik = useFormik({
         initialValues: {

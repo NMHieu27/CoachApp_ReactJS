@@ -12,10 +12,11 @@ import Helmet from '~/components/Helmet/Helmet';
 import Image from '~/components/Image';
 function AccountsManagement() {
     const [accountList, setAccountList] = useState();
+    const accessToken = localStorage.getItem('accessToken');
     useEffect(() => {
         const fetchListUser = async () => {
             try {
-                const response = await userAPI.getAll();
+                const response = await userAPI.getAll(accessToken);
                 if (response.code === 200) {
                     toast.success('Lấy dữ liệu thành công', { theme: 'colored' });
                     setAccountList(response.data);

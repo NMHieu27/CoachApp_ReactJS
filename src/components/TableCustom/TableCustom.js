@@ -22,6 +22,8 @@ function TableCustom({ data, columns, title = '', link, isAddButton, ...props })
                 options={{
                     exportButton: true,
                     headerStyle: {
+                        background: 'var(--second-color)',
+                        color: 'white',
                         fontSize: '18px',
                         fontWeight: 'bold',
                     },

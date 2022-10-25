@@ -17,7 +17,7 @@ function StatFilterBox({
         { id: 3, name: 'year', title: 'Theo năm' },
     ];
     return (
-        <div class="row">
+        <div class="row" style={{ textAlign: '-webkit-center' }}>
             <div class="col-md-3">
                 <label class="form-label" for="statFilter">
                     Thống kê theo
@@ -141,7 +141,7 @@ function StatFilterBox({
                 )}
             </div>
             <div className="col-md-2">
-                <div className="col-md-12 text-center" style={{ paddingTop: '2.3rem' }}>
+                <div className="col-md-12" style={{ paddingTop: '2.3rem' }}>
                     <button className=" btn-lg btn-handle-primary text-light" onClick={onClick}>
                         {' '}
                         Thống kê
