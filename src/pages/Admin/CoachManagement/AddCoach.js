@@ -5,12 +5,12 @@ import Dropdown from '~/components/Dropdown/Dropdown';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import coachAPI from '~/api/coachAPI';
-import categoryAPI from '~/api/categoryAPI';
-import coachGarageAPI from '~/api/coachGarageAPI';
 import config from '~/config';
 
 import './AddCoach.scss';
+import coachAPI from '~/api/adminAPI/coachAPI';
+import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
+import categoryAPI from '~/api/adminAPI/categoryAPI';
 
 function AddCoach() {
     const nav = useNavigate();
@@ -97,7 +97,7 @@ function AddCoach() {
                         files: values.files,
                     };
                     //Đổi APi đúng chức năng
-                    const response = await coachAPI.postAddCoach(params);
+                    const response = await coachAPI.addCoach(params);
                     if (response.code === 200) {
                         toast.success('Thêm xe thành công !', { theme: 'colored' });
                         nav(config.routes.coachManagement);

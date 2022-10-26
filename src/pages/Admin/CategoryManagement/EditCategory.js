@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import config from '~/config';
-import categoryAPI from '~/api/categoryAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import './EditCategory.scss';
+import categoryAPI from '~/api/adminAPI/categoryAPI';
 function EditCategory() {
     const { id } = useParams();
     const status = [

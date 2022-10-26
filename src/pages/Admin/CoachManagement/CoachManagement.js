@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import coachAPI from '~/api/coachAPI';
+import coachAPI from '~/api/adminAPI/coachAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import config from '~/config';
 import './CoachManagement.scss';
 function CoachManagement() {
     const [coachList, setCoachList] = useState();
+    const [isDeleted, setIsDeleted] = useState(false);
     const columns = [
         { title: 'Id', field: 'id' },
         { title: 'Biển số', field: 'licensePlates' },
@@ -49,9 +50,9 @@ function CoachManagement() {
             try {
                 const response = await coachAPI.getAll();
                 if (response.code === 200) {
-                    toast.success('Lấy đữ liệu thành công !', {
-                        theme: 'colored',
-                    });
+                    // toast.success('Lấy đữ liệu thành công !', {
+                    //     theme: 'colored',
+                    // });
                     setCoachList(response.data);
                 } else {
                     toast.error('Lấy dữ liệu thất bại !', { theme: 'colored' });
@@ -63,7 +64,7 @@ function CoachManagement() {
             }
         };
         fetchCoachList();
-    }, []);
+    }, [isDeleted]);
 
     const handleDeleteCoach = async (coach) => {
         try {
@@ -71,10 +72,11 @@ function CoachManagement() {
                 const response = await coachAPI.deleteCoach(coach.id);
                 if (response.code === 200) {
                     toast.success('Xóa thành công!', { theme: 'colored' });
-                    const index = coachList.findIndex((value) => value.id === coach.id);
-                    const arrCopy = [...coachList];
-                    arrCopy.splice(index, 1);
-                    setCoachList(arrCopy);
+                    setIsDeleted(!isDeleted);
+                    // const index = coachList.findIndex((value) => value.id === coach.id);
+                    // const arrCopy = [...coachList];
+                    // arrCopy.splice(index, 1);
+                    // setCoachList(arrCopy);
                 } else {
                     toast.error('Không thể xóa ! ' + response.message, { theme: 'colored' });
                     throw new Error(response.message);

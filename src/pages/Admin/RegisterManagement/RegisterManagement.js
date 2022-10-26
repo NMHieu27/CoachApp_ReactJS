@@ -2,21 +2,21 @@ import { useState, useEffect } from 'react';
 import Helmet from '~/components/Helmet/Helmet';
 import config from '~/config';
 import { Link } from 'react-router-dom';
-import coachGarageAPI from '~/api/coachGarageAPI';
 import { toast } from 'react-toastify';
 import './RegisterManagement.scss';
 import TableCustom from '~/components/TableCustom/TableCustom';
+import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
 function RegisterManagement() {
     const [registerList, setRegisterList] = useState();
+    const [isToggle, setIsToggle] = useState(false);
     useEffect(() => {
         const fetchRegisterList = async () => {
             try {
-                // Chua co api nen lay tam get all coach garage, có thì getCoachGarageRegister status 2
-                const response = await coachGarageAPI.getAll();
+                const response = await coachGarageAPI.getCoachGarageRequest();
                 if (response.code === 200) {
-                    toast.success('Lấy đữ liệu thành công !', {
-                        theme: 'colored',
-                    });
+                    // toast.success('Lấy đữ liệu thành công !', {
+                    //     theme: 'colored',
+                    // });
                     setRegisterList(response.data);
                 } else {
                     toast.error('Lấy dữ liệu thất bại !', { theme: 'colored' });
@@ -28,7 +28,7 @@ function RegisterManagement() {
             }
         };
         fetchRegisterList();
-    }, []);
+    }, [isToggle]);
     const columns = [
         { title: 'Id', field: 'id' },
         { title: 'Tên nhà xe', field: 'name' },
@@ -63,15 +63,16 @@ function RegisterManagement() {
     const handleAcceptRequest = async (coachGarage) => {
         try {
             if (window.confirm(`Chấp nhận nhà xe ${coachGarage.name} ?`)) {
-                const response = await coachGarageAPI.acceptRequest(coachGarage.id);
+                const response = await coachGarageAPI.acceptGarageRequest(coachGarage.id);
                 if (response.code === 200) {
-                    const index = registerList.findIndex((value) => value.id === coachGarage.id);
-                    const arrCopy = [...registerList];
-                    arrCopy.splice(index, 1);
-                    setRegisterList(arrCopy);
+                    // const index = registerList.findIndex((value) => value.id === coachGarage.id);
+                    // const arrCopy = [...registerList];
+                    // arrCopy.splice(index, 1);
+                    // setRegisterList(arrCopy);
                     toast.success(`Đã chấp nhận nhà xe ${coachGarage.name}`, {
                         theme: 'colored',
                     });
+                    setIsToggle(!isToggle);
                     console.log(`Đã chấp nhận nhà xe ${coachGarage.name}`);
                 } else {
                     toast.error('Chấp nhận thất bại !' + response.message, {
@@ -89,15 +90,16 @@ function RegisterManagement() {
     const handleDenyRequest = async (coachGarage) => {
         try {
             if (window.confirm(`Từ chối nhà xe ${coachGarage.name} ?`)) {
-                const response = await coachGarageAPI.denyRequest(coachGarage.id);
+                const response = await coachGarageAPI.rejectGarageRequest(coachGarage.id);
                 if (response.code === 200) {
-                    const index = registerList.findIndex((value) => value.id === coachGarage.id);
-                    const arrCopy = [...registerList];
-                    arrCopy.splice(index, 1);
-                    setRegisterList(arrCopy);
+                    // const index = registerList.findIndex((value) => value.id === coachGarage.id);
+                    // const arrCopy = [...registerList];
+                    // arrCopy.splice(index, 1);
+                    // setRegisterList(arrCopy);
                     toast.success(`Đã từ chối nhà xe ${coachGarage.name}`, {
                         theme: 'colored',
                     });
+                    setIsToggle(!isToggle);
                     console.log(`Đã từ chối nhà xe ${coachGarage.name}`);
                 } else {
                     toast.error('Từ chối thất bại !' + response.message, {

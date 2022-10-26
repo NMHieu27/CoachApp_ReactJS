@@ -1,13 +1,14 @@
 import Helmet from '~/components/Helmet/Helmet';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import categoryAPI from '~/api/categoryAPI';
 import { toast } from 'react-toastify';
 import config from '~/config';
 import './CategoryManagement.scss';
 import TableCustom from '~/components/TableCustom/TableCustom';
+import categoryAPI from '~/api/adminAPI/categoryAPI';
 function CategoryManagement() {
     const [categoryList, setCategoryList] = useState();
+    const [isDeleted, setIsDeleted] = useState(false);
     const columns = [
         { title: 'Id', field: 'id' },
         { title: 'Tên loại', field: 'name' },
@@ -47,7 +48,7 @@ function CategoryManagement() {
             try {
                 const response = await categoryAPI.getAll();
                 if (response.code === 200) {
-                    toast.success('Lấy dữ liệu thành công ! ', { theme: 'colored' });
+                    // toast.success('Lấy dữ liệu thành công ! ', { theme: 'colored' });
                     setCategoryList(response.data);
                 } else {
                     toast.error('Thất bại khi lấy dữ liệu !' + response.message, { theme: 'colored' });
@@ -58,18 +59,19 @@ function CategoryManagement() {
             }
         };
         fetchCategoryList();
-    }, []);
+    }, [isDeleted]);
 
     const handleDeleteCate = async (category) => {
         try {
             if (window.confirm(`Bạn chắc chắn xóa ${category.name}`)) {
-                const response = await categoryAPI.deleteCategoryById(category.id);
+                const response = await categoryAPI.deleteCategory(category.id);
                 if (response.code === 200) {
                     toast.success('Xóa thành công!', { theme: 'colored' });
-                    const index = categoryList.findIndex((value) => value.id === category.id);
-                    const arrCopy = [...categoryList];
-                    arrCopy.splice(index, 1);
-                    setCategoryList(arrCopy);
+                    // const index = categoryList.findIndex((value) => value.id === category.id);
+                    // const arrCopy = [...categoryList];
+                    // arrCopy.splice(index, 1);
+                    // setCategoryList(arrCopy);
+                    setIsDeleted(!isDeleted);
                 } else {
                     toast.error('Không thể xóa !' + response.message, { theme: 'colored' });
                     throw new Error(response.message);

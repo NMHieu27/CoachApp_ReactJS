@@ -116,7 +116,7 @@ function EditAccount() {
                 const response = await userAPI.getUserById(id);
                 if (response.code === 200) {
                     setUserNeedEdit(response.data);
-                    toast.success('Lấy dữ liệu tài khoản thành công !', { theme: 'colored' });
+                    // toast.success('Lấy dữ liệu tài khoản thành công !', { theme: 'colored' });
                     formik.values.fullname = response.data.fullname;
                     response.data.gender ? setSexChecked(1) : setSexChecked(0);
                     formik.values.gender = response.data.gender;

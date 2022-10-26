@@ -9,9 +9,9 @@ import config from '~/config';
 
 import './AddCoaches.scss';
 import countryAPI from '~/api/countryAPI';
-import coachesAPI from '~/api/coachesAPI';
 import StopByBox from '~/components/StopByBox/StopByBox';
 import stopByAPI from '~/api/stopByAPI';
+import coachesAPI from '~/api/adminAPI/coachesAPI';
 
 function AddCoaches() {
     const nav = useNavigate();
@@ -89,7 +89,7 @@ function AddCoaches() {
     useEffect(() => {
         const fetchAllPickUpByStartPoint = async () => {
             try {
-                setPickUpListReq([]);
+                // setPickUpListReq([]);
                 const response = await stopByAPI.getStopByCountryId(selectedStartPointId);
                 if (response.code === 200) {
                     console.log('fetch pickup success');
@@ -110,7 +110,7 @@ function AddCoaches() {
     useEffect(() => {
         const fetchAllDropOffByEndPoint = async () => {
             try {
-                setDropOffListReq([]);
+                // setDropOffListReq([]);
                 const response = await stopByAPI.getStopByCountryId(selectedEndPointId);
                 if (response.code === 200) {
                     console.log('fetch dropoff success');
@@ -170,8 +170,7 @@ function AddCoaches() {
                     pick_up: values.pick_up,
                     drop_off: values.drop_off,
                 };
-                //Đổi APi đúng chức năng
-                const response = await coachesAPI.postAddCoaches(params);
+                const response = await coachesAPI.addCoaches(params);
                 if (response.code === 200) {
                     toast.success('Thêm chuyến xe thành công !', { theme: 'colored' });
                     nav(config.routes.coachesManagement);

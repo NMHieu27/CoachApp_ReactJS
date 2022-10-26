@@ -5,12 +5,13 @@ import Dropdown from '~/components/Dropdown/Dropdown';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import coachAPI from '~/api/coachAPI';
-import categoryAPI from '~/api/categoryAPI';
-import coachGarageAPI from '~/api/coachGarageAPI';
+
 import config from '~/config';
 
 import './EditCoach.scss';
+import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
+import coachAPI from '~/api/adminAPI/coachAPI';
+import categoryAPI from '~/api/adminAPI/categoryAPI';
 
 function EditCoach() {
     const { id } = useParams();

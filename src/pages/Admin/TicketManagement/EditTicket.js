@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import Helmet from '~/components/Helmet/Helmet';
 import stopByAPI from '~/api/stopByAPI';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import ticketAPI from '~/api/ticketAPI';
 import config from '~/config';
 import Dropdown from '~/components/Dropdown/Dropdown';
+import ticketAPI from '~/api/adminAPI/ticketAPI';
 function EditTicket() {
     const nav = useNavigate();
     const { ticketId, coachesId } = useParams();
@@ -106,14 +106,14 @@ function EditTicket() {
                     status: values.status,
                 };
 
-                // const response = await ticketAPI.updateTicket(params);
-                // if (response.code === 200) {
-                //     toast.success('Sửa vé thành công !', { theme: 'colored' });
-                // nav(-1);
-                // } else {
-                //     toast.error('Sửa vé thất bại !' + response.message, { theme: 'colored' });
-                //     throw new Error(response.message);
-                // }
+                const response = await ticketAPI.updateTicket(params);
+                if (response.code === 200) {
+                    toast.success('Sửa vé thành công !', { theme: 'colored' });
+                    nav(-1);
+                } else {
+                    toast.error('Sửa vé thất bại !' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
+                }
             } catch (err) {
                 toast.error('Thất bại khi sửa dữ liệu' + err.message, { theme: 'colored' });
             }

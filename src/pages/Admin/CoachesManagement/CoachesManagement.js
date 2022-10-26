@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import coachesAPI from '~/api/coachesAPI';
-import shippingAPI from '~/api/shippingAPI';
-import ticketAPI from '~/api/ticketAPI';
+import coachesAPI from '~/api/adminAPI/coachesAPI';
+import ticketAPI from '~/api/adminAPI/ticketAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import config from '~/config';
@@ -16,6 +15,7 @@ function CoachesManagement() {
     const [coachesId, setCoachesId] = useState();
     const [ticketListByCoachesId, setTicketListBuyCoachesId] = useState();
     const [shippingListByCoachesId, setShippingListByCoachesId] = useState();
+    const [isDeleted, setIsDeleted] = useState(false);
     const columns = [
         { title: 'Id', field: 'id' },
         {
@@ -98,10 +98,11 @@ function CoachesManagement() {
                 const response = await coachesAPI.deleteCoaches(coaches.id);
                 if (response.code === 200) {
                     toast.success('Xóa thành công!', { theme: 'colored' });
-                    const index = coachesList.findIndex((value) => value.id === coaches.id);
-                    const arrCopy = [...coachesList];
-                    arrCopy.splice(index, 1);
-                    setCoachesList(arrCopy);
+                    // const index = coachesList.findIndex((value) => value.id === coaches.id);
+                    // const arrCopy = [...coachesList];
+                    // arrCopy.splice(index, 1);
+                    // setCoachesList(arrCopy);
+                    setIsDeleted(!isDeleted);
                 } else {
                     toast.error('Không thể xóa ! ' + response.message, { theme: 'colored' });
                     throw new Error(response.message);
@@ -120,8 +121,7 @@ function CoachesManagement() {
         setCoachesId(rowData.id);
         console.log(rowData.id);
         try {
-            // const responese1 = await ticketAPI.getTicketByCoachesId(rowData.id);
-            const response1 = await ticketAPI.getAllTicket(0, 20);
+            const response1 = await ticketAPI.getTicketByCoachesId(rowData.id);
             if (response1.code === 200) {
                 console.log('fetch ticket success');
                 setTicketListBuyCoachesId(response1.data);

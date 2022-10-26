@@ -22,7 +22,10 @@ axiosClient.interceptors.request.use(
             return config;
         }
         const { accessToken, expiredTime } = await axiosClient.getLocalAccessToken();
-        config.headers.Authorization = accessToken;
+        // accessToken && config.headers.Authorization = accessToken;
+        if (accessToken) {
+            config.headers.Authorization = accessToken;
+        }
         console.log(`{accessToken, expiredTime}`, { accessToken, expiredTime });
         const now = new Date().getTime();
         console.log(`timeExpired:::${expiredTime} vs::now::${now}`);
@@ -36,7 +39,9 @@ axiosClient.interceptors.request.use(
                 if (response.code === 200) {
                     const newAccessToken = response.data.accessToken;
                     const newExpiredTime = response.data.expiredTime;
-                    config.headers.Authorization = newAccessToken;
+                    if (newAccessToken) {
+                        config.headers.Authorization = newAccessToken;
+                    }
                     console.log({ newAccessToken, newExpiredTime });
                     await axiosClient.setLocalAccessToken(newAccessToken, newExpiredTime);
                     return config;

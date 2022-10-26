@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import Helmet from '~/components/Helmet/Helmet';
 import { Link } from 'react-router-dom';
-import coachGarageAPI from '~/api/coachGarageAPI';
 import { toast } from 'react-toastify';
 import config from '~/config';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import './CoachGarageManagement.scss';
+import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
 function CoachGarageManagement() {
     const [coachGarageList, setCoachGarageList] = useState();
+    const [isDeleted, setIsDeleted] = useState(false);
     useEffect(() => {
         const fetchCoachGarageList = async () => {
             try {
-                // Chua co api nen lay tam get all coach garage
                 const response = await coachGarageAPI.getAll();
                 if (response.code === 200) {
-                    toast.success('Lấy đữ liệu thành công !', {
-                        theme: 'colored',
-                    });
+                    // toast.success('Lấy đữ liệu thành công !', {
+                    //     theme: 'colored',
+                    // });
                     setCoachGarageList(response.data);
                 } else {
                     toast.error('Lấy dữ liệu thất bại !', { theme: 'colored' });
@@ -28,7 +28,7 @@ function CoachGarageManagement() {
             }
         };
         fetchCoachGarageList();
-    }, []);
+    }, [isDeleted]);
     const columns = [
         { title: 'Id', field: 'id' },
         { title: 'Tên nhà xe', field: 'name' },
@@ -74,14 +74,15 @@ function CoachGarageManagement() {
 
     const handleDeleteCoachGarage = async (coachGarage) => {
         try {
-            if (window.confirm(`Bạn chắc chắn xóa ${coachGarage.name}`)) {
+            if (window.confirm(`Bạn chắc chắn xóa nhà xe ${coachGarage.name}`)) {
                 const response = await coachGarageAPI.deleteCoachGarage(coachGarage.id);
                 if (response.code === 200) {
                     toast.success('Xóa thành công!', { theme: 'colored' });
-                    const index = coachGarageList.findIndex((value) => value.id === coachGarage.id);
-                    const arrCopy = [...coachGarageList];
-                    arrCopy.splice(index, 1);
-                    setCoachGarageList(arrCopy);
+                    // const index = coachGarageList.findIndex((value) => value.id === coachGarage.id);
+                    // const arrCopy = [...coachGarageList];
+                    // arrCopy.splice(index, 1);
+                    // setCoachGarageList(arrCopy);
+                    setIsDeleted(!isDeleted);
                 } else {
                     toast.error('Không thể xóa !' + response.message, { theme: 'colored' });
                     throw new Error(response.message);

@@ -5,11 +5,11 @@ import Dropdown from '~/components/Dropdown/Dropdown';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import coachGarageAPI from '~/api/coachGarageAPI';
 import config from '~/config';
 
 import districtAPI from '~/api/districtAPI';
 import './AddCoachGarage.scss';
+import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
 
 function EditCoachGarage() {
     const [district, setDistrict] = useState();
@@ -39,7 +39,7 @@ function EditCoachGarage() {
         }
     }, [currentUserId, nav]);
     const [selectedDistrict, setSelectedDistrict] = useState();
-    const [selectedDistrictId, setSelectedDistrictId] = useState();
+    const [selectedDistrictId, setSelectedDistrictId] = useState(1);
     const status = [
         { id: 0, name: 'banned', title: 'Vô hiệu' },
         { id: 1, name: 'active', title: 'Hoạt động' },
@@ -98,7 +98,6 @@ function EditCoachGarage() {
                         status: values.status,
                         contract: values.contract,
                     };
-                    //Đổi APi đúng chức năng
                     const response = await coachGarageAPI.updateCoachGarage(params);
                     if (response.code === 200) {
                         toast.success('Sửa nhà xe thành công !', { theme: 'colored' });

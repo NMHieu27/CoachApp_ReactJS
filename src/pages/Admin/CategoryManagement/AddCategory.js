@@ -4,9 +4,9 @@ import { useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import config from '~/config';
-import categoryAPI from '~/api/categoryAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import './AddCategory.scss';
+import categoryAPI from '~/api/adminAPI/categoryAPI';
 function AddCategory() {
     const status = [
         { id: 0, name: 'banned', title: 'Vô hiệu' },
@@ -33,7 +33,7 @@ function AddCategory() {
                     seat: values.seat,
                     status: values.status,
                 };
-                const response = await categoryAPI.postAddCategory(params);
+                const response = await categoryAPI.addCategory(params);
                 if (response.code === 200) {
                     toast.success('Thêm dữ liệu thành công !', { theme: 'colored' });
                     nav(config.routes.categoryManagement);

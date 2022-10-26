@@ -9,9 +9,9 @@ import config from '~/config';
 
 import './EditCoaches.scss';
 import countryAPI from '~/api/countryAPI';
-import coachesAPI from '~/api/coachesAPI';
 import StopByBox from '~/components/StopByBox/StopByBox';
 import stopByAPI from '~/api/stopByAPI';
+import coachesAPI from '~/api/adminAPI/coachesAPI';
 
 function EditCoaches() {
     const nav = useNavigate();
@@ -90,7 +90,7 @@ function EditCoaches() {
     useEffect(() => {
         const fetchAllPickUpByStartPoint = async () => {
             try {
-                setPickUpListReq([]);
+                // setPickUpListReq([]);
                 const response = await stopByAPI.getStopByCountryId(selectedStartPointId);
                 if (response.code === 200) {
                     console.log('fetch pickup success');
@@ -111,7 +111,7 @@ function EditCoaches() {
     useEffect(() => {
         const fetchAllDropOffByEndPoint = async () => {
             try {
-                setDropOffListReq([]);
+                // setDropOffListReq([]);
                 const response = await stopByAPI.getStopByCountryId(selectedEndPointId);
                 if (response.code === 200) {
                     console.log('fetch dropoff success');
@@ -127,6 +127,46 @@ function EditCoaches() {
         };
         fetchAllDropOffByEndPoint();
     }, [selectedEndPointId]);
+
+    // fetch list pickup request by coaches id
+    useEffect(() => {
+        const fetchAllPickUpByCoachesID = async (id) => {
+            try {
+                const response = await stopByAPI.getPickUpByCoachesId(id);
+                if (response.code === 200) {
+                    console.log('fetch pickup req success');
+                    console.log(response.data);
+                    setPickUpListReq([...response.data]);
+                } else {
+                    console.log('fetch pickup req error');
+                    throw new Error(response.message);
+                }
+            } catch (err) {
+                console.log('fetch pickup req failed' + err.message);
+            }
+        };
+        fetchAllPickUpByCoachesID(id);
+    }, []);
+
+    // fetch list dropoff request by coaches id
+    useEffect(() => {
+        const fetchAllDropOffByCoachesID = async (id) => {
+            try {
+                const response = await stopByAPI.getDropOffByCoachesId(id);
+                if (response.code === 200) {
+                    console.log('fetch dropoff req success');
+                    console.log(response.data);
+                    setDropOffListReq([...response.data]);
+                } else {
+                    console.log('fetch dropoff req error');
+                    throw new Error(response.message);
+                }
+            } catch (err) {
+                console.log('fetch dropoff req failed' + err.message);
+            }
+        };
+        fetchAllDropOffByCoachesID(id);
+    }, []);
 
     const formik = useFormik({
         initialValues: {
