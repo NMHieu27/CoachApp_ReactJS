@@ -33,7 +33,7 @@ import EditCoach from '~/pages/Admin/CoachManagement/EditCoach';
 import CoachesManagement from '~/pages/Admin/CoachesManagement/CoachesManagement';
 import AddCoaches from '~/pages/Admin/CoachesManagement/AddCoaches';
 import EditCoaches from '~/pages/Admin/CoachesManagement/EditCoaches';
-import GarageHome from '~/pages/Garage/GarageHone/GarageHome';
+import GarageHome from '~/pages/Garage/GarageHome/GarageHome';
 import GarageCoachManagement from '~/pages/Garage/GarageManageCoach/GarageCoachManagement';
 import GarageAddCoach from '~/pages/Garage/GarageManageCoach/GarageAddCoach';
 import GarageEditCoach from '~/pages/Garage/GarageManageCoach/GarageEditCoach';

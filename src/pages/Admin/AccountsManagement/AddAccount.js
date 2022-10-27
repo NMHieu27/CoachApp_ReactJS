@@ -50,8 +50,8 @@ function AddAccount() {
 
             console.log(avatar_el.current.files[0]);
             if (avatar_el.current.files[0]) {
-                // values.avatar = avatar_el.current.files[0]; set như thế này khi đã có cloudinary
-                values.avatar = avatar_el.current.files[0].toString();
+                values.avatar = avatar_el.current.files[0];
+                // values.avatar = avatar_el.current.files[0].toString();
             }
             try {
                 const params = {
@@ -60,7 +60,7 @@ function AddAccount() {
                     email: values.email,
                     phone: values.phone,
                     gender: values.gender,
-                    avatar: values.avatar,
+                    avatarPic: values.avatar,
                     status: values.status,
                     roleId: values.roleId,
                 };

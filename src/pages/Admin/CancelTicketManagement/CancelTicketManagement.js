@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ticketAPI from '~/api/ticketAPI';
+import ticketAPI from '~/api/adminAPI/ticketAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import config from '~/config';
@@ -11,12 +11,11 @@ function CancelTicketManagement() {
     useEffect(() => {
         const fetchRegisterList = async () => {
             try {
-                // Chua co api nen lay tam get all ticket, có thì getCancelTicket status = 2
-                const response = await ticketAPI.getAllTicket(0, 20);
+                const response = await ticketAPI.getRequestCancelTicket();
                 if (response.code === 200) {
-                    toast.success('Lấy đữ liệu thành công !', {
-                        theme: 'colored',
-                    });
+                    // toast.success('Lấy đữ liệu thành công !', {
+                    //     theme: 'colored',
+                    // });
                     setCancelTicketList(response.data);
                 } else {
                     toast.error('Lấy dữ liệu thất bại !', { theme: 'colored' });
@@ -59,7 +58,7 @@ function CancelTicketManagement() {
     const handleDenyRequest = async (ticket) => {
         try {
             if (window.confirm(`Từ chối yêu cầu hủy vé có id là ${ticket.id} ?`)) {
-                const response = await ticketAPI.denyRequest(ticket.id);
+                const response = await ticketAPI.rejectRefundTicket(ticket.id);
                 if (response.code === 200) {
                     const index = cancelTicketList.findIndex((value) => value.id === ticket.id);
                     const arrCopy = [...cancelTicketList];

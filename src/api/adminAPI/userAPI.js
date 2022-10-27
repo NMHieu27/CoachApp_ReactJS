@@ -10,11 +10,21 @@ const userAPI = {
     },
     addUser: (params) => {
         const url = '/admin/user/add';
-        return axiosClient.post(url, params);
+        return axiosClient.post(url, params, {
+            headers: {
+                'content-type': 'multipart/form-data',
+                // accept: 'multipart/form-data',
+            },
+        });
     },
     updateUser: (params) => {
         const url = '/admin/user/update';
-        return axiosClient.put(url, params);
+        return axiosClient.put(url, params, {
+            headers: {
+                'content-type': 'multipart/form-data',
+                // accept: 'multipart/form-data',
+            },
+        });
     },
     deleteUser: (id) => {
         const url = `/admin/user/delete/${id}`;

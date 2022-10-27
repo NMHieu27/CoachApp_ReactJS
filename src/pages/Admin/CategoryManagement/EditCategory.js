@@ -55,7 +55,7 @@ function EditCategory() {
             try {
                 const response = await categoryAPI.getCategoryById(id);
                 if (response.code === 200) {
-                    toast.success('Lấy dữ liệu tài khoản thành công !', { theme: 'colored' });
+                    toast.success('Lấy dữ liệu thành công !', { theme: 'colored' });
                     formik.values.name = response.data.name;
                     formik.values.seat = response.data.seat;
                     response.data.status ? setStatusChecked(1) : setStatusChecked(0);

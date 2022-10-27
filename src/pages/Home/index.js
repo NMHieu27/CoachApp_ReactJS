@@ -5,8 +5,8 @@ import Helmet from '~/components/Helmet/Helmet';
 import './home.scss';
 import { useEffect, useState } from 'react';
 import formatDate from '~/utils/formatDate';
-import countryAPI from '~/api/countryAPI';
 import { toast } from 'react-toastify';
+import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
 function Home() {
     const [from, setFrom] = useState();
     const [to, setTo] = useState();
@@ -19,7 +19,7 @@ function Home() {
     useEffect(() => {
         const fetchCountryList = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     setFrom([...response.data]);
                     setTo([...response.data]);

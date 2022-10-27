@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ticketAPI from '~/api/ticketAPI';
+import ticketAPI from '~/api/employeeAPI/ticketAPI';
 import TableCustom from '~/components/TableCustom/TableCustom';
 
 function EmployeeTableTicketList({ ticketListByCoachesId, setTicketListByCoachesId, coachesId }) {

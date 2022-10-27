@@ -7,18 +7,18 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import config from '~/config';
 
-import districtAPI from '~/api/districtAPI';
 import './AddCoachGarage.scss';
 import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
+import commonDistrictAPI from '~/api/commonAPI/commonDistrictAPI';
 
 function AddCoachGarage() {
     const [district, setDistrict] = useState();
     const [selectedDistrict, setSelectedDistrict] = useState();
-    const [selectedDistrictId, setSelectedDistrictId] = useState(1);
+    const [selectedDistrictId, setSelectedDistrictId] = useState();
     useEffect(() => {
         const fetchAllDistrict = async () => {
             try {
-                const response = await districtAPI.getAll();
+                const response = await commonDistrictAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch district success');
                     setDistrict(response.data);

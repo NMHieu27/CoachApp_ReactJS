@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Helmet from '~/components/Helmet/Helmet';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import config from '~/config';
-import shippingAPI from '~/api/shippingAPI';
+import shippingAPI from '~/api/employeeAPI/shippingAPI';
 function EmployeeEditShipping() {
     const nav = useNavigate();
     const { shippingId } = useParams();
@@ -72,14 +72,14 @@ function EmployeeEditShipping() {
                     status: +values.status,
                 };
 
-                // const response = await shippingAPI.updateShipping(params);
-                // if (response.code === 200) {
-                //     toast.success('Sửa đơn hàng thành công !', { theme: 'colored' });
-                // nav(-1);
-                // } else {
-                //     toast.error('Sửa đơn hàng thất bại !' + response.message, { theme: 'colored' });
-                //     throw new Error(response.message);
-                // }
+                const response = await shippingAPI.updateShipping(params);
+                if (response.code === 200) {
+                    toast.success('Sửa đơn hàng thành công !', { theme: 'colored' });
+                    nav(-1);
+                } else {
+                    toast.error('Sửa đơn hàng thất bại !' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
+                }
             } catch (err) {
                 toast.error('Thất bại khi sửa dữ liệu' + err.message, { theme: 'colored' });
             }

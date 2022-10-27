@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import statsAPI from '~/api/statsAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import StatFilterBox from '~/components/StatFilterBox/StatFilterBox';
 import TableCustom from '~/components/TableCustom/TableCustom';

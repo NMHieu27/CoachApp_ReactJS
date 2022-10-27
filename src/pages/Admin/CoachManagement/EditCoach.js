@@ -9,9 +9,9 @@ import * as Yup from 'yup';
 import config from '~/config';
 
 import './EditCoach.scss';
-import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
 import coachAPI from '~/api/adminAPI/coachAPI';
-import categoryAPI from '~/api/adminAPI/categoryAPI';
+import commonCoachGarageAPI from '~/api/commonAPI/commonCoachGarageAPI';
+import commonCategoryAPI from '~/api/commonAPI/commonCategoryAPI';
 
 function EditCoach() {
     const { id } = useParams();
@@ -20,9 +20,9 @@ function EditCoach() {
     const [coachGarageList, setCoachGarageList] = useState();
     const [categoryList, setCategoryList] = useState();
     const [selectedCoachGarage, setSelectedCoachGarage] = useState();
-    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState(1);
+    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState();
     const [selectedCategory, setSelectedCategory] = useState();
-    const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+    const [selectedCategoryId, setSelectedCategoryId] = useState();
     const status = [
         { id: 0, name: 'banned', title: 'Vô hiệu' },
         { id: 1, name: 'active', title: 'Hoạt động' },
@@ -32,7 +32,7 @@ function EditCoach() {
     useEffect(() => {
         const fetchAllCoachGarage = async () => {
             try {
-                const response = await coachGarageAPI.getAll();
+                const response = await commonCoachGarageAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch coach garage success');
                     setCoachGarageList(response.data);
@@ -51,7 +51,7 @@ function EditCoach() {
     useEffect(() => {
         const fetchAllCategory = async () => {
             try {
-                const response = await categoryAPI.getAll();
+                const response = await commonCategoryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch category list success');
                     setCategoryList(response.data);

@@ -15,7 +15,6 @@ function CommentItem({ comment }) {
                     </span>
                     <div className="comment-item__content">{comment.content}</div>
                     <div className="comment-item__created-date">
-                        {/* Đăng lúc {new Date(comment.created_date).toLocaleString('vi-VI')} */}
                         Đăng lúc <Moment fromNow>{comment.created_date}</Moment>{' '}
                         {new Date(comment.created_date).toLocaleString('vi-VI')}
                     </div>

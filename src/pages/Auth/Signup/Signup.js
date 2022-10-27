@@ -4,10 +4,10 @@ import { useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import config from '~/config';
-import signupAPI from '~/api/signupAPI';
 import Helmet from '~/components/Helmet/Helmet';
 
 import './signup.scss';
+import authAPI from '~/api/authAPI/authAPI';
 
 function Signup() {
     const navigate = useNavigate();
@@ -47,8 +47,7 @@ function Signup() {
 
             console.log(avatar_el.current.files[0]);
             if (avatar_el.current.files[0]) {
-                // values.avatar = avatar_el.current.files[0]; set như thế này khi đã có cloudinary
-                values.avatar = avatar_el.current.files[0].toString();
+                values.avatar = avatar_el.current.files[0];
             }
             try {
                 const params = {
@@ -57,23 +56,23 @@ function Signup() {
                     email: values.email,
                     phone: values.phone,
                     gender: values.gender,
-                    avatar: values.avatar,
+                    avatarPic: values.avatar,
                 };
                 if (!values.password.includes(values.confirmPassword)) {
                     toast.error('Password xác nhận không chính xác', {
                         theme: 'colored',
                     });
                 } else {
-                    const response = await signupAPI.postSignUp(params);
+                    const response = await authAPI.signUp(params);
                     if (response.code === 200) {
                         toast.success('Đăng ký thành công !', { theme: 'colored' });
                         setTimeout(() => navigate(config.routes.signin), 1000);
-                        } else {
-                            console.log(response.code);
-                            toast.error('Đăng ký thất bại! ' + response.message, {
-                                theme: 'colored',
-                            });
-                        }
+                    } else {
+                        console.log(response.code);
+                        toast.error('Đăng ký thất bại! ' + response.message, {
+                            theme: 'colored',
+                        });
+                    }
                 }
             } catch (error) {
                 console.log('Thất bại khi gửi dữ liệu: ', error.message);

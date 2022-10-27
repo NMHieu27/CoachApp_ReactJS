@@ -11,11 +11,10 @@ import './Booking.scss';
 import chuyenxe from '~/fakedata/chuyenxe';
 import { useEffect, useState } from 'react';
 import formatDate from '~/utils/formatDate';
-import countryAPI from '~/api/countryAPI';
 import { toast } from 'react-toastify';
 import Dropdown from '~/components/Dropdown/Dropdown';
-import stopByAPI from '~/api/stopByAPI';
-import coachGarageAPI from '~/api/coachGarageAPI';
+import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
+import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
 
 function Booking() {
     const { fromId, toId, startDate } = useParams();
@@ -44,21 +43,21 @@ function Booking() {
     // coachGarage
     const [coachGarageList, setCoachGarageList] = useState([]);
     const [selectedCoachGarage, setSelectedCoachGarage] = useState();
-    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState(1);
+    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState();
 
     //Pickup and dropoff
     const [pickUpList, setPickUpList] = useState([]);
     const [dropOffList, setDropOffList] = useState([]);
 
     const [selectedPickUp, setSelectedPickUp] = useState();
-    const [selectedPickUpId, setSelectedPickUpId] = useState(1);
+    const [selectedPickUpId, setSelectedPickUpId] = useState();
     const [selectedDropOff, setSelectedDropOff] = useState();
-    const [selectedDropOffId, setSelectedDropOffId] = useState(1);
+    const [selectedDropOffId, setSelectedDropOffId] = useState();
 
     useEffect(() => {
         const fetchCountryList = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     setFrom([...response.data]);
                     setTo([...response.data]);
@@ -96,7 +95,7 @@ function Booking() {
     useEffect(() => {
         const fetchAllPickUpByStartPoint = async (fromId) => {
             try {
-                const response = await stopByAPI.getStopByCountryId(fromId);
+                const response = await commonStopByAPI.getStopByCountryId(fromId);
                 if (response.code === 200) {
                     console.log('fetch pickup success');
                     console.log(response.data);
@@ -116,7 +115,7 @@ function Booking() {
     useEffect(() => {
         const fetchAllDropOffByEndPoint = async (toId) => {
             try {
-                const response = await stopByAPI.getStopByCountryId(toId);
+                const response = await commonStopByAPI.getStopByCountryId(toId);
                 if (response.code === 200) {
                     console.log('fetch dropoff success');
                     console.log(response.data);

@@ -8,10 +8,10 @@ import * as Yup from 'yup';
 import config from '~/config';
 
 import './EditCoaches.scss';
-import countryAPI from '~/api/countryAPI';
 import StopByBox from '~/components/StopByBox/StopByBox';
-import stopByAPI from '~/api/stopByAPI';
 import coachesAPI from '~/api/adminAPI/coachesAPI';
+import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
+import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
 
 function EditCoaches() {
     const nav = useNavigate();
@@ -22,16 +22,16 @@ function EditCoaches() {
 
     //
     const [selectedStartPoint, setSelectedStartPoint] = useState();
-    const [selectedStartPointId, setSelectedStartPointId] = useState(1);
+    const [selectedStartPointId, setSelectedStartPointId] = useState();
     const [selectedEndPoint, setSelectedEndPoint] = useState();
-    const [selectedEndPointId, setSelectedEndPointId] = useState(1);
+    const [selectedEndPointId, setSelectedEndPointId] = useState();
 
     const [pickUpList, setPickUpList] = useState([]);
     const [dropOffList, setDropOffList] = useState([]);
     const [selectedPickUp, setSelectedPickUp] = useState();
-    const [selectedPickUpId, setSelectedPickUpId] = useState(1);
+    const [selectedPickUpId, setSelectedPickUpId] = useState();
     const [selectedDropOff, setSelectedDropOff] = useState();
-    const [selectedDropOffId, setSelectedDropOffId] = useState(1);
+    const [selectedDropOffId, setSelectedDropOffId] = useState();
 
     //Danh sách điểm đón trả về server
     const [pickUpListReq, setPickUpListReq] = useState([]);
@@ -52,7 +52,7 @@ function EditCoaches() {
     useEffect(() => {
         const fetchAllStartPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch start point success');
                     setStartPointList(response.data);
@@ -71,7 +71,7 @@ function EditCoaches() {
     useEffect(() => {
         const fetchAllEndPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch end point success');
                     setEndPointList(response.data);
@@ -90,8 +90,7 @@ function EditCoaches() {
     useEffect(() => {
         const fetchAllPickUpByStartPoint = async (selectedStartPointId) => {
             try {
-                // setPickUpListReq([]);
-                const response = await stopByAPI.getStopByCountryId(selectedStartPointId);
+                const response = await commonStopByAPI.getStopByCountryId(selectedStartPointId);
                 if (response.code === 200) {
                     console.log('fetch pickup success');
                     console.log(response.data);
@@ -112,7 +111,7 @@ function EditCoaches() {
         const fetchAllDropOffByEndPoint = async (selectedEndPointId) => {
             try {
                 // setDropOffListReq([]);
-                const response = await stopByAPI.getStopByCountryId(selectedEndPointId);
+                const response = await commonStopByAPI.getStopByCountryId(selectedEndPointId);
                 if (response.code === 200) {
                     console.log('fetch dropoff success');
                     console.log(response.data);
@@ -132,7 +131,7 @@ function EditCoaches() {
     useEffect(() => {
         const fetchAllPickUpByCoachesID = async (id) => {
             try {
-                const response = await stopByAPI.getPickUpByCoachesId(id);
+                const response = await commonStopByAPI.getPickUpByCoachesId(id);
                 if (response.code === 200) {
                     console.log('fetch pickup req success');
                     console.log(response.data);
@@ -152,7 +151,7 @@ function EditCoaches() {
     useEffect(() => {
         const fetchAllDropOffByCoachesID = async (id) => {
             try {
-                const response = await stopByAPI.getDropOffByCoachesId(id);
+                const response = await commonStopByAPI.getDropOffByCoachesId(id);
                 if (response.code === 200) {
                     console.log('fetch dropoff req success');
                     console.log(response.data);

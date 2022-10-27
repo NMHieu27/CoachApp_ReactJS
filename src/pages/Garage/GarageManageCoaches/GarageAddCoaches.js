@@ -8,10 +8,10 @@ import * as Yup from 'yup';
 import config from '~/config';
 
 import './GarageAddCoaches.scss';
-import countryAPI from '~/api/countryAPI';
-import coachesAPI from '~/api/coachesAPI';
 import StopByBox from '~/components/StopByBox/StopByBox';
-import stopByAPI from '~/api/stopByAPI';
+import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
+import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
+import coachesAPI from '~/api/coachGarageAPI/coachesAPI';
 
 function GarageAddCoaches() {
     const nav = useNavigate();
@@ -22,9 +22,9 @@ function GarageAddCoaches() {
 
     //
     const [selectedStartPoint, setSelectedStartPoint] = useState();
-    const [selectedStartPointId, setSelectedStartPointId] = useState(1);
+    const [selectedStartPointId, setSelectedStartPointId] = useState();
     const [selectedEndPoint, setSelectedEndPoint] = useState();
-    const [selectedEndPointId, setSelectedEndPointId] = useState(1);
+    const [selectedEndPointId, setSelectedEndPointId] = useState();
 
     const [pickUpList, setPickUpList] = useState([]);
     const [dropOffList, setDropOffList] = useState([]);
@@ -52,7 +52,7 @@ function GarageAddCoaches() {
     useEffect(() => {
         const fetchAllStartPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch start point success');
                     setStartPointList(response.data);
@@ -71,7 +71,7 @@ function GarageAddCoaches() {
     useEffect(() => {
         const fetchAllEndPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch end point success');
                     setEndPointList(response.data);
@@ -88,10 +88,9 @@ function GarageAddCoaches() {
 
     // fetch list pick up
     useEffect(() => {
-        const fetchAllPickUpByStartPoint = async () => {
+        const fetchAllPickUpByStartPoint = async (selectedStartPointId) => {
             try {
-                setPickUpListReq([]);
-                const response = await stopByAPI.getStopByCountryId(selectedStartPointId);
+                const response = await commonStopByAPI.getStopByCountryId(selectedStartPointId);
                 if (response.code === 200) {
                     console.log('fetch pickup success');
                     console.log(response.data);
@@ -104,15 +103,15 @@ function GarageAddCoaches() {
                 console.log('fetch pickup failed' + err.message);
             }
         };
-        fetchAllPickUpByStartPoint();
+        fetchAllPickUpByStartPoint(selectedStartPointId);
     }, [selectedStartPointId]);
 
     // fetch list drop off
     useEffect(() => {
-        const fetchAllDropOffByEndPoint = async () => {
+        const fetchAllDropOffByEndPoint = async (selectedEndPointId) => {
             try {
                 setDropOffListReq([]);
-                const response = await stopByAPI.getStopByCountryId(selectedEndPointId);
+                const response = await commonStopByAPI.getStopByCountryId(selectedEndPointId);
                 if (response.code === 200) {
                     console.log('fetch dropoff success');
                     console.log(response.data);
@@ -125,7 +124,7 @@ function GarageAddCoaches() {
                 console.log('fetch dropoff failed' + err.message);
             }
         };
-        fetchAllDropOffByEndPoint();
+        fetchAllDropOffByEndPoint(selectedEndPointId);
     }, [selectedEndPointId]);
 
     const formik = useFormik({

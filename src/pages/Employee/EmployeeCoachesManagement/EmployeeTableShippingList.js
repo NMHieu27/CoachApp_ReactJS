@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import shippingAPI from '~/api/shippingAPI';
+import shippingAPI from '~/api/employeeAPI/shippingAPI';
 import TableCustom from '~/components/TableCustom/TableCustom';
 
 function EmployeeTableShippingList({ shippingListByCoachesId, setShippingListByCoachesId, coachesId }) {
@@ -10,10 +10,10 @@ function EmployeeTableShippingList({ shippingListByCoachesId, setShippingListByC
                 const response = await shippingAPI.deleteShipping(shipping.id);
                 if (response.code === 200) {
                     toast.success('Xóa thành công!', { theme: 'colored' });
-                    const index = shippingListByCoachesId.findIndex((value) => value.id === shipping.id);
-                    const arrCopy = [...shippingListByCoachesId];
-                    arrCopy.splice(index, 1);
-                    setShippingListByCoachesId(arrCopy);
+                    // const index = shippingListByCoachesId.findIndex((value) => value.id === shipping.id);
+                    // const arrCopy = [...shippingListByCoachesId];
+                    // arrCopy.splice(index, 1);
+                    // setShippingListByCoachesId(arrCopy);
                 } else {
                     toast.error('Không thể xóa ! ' + response.message, { theme: 'colored' });
                     throw new Error(response.message);

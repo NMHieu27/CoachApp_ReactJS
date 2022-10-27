@@ -7,8 +7,7 @@ import * as Yup from 'yup';
 import config from '~/config';
 import './AccountInfoSetting.scss';
 import Image from '~/components/Image';
-import accountAPI from '~/api/accountAPI';
-import userAPI from '~/api/userAPI';
+import userAPI from '~/api/userAPI/userAPI';
 function AccountInfoSetting() {
     const currentUserId = localStorage.getItem('userId');
     const sexs = [
@@ -83,7 +82,7 @@ function AccountInfoSetting() {
                         theme: 'colored',
                     });
                 } else {
-                    const response = await accountAPI.postUpdateInfo(params);
+                    const response = await userAPI.updateUser(params);
                     if (response.code === 200) {
                         toast.success('Cập nhật thông tin thành công !', { theme: 'colored' });
                         localStorage.setItem('fullname', 'A');

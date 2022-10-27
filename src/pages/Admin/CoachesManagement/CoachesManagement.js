@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import coachesAPI from '~/api/adminAPI/coachesAPI';
+import shippingAPI from '~/api/adminAPI/shippingAPI';
 import ticketAPI from '~/api/adminAPI/ticketAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import TableCustom from '~/components/TableCustom/TableCustom';
@@ -133,20 +134,18 @@ function CoachesManagement() {
             console.log('fetch ticket failed' + err.message);
         }
 
-        //Khi có API sẽ dùng
-        // try {
-        //     const response2 = await shippingAPI.getShippingByCoachesId(rowData.id);
-        //     if (response2.code === 200){
-        //         console.log('fetch shipping success');
-        //         setShippingListByCoachesId(response2.data);
-        //     }
-        //     else {
-        //         console.log('fetch shipping failed' + response2.message);
-        //         throw new Error(response2.message)
-        //     }
-        // }catch(err){
-        //     console.log('fetch shipping failed'+err.message);
-        // }
+        try {
+            const response2 = await shippingAPI.getShippingByCoachesId(rowData.id);
+            if (response2.code === 200) {
+                console.log('fetch shipping success');
+                setShippingListByCoachesId(response2.data);
+            } else {
+                console.log('fetch shipping failed' + response2.message);
+                throw new Error(response2.message);
+            }
+        } catch (err) {
+            console.log('fetch shipping failed' + err.message);
+        }
         setShippingListByCoachesId(shippingList);
     };
     return (

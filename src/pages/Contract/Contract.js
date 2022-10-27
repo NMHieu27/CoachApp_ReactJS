@@ -7,17 +7,16 @@ import Dropdown from '~/components/Dropdown/Dropdown';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import coachGarageAPI from '~/api/coachGarageAPI';
 import config from '~/config';
-
-import districtAPI from '~/api/districtAPI';
+import coachGarageAPI from '~/api/userAPI/coachGarage';
+import commonDistrictAPI from '~/api/commonAPI/commonDistrictAPI';
 
 function Contract() {
     const [district, setDistrict] = useState();
     useEffect(() => {
         const fetchAllDistrict = async () => {
             try {
-                const response = await districtAPI.getAll();
+                const response = await commonDistrictAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch district success');
                     setDistrict(response.data);
@@ -40,17 +39,7 @@ function Contract() {
         }
     }, [currentUserId, nav]);
     const [selectedDistrict, setSelectedDistrict] = useState();
-    const [selectedDistrictId, setSelectedDistrictId] = useState(district && district.id);
-    // let selectedDistrict = '';
-    // let selectedDistrictId = '';
-
-    // Test
-    // let countryName = '';
-    // let countryId = '';
-    // const handleClick = () => {
-    //     console.log(countryName);
-    //     console.log(countryId);
-    // };
+    const [selectedDistrictId, setSelectedDistrictId] = useState();
 
     const formik = useFormik({
         initialValues: {
@@ -96,7 +85,7 @@ function Contract() {
                         contract: '',
                         email: values.email,
                     };
-                    const response = await coachGarageAPI.postAddGarage(params);
+                    const response = await coachGarageAPI.registerCoachGarage(params);
                     if (response.code === 200) {
                         toast.success('Đơn đăng kí đã được gửi đi !', { theme: 'colored' });
                     } else {

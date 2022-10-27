@@ -5,12 +5,12 @@ import Dropdown from '~/components/Dropdown/Dropdown';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import coachAPI from '~/api/coachAPI';
-import categoryAPI from '~/api/categoryAPI';
-import coachGarageAPI from '~/api/coachGarageAPI';
 import config from '~/config';
 
 import './GarageEditCoach.scss';
+import commonCategoryAPI from '~/api/commonAPI/commonCategoryAPI';
+import coachAPI from '~/api/coachGarageAPI/coachAPI';
+import coachGarageAPI from '~/api/coachGarageAPI/coachGarageAPI';
 
 function GarageEditCoach() {
     const { id } = useParams();
@@ -20,9 +20,9 @@ function GarageEditCoach() {
     const [coachGarageList, setCoachGarageList] = useState();
     const [categoryList, setCategoryList] = useState();
     const [selectedCoachGarage, setSelectedCoachGarage] = useState();
-    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState(1);
+    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState();
     const [selectedCategory, setSelectedCategory] = useState();
-    const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+    const [selectedCategoryId, setSelectedCategoryId] = useState();
     const status = [
         { id: 0, name: 'banned', title: 'Vô hiệu' },
         { id: 1, name: 'active', title: 'Hoạt động' },
@@ -30,9 +30,9 @@ function GarageEditCoach() {
     const [statusChecked, setStatusChecked] = useState(1);
     //Get coach garage list
     useEffect(() => {
-        const fetchAllCoachGarage = async () => {
+        const fetchAllCoachGarage = async (currentOwnerId) => {
             try {
-                const response = await coachGarageAPI.getAll();
+                const response = await coachGarageAPI.getAll(currentOwnerId);
                 if (response.code === 200) {
                     console.log('fetch coach garage success');
                     setCoachGarageList(response.data);
@@ -44,14 +44,14 @@ function GarageEditCoach() {
                 console.log('fetch coach garage failed' + err.message);
             }
         };
-        fetchAllCoachGarage();
+        fetchAllCoachGarage(currentOwnerId);
     }, []);
 
     //Get category list
     useEffect(() => {
         const fetchAllCategory = async () => {
             try {
-                const response = await categoryAPI.getAll();
+                const response = await commonCategoryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch category list success');
                     setCategoryList(response.data);

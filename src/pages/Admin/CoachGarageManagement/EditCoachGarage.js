@@ -7,9 +7,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import config from '~/config';
 
-import districtAPI from '~/api/districtAPI';
 import './AddCoachGarage.scss';
 import coachGarageAPI from '~/api/adminAPI/coachGarageAPI';
+import commonDistrictAPI from '~/api/commonAPI/commonDistrictAPI';
 
 function EditCoachGarage() {
     const [district, setDistrict] = useState();
@@ -18,7 +18,7 @@ function EditCoachGarage() {
     useEffect(() => {
         const fetchAllDistrict = async () => {
             try {
-                const response = await districtAPI.getAll();
+                const response = await commonDistrictAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch district success');
                     setDistrict(response.data);
@@ -39,7 +39,7 @@ function EditCoachGarage() {
         }
     }, [currentUserId, nav]);
     const [selectedDistrict, setSelectedDistrict] = useState();
-    const [selectedDistrictId, setSelectedDistrictId] = useState(1);
+    const [selectedDistrictId, setSelectedDistrictId] = useState();
     const status = [
         { id: 0, name: 'banned', title: 'Vô hiệu' },
         { id: 1, name: 'active', title: 'Hoạt động' },

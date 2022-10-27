@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import coachesAPI from '~/api/coachesAPI';
-import shippingAPI from '~/api/shippingAPI';
-import ticketAPI from '~/api/ticketAPI';
+import coachesAPI from '~/api/employeeAPI/coachesAPI';
+import shippingAPI from '~/api/employeeAPI/shippingAPI';
+import ticketAPI from '~/api/employeeAPI/ticketAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import config from '~/config';
@@ -71,7 +71,7 @@ function EmployeeCoachesManagement() {
         const fetchCoachesList = async () => {
             try {
                 // const response = await coachesAPI.getCoachesByDate(dateFilter);
-                const response = await coachesAPI.getAll(0, 20);
+                const response = await coachesAPI.getCoachesByStartDate(dateFilter);
                 if (response.code === 200) {
                     toast.success('Lấy đữ liệu thành công !', {
                         theme: 'colored',
@@ -99,7 +99,7 @@ function EmployeeCoachesManagement() {
         console.log(rowData.id);
         try {
             // const responese1 = await ticketAPI.getTicketByCoachesId(rowData.id);
-            const response1 = await ticketAPI.getAllTicket(0, 20);
+            const response1 = await ticketAPI.getTicketByCoachesId(rowData.id);
             if (response1.code === 200) {
                 console.log('fetch ticket success');
                 setTicketListBuyCoachesId(response1.data);
@@ -111,21 +111,18 @@ function EmployeeCoachesManagement() {
             console.log('fetch ticket failed' + err.message);
         }
 
-        //Khi có API sẽ dùng
-        // try {
-        //     const response2 = await shippingAPI.getShippingByCoachesId(rowData.id);
-        //     if (response2.code === 200){
-        //         console.log('fetch shipping success');
-        //         setShippingListByCoachesId(response2.data);
-        //     }
-        //     else {
-        //         console.log('fetch shipping failed' + response2.message);
-        //         throw new Error(response2.message)
-        //     }
-        // }catch(err){
-        //     console.log('fetch shipping failed'+err.message);
-        // }
-        setShippingListByCoachesId(shippingList);
+        try {
+            const response2 = await shippingAPI.getShippingByCoachesId(rowData.id);
+            if (response2.code === 200) {
+                console.log('fetch shipping success');
+                setShippingListByCoachesId(response2.data);
+            } else {
+                console.log('fetch shipping failed' + response2.message);
+                throw new Error(response2.message);
+            }
+        } catch (err) {
+            console.log('fetch shipping failed' + err.message);
+        }
     };
     return (
         <Helmet title="Quản lí chuyến xe">

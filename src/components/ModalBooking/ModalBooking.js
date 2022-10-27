@@ -6,7 +6,7 @@ import './ModalBooking.scss';
 import { toast } from 'react-toastify';
 import numberWithCommas from '~/utils/numberWithCommas';
 import Modal from '../Modal/Modal';
-import ticketAPI from '~/api/ticketAPI';
+import ticketAPI from '~/api/userAPI/ticketAPI';
 function ModalBooking({
     userId,
     coachesId,
@@ -22,9 +22,9 @@ function ModalBooking({
     const [isUser, setIsUser] = useState(false);
     const accessToken = localStorage.getItem('accessToken');
     const [selectedPickUp, setSelectedPickUp] = useState();
-    const [selectedPickUpId, setSelectedPickUpId] = useState(1);
+    const [selectedPickUpId, setSelectedPickUpId] = useState();
     const [selectedDropOff, setSelectedDropOff] = useState();
-    const [selectedDropOffId, setSelectedDropOffId] = useState(1);
+    const [selectedDropOffId, setSelectedDropOffId] = useState();
 
     useEffect(() => {
         (!userRole || userRole === 'user') && setIsUser(true);
@@ -102,7 +102,7 @@ function ModalBooking({
                 seatNum: formik.values.seatNum,
             };
             console.log(params);
-            const response = await ticketAPI.postAddTicket(params);
+            const response = await ticketAPI.addTicket(params);
             if (response.code === 200) {
                 toast.success('Đặt vé thành công !', { theme: 'colored' });
             } else {

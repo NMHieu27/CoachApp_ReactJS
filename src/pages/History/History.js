@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import shippingAPI from '~/api/shippingAPI';
-import ticketAPI from '~/api/ticketAPI';
 import Helmet from '~/components/Helmet/Helmet';
 import config from '~/config';
 import shippingList from '~/fakedata/shippingList';
@@ -18,19 +16,18 @@ function History() {
 
     useEffect(() => {
         const fetchTicketByUserId = async (currentUserId) => {
-            try {
-                // const responseTicket = await ticketAPI.getTicketByUserId(currentUserId);
-                const responseTicket = await ticketAPI.getAllTicket(0, 20);
-                if (responseTicket.code === 200) {
-                    setTicketListByPhone(responseTicket.data);
-                    console.log('Lấy vé xe thành công');
-                } else {
-                    console.log('Lấy vé thất bại' + responseTicket.message);
-                    throw new Error(responseTicket.message);
-                }
-            } catch (error) {
-                console.log('Thất bại khi lấy dữ liệu: ', error.message);
-            }
+            // try {
+            //     const responseTicket = await ticketAPI.getTicketByUserId(currentUserId);
+            //     if (responseTicket.code === 200) {
+            //         setTicketListByPhone(responseTicket.data);
+            //         console.log('Lấy vé xe thành công');
+            //     } else {
+            //         console.log('Lấy vé thất bại' + responseTicket.message);
+            //         throw new Error(responseTicket.message);
+            //     }
+            // } catch (error) {
+            //     console.log('Thất bại khi lấy dữ liệu: ', error.message);
+            // }
         };
         fetchTicketByUserId(currentUserId);
     }, []);

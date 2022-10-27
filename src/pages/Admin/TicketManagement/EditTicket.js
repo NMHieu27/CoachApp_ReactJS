@@ -3,11 +3,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import Helmet from '~/components/Helmet/Helmet';
-import stopByAPI from '~/api/stopByAPI';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import config from '~/config';
 import Dropdown from '~/components/Dropdown/Dropdown';
 import ticketAPI from '~/api/adminAPI/ticketAPI';
+import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
 function EditTicket() {
     const nav = useNavigate();
     const { ticketId, coachesId } = useParams();
@@ -29,7 +29,7 @@ function EditTicket() {
     useEffect(() => {
         const fetchAllPickUpByCoachesId = async (coachesId) => {
             try {
-                const response = await stopByAPI.getPickUpByCoachesId(coachesId);
+                const response = await commonStopByAPI.getPickUpByCoachesId(coachesId);
                 if (response.code === 200) {
                     console.log('fetch pickup success');
                     console.log(response.data);
@@ -49,7 +49,7 @@ function EditTicket() {
     useEffect(() => {
         const fetchAllDropOffByCoachesId = async (coachesId) => {
             try {
-                const response = await stopByAPI.getDropOffByCoachesId(coachesId);
+                const response = await commonStopByAPI.getDropOffByCoachesId(coachesId);
                 if (response.code === 200) {
                     console.log('fetch dropoff success');
                     console.log(response.data);

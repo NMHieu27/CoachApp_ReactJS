@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import shippingAPI from '~/api/shippingAPI';
+import shippingAPI from '~/api/adminAPI/shippingAPI';
 import TableCustom from '~/components/TableCustom/TableCustom';
 
 function TableShippingList({ shippingListByCoachesId, setShippingListByCoachesId, coachesId }) {

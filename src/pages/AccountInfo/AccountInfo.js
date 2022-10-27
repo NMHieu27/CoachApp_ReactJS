@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import config from '~/config';
 import Image from '~/components/Image';
-import userAPI from '~/api/userAPI';
 import { toast } from 'react-toastify';
 
 import './AccountInfo.scss';
 import Helmet from '~/components/Helmet/Helmet';
+import userAPI from '~/api/userAPI/userAPI';
 function AccountInfo() {
     // const avatar = localStorage.getItem('avatar');
     const fullname = localStorage.getItem('fullname');

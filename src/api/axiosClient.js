@@ -18,7 +18,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
     async (config) => {
         // Handle refresh token
-        if (config.url.indexOf('/user/signin') >= 0 || config.url.indexOf('/user/token/refresh') >= 0) {
+        if (config.url.indexOf('/auth/signin') >= 0 || config.url.indexOf('/auth/token/refresh') >= 0) {
             return config;
         }
         const { accessToken, expiredTime } = await axiosClient.getLocalAccessToken();

@@ -3,8 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import config from '~/config';
 import Helmet from '~/components/Helmet/Helmet';
 import { toast } from 'react-toastify';
-import signinAPI from '~/api/signinAPI';
 import './signin.scss';
+import authAPI from '~/api/authAPI/authAPI';
 // import useAuth from '~/hooks/useAuth';
 function Signin(props) {
     // const { setAuth } = useAuth();
@@ -22,9 +22,9 @@ function Signin(props) {
                 phone: phone,
                 password: password,
             };
-            const response = await signinAPI.postSignIn(params);
+            const response = await authAPI.signIn(params);
             if (response.code === 200) {
-                // localStorage.setItem('token', response.token);
+                toast.success('Đăng nhập thành công!', { theme: 'colored' });
                 localStorage.setItem('role', response.data.role);
                 localStorage.setItem('fullname', response.data.fullname);
                 localStorage.setItem('phone', response.data.phone);

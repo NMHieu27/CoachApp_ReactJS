@@ -1,7 +1,6 @@
 import './dropdown.scss';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
-import { Select } from '@mui/material';
 function Dropdown({
     options = [{ name: 'Empty', id: 1 }],
     icon = 'fas fa-caret-down',
@@ -18,7 +17,7 @@ function Dropdown({
     // onChange = () => {},
     selected,
     setSelected,
-    selectedId = options[0]?.id,
+    selectedId,
     setSelectedId,
 }) {
     const [isActive, setIsActive] = useState(false);
@@ -29,9 +28,17 @@ function Dropdown({
 
     // const [selected, setSelected] = useState(options[0].name);
     // const [selectedId, setSelectedId] = useState(options[0].id);
+
     useEffect(() => {
-        setSelected(options.find((option) => +option.id === +selectedId).name);
-    }, [selectedId]);
+        if (!selectedId) {
+            setSelectedId(options[0].id);
+            setSelected(options[0].name);
+        } else {
+            setSelected(options.find((option) => +option.id === +selectedId).name);
+        }
+    }, []);
+
+    useEffect(() => {}, []);
     // console.log(selected);
 
     const compareIgnore = (str1, str2) => {

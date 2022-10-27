@@ -8,10 +8,10 @@ import * as Yup from 'yup';
 import config from '~/config';
 
 import './AddCoaches.scss';
-import countryAPI from '~/api/countryAPI';
 import StopByBox from '~/components/StopByBox/StopByBox';
-import stopByAPI from '~/api/stopByAPI';
 import coachesAPI from '~/api/adminAPI/coachesAPI';
+import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
+import stopByAPI from '~/api/commonAPI/commonStopByAPI';
 
 function AddCoaches() {
     const nav = useNavigate();
@@ -21,16 +21,16 @@ function AddCoaches() {
 
     //
     const [selectedStartPoint, setSelectedStartPoint] = useState();
-    const [selectedStartPointId, setSelectedStartPointId] = useState(1);
+    const [selectedStartPointId, setSelectedStartPointId] = useState();
     const [selectedEndPoint, setSelectedEndPoint] = useState();
-    const [selectedEndPointId, setSelectedEndPointId] = useState(1);
+    const [selectedEndPointId, setSelectedEndPointId] = useState();
 
     const [pickUpList, setPickUpList] = useState([]);
     const [dropOffList, setDropOffList] = useState([]);
     const [selectedPickUp, setSelectedPickUp] = useState();
-    const [selectedPickUpId, setSelectedPickUpId] = useState(1);
+    const [selectedPickUpId, setSelectedPickUpId] = useState();
     const [selectedDropOff, setSelectedDropOff] = useState();
-    const [selectedDropOffId, setSelectedDropOffId] = useState(1);
+    const [selectedDropOffId, setSelectedDropOffId] = useState();
 
     //Danh sách điểm đón trả về server
     const [pickUpListReq, setPickUpListReq] = useState([]);
@@ -51,7 +51,7 @@ function AddCoaches() {
     useEffect(() => {
         const fetchAllStartPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch start point success');
                     setStartPointList(response.data);
@@ -70,7 +70,7 @@ function AddCoaches() {
     useEffect(() => {
         const fetchAllEndPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch end point success');
                     setEndPointList(response.data);

@@ -1,23 +1,23 @@
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ticketAPI from '~/api/ticketAPI';
+import ticketAPI from '~/api/userAPI/ticketAPI';
 import TableCustom from '~/components/TableCustom/TableCustom';
 
 function HistoryTableTicketList({ ticketListByPhone, setTicketListByPhone }) {
     const handleCancelTicket = async (ticket) => {
         try {
             if (window.confirm(`Bạn chắc chắn hủy vé có id  ${ticket.id}`)) {
-                // const response = await ticketAPI.cancelTicket(ticket.id);
-                // if (response.code === 200) {
-                toast.success('Gửi yêu cầu hủy vé thành công!', { theme: 'colored' });
-                const index = ticketListByPhone.findIndex((value) => value.id === ticket.id);
-                const arrCopy = [...ticketListByPhone];
-                arrCopy[index] = { ...arrCopy[index], status: 2 };
-                setTicketListByPhone(arrCopy);
-                // } else {
-                //     toast.error('Không thể hủy vé ! ' + response.message, { theme: 'colored' });
-                //     throw new Error(response.message);
-                // }
+                const response = await ticketAPI.requestCancelTicket(ticket.id);
+                if (response.code === 200) {
+                    toast.success('Gửi yêu cầu hủy vé thành công!', { theme: 'colored' });
+                    const index = ticketListByPhone.findIndex((value) => value.id === ticket.id);
+                    const arrCopy = [...ticketListByPhone];
+                    arrCopy[index] = { ...arrCopy[index], status: 2 };
+                    setTicketListByPhone(arrCopy);
+                } else {
+                    toast.error('Không thể hủy vé ! ' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
+                }
             }
         } catch (err) {
             toast.error('Thất bại khi yêu cầu hủy vé ' + err.message, { theme: 'colored' });

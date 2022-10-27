@@ -20,5 +20,17 @@ const ticketAPI = {
         const url = `/admin/ticket/delete/${id}`;
         return axiosClient.delete(url);
     },
+    getRequestCancelTicket: () => {
+        const url = '/admin/ticket/request';
+        return axiosClient.get(url);
+    },
+    acceptRequestCancel: (id) => {
+        const url = `/admin/ticket/refund/accept/${id}`;
+        return axiosClient.put(url);
+    },
+    rejectRefundTicket: (id) => {
+        const url = `/admin/ticket/refund/reject/${id}`;
+        return axiosClient.put(url);
+    },
 };
 export default ticketAPI;

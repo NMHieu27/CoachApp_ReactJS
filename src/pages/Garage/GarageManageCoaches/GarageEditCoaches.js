@@ -8,10 +8,10 @@ import * as Yup from 'yup';
 import config from '~/config';
 
 import './GarageEditCoaches.scss';
-import countryAPI from '~/api/countryAPI';
-import coachesAPI from '~/api/coachesAPI';
 import StopByBox from '~/components/StopByBox/StopByBox';
-import stopByAPI from '~/api/stopByAPI';
+import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
+import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
+import coachesAPI from '~/api/coachGarageAPI/coachesAPI';
 
 function GarageEditCoaches() {
     const nav = useNavigate();
@@ -53,7 +53,7 @@ function GarageEditCoaches() {
     useEffect(() => {
         const fetchAllStartPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch start point success');
                     setStartPointList(response.data);
@@ -72,7 +72,7 @@ function GarageEditCoaches() {
     useEffect(() => {
         const fetchAllEndPoint = async () => {
             try {
-                const response = await countryAPI.getAll();
+                const response = await commonCountryAPI.getAll();
                 if (response.code === 200) {
                     console.log('fetch end point success');
                     setEndPointList(response.data);
@@ -89,10 +89,10 @@ function GarageEditCoaches() {
 
     // fetch list pick up
     useEffect(() => {
-        const fetchAllPickUpByStartPoint = async () => {
+        const fetchAllPickUpByStartPoint = async (selectedStartPointId) => {
             try {
                 setPickUpListReq([]);
-                const response = await stopByAPI.getStopByCountryId(selectedStartPointId);
+                const response = await commonStopByAPI.getStopByCountryId(selectedStartPointId);
                 if (response.code === 200) {
                     console.log('fetch pickup success');
                     console.log(response.data);
@@ -105,15 +105,15 @@ function GarageEditCoaches() {
                 console.log('fetch pickup failed' + err.message);
             }
         };
-        fetchAllPickUpByStartPoint();
+        fetchAllPickUpByStartPoint(selectedStartPointId);
     }, [selectedStartPointId]);
 
     // fetch list drop off
     useEffect(() => {
-        const fetchAllDropOffByEndPoint = async () => {
+        const fetchAllDropOffByEndPoint = async (selectedEndPointId) => {
             try {
                 setDropOffListReq([]);
-                const response = await stopByAPI.getStopByCountryId(selectedEndPointId);
+                const response = await commonStopByAPI.getStopByCountryId(selectedEndPointId);
                 if (response.code === 200) {
                     console.log('fetch dropoff success');
                     console.log(response.data);
@@ -126,8 +126,48 @@ function GarageEditCoaches() {
                 console.log('fetch dropoff failed' + err.message);
             }
         };
-        fetchAllDropOffByEndPoint();
+        fetchAllDropOffByEndPoint(selectedEndPointId);
     }, [selectedEndPointId]);
+
+    // fetch list pickup request by coaches id
+    useEffect(() => {
+        const fetchAllPickUpByCoachesID = async (id) => {
+            try {
+                const response = await commonStopByAPI.getPickUpByCoachesId(id);
+                if (response.code === 200) {
+                    console.log('fetch pickup req success');
+                    console.log(response.data);
+                    setPickUpListReq([...response.data]);
+                } else {
+                    console.log('fetch pickup req error');
+                    throw new Error(response.message);
+                }
+            } catch (err) {
+                console.log('fetch pickup req failed' + err.message);
+            }
+        };
+        fetchAllPickUpByCoachesID(id);
+    }, []);
+
+    // fetch list dropoff request by coaches id
+    useEffect(() => {
+        const fetchAllDropOffByCoachesID = async (id) => {
+            try {
+                const response = await commonStopByAPI.getDropOffByCoachesId(id);
+                if (response.code === 200) {
+                    console.log('fetch dropoff req success');
+                    console.log(response.data);
+                    setDropOffListReq([...response.data]);
+                } else {
+                    console.log('fetch dropoff req error');
+                    throw new Error(response.message);
+                }
+            } catch (err) {
+                console.log('fetch dropoff req failed' + err.message);
+            }
+        };
+        fetchAllDropOffByCoachesID(id);
+    }, []);
 
     const formik = useFormik({
         initialValues: {

@@ -7,7 +7,6 @@ import config from '~/config';
 import Helmet from '~/components/Helmet/Helmet';
 import './EditAccount.scss';
 import Image from '~/components/Image';
-import accountAPI from '~/api/accountAPI';
 import userAPI from '~/api/adminAPI/userAPI';
 
 function EditAccount() {
@@ -78,8 +77,6 @@ function EditAccount() {
 
             // console.log(avatar_el.current.files[0]);
             if (avatar_el.current.files[0]) {
-                // values.avatar = avatar_el.current.files[0]; set như thế này khi đã có cloudinary
-                // values.avatar = avatar_el.current.files[0].toString();
                 values.avatar = avatar_el.current.files[0];
             }
             try {
@@ -90,7 +87,7 @@ function EditAccount() {
                     email: values.email,
                     phone: values.phone,
                     gender: values.gender,
-                    avatar: values.avatar,
+                    avatarPic: values.avatar,
                     status: values.status,
                     roleId: values.roleId,
                 };
