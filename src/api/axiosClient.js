@@ -72,7 +72,7 @@ axiosClient.interceptors.response.use(
 );
 
 async function refreshToken(params) {
-    const url = '/user/token/refresh';
+    const url = '/auth/token/refresh';
     return await axiosClient.post(url, params);
 }
 axiosClient.setLocalAccessToken = async (accessToken, expiredTime) => {
