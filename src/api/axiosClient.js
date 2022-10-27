@@ -25,29 +25,30 @@ axiosClient.interceptors.request.use(
         // accessToken && config.headers.Authorization = accessToken;
         if (accessToken) {
             config.headers.Authorization = accessToken;
-        }
-        console.log(`{accessToken, expiredTime}`, { accessToken, expiredTime });
-        const now = new Date().getTime();
-        console.log(`timeExpired:::${expiredTime} vs::now::${now}`);
-        if (+expiredTime <= +now + 5 * 60 * 1000) {
-            try {
-                console.log('AccessToken expired!!');
-                const params = {
-                    accessToken: accessToken,
-                };
-                const response = await refreshToken(params);
-                if (response.code === 200) {
-                    const newAccessToken = response.data.accessToken;
-                    const newExpiredTime = response.data.expiredTime;
-                    if (newAccessToken) {
-                        config.headers.Authorization = newAccessToken;
+
+            console.log(`{accessToken, expiredTime}`, { accessToken, expiredTime });
+            const now = new Date().getTime();
+            console.log(`timeExpired:::${expiredTime} vs::now::${now}`);
+            if (+expiredTime <= +now + 5 * 60 * 1000) {
+                try {
+                    console.log('AccessToken expired!!');
+                    const params = {
+                        accessToken: accessToken,
+                    };
+                    const response = await refreshToken(params);
+                    if (response.code === 200) {
+                        const newAccessToken = response.data.accessToken;
+                        const newExpiredTime = response.data.expiredTime;
+                        if (newAccessToken) {
+                            config.headers.Authorization = newAccessToken;
+                        }
+                        console.log({ newAccessToken, newExpiredTime });
+                        await axiosClient.setLocalAccessToken(newAccessToken, newExpiredTime);
+                        return config;
                     }
-                    console.log({ newAccessToken, newExpiredTime });
-                    await axiosClient.setLocalAccessToken(newAccessToken, newExpiredTime);
-                    return config;
+                } catch (error) {
+                    return Promise.reject(error);
                 }
-            } catch (error) {
-                return Promise.reject(error);
             }
         }
         return config;

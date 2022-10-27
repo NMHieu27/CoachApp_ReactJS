@@ -25,6 +25,22 @@ function App() {
             <Router>
                 <div className="App">
                     <Routes>
+                        <Route path="/" element={<DefaultLayout />}>
+                            {publicRoutes.map((route, index) => {
+                                const Page = route.component;
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={
+                                            <>
+                                                <Page /> <ScrollButton />
+                                            </>
+                                        }
+                                    />
+                                );
+                            })}
+                        </Route>
                         <Route element={<DefaultLayout />}>
                             <Route
                                 path="/dat-ve"
@@ -65,22 +81,6 @@ function App() {
                                     </Route>
                                 </Route>
                             </Route>
-                        </Route>
-                        <Route path="/" element={<DefaultLayout />}>
-                            {publicRoutes.map((route, index) => {
-                                const Page = route.component;
-                                return (
-                                    <Route
-                                        key={index}
-                                        path={route.path}
-                                        element={
-                                            <>
-                                                <Page /> <ScrollButton />
-                                            </>
-                                        }
-                                    />
-                                );
-                            })}
                         </Route>
                         <Route path="/auth">
                             {authRoutes.map((route, index) => {
