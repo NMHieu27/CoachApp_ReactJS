@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import HistoryTableTicketList from './HistoryTableTicketList';
 import HistoryTableShippingList from './HistoryTableShippingList';
 function History() {
+    const accessToken = localStorage.getItem('accessToken');
     const [ticketListByPhone, setTicketListByPhone] = useState();
     const [shippingListByPhone, setShippingListByPhone] = useState();
     const currentUserId = localStorage.getItem('userId');
@@ -29,7 +30,6 @@ function History() {
                 }
             } catch (error) {
                 console.log('Thất bại khi lấy dữ liệu: ', error.message);
-                toast.error('Thất bại khi lấy dữ liệu ! ' + error.message, { theme: 'colored' });
             }
         };
         fetchTicketByUserId(currentUserId);
@@ -49,7 +49,6 @@ function History() {
                 setShippingListByPhone(shippingList);
             } catch (error) {
                 console.log('Thất bại khi lấy dữ liệu: ', error.message);
-                toast.error('Thất bại khi lấy dữ liệu ! ' + error.message, { theme: 'colored' });
             }
         };
         fetchShippingByUserId(currentUserId);
@@ -74,23 +73,31 @@ function History() {
                 <h2 className="text-center" style={{ color: 'var(--main-color)' }}>
                     Lịch sử giao dịch
                 </h2>
-                {ticketListByPhone && (
-                    <div className="ticket-management__data-table" style={{ marginTop: '10px' }}>
-                        <h3 style={{ color: 'var(--second-color)' }}>Số vé: {ticketListByPhone.length}</h3>
-                        <HistoryTableTicketList
-                            ticketListByPhone={ticketListByPhone}
-                            setTicketListByPhone={setTicketListByPhone}
-                        />
+                {accessToken ? (
+                    <div className="history-management__data-table">
+                        {ticketListByPhone && (
+                            <div className="ticket-management__data-table" style={{ marginTop: '10px' }}>
+                                <h3 style={{ color: 'var(--second-color)' }}>Số vé: {ticketListByPhone.length}</h3>
+                                <HistoryTableTicketList
+                                    ticketListByPhone={ticketListByPhone}
+                                    setTicketListByPhone={setTicketListByPhone}
+                                />
+                            </div>
+                        )}
+                        {shippingListByPhone && (
+                            <div className="shipping-management__data-table" style={{ marginTop: '10px' }}>
+                                <h3 style={{ color: 'var(--second-color)' }}>
+                                    Số đơn hàng: {shippingListByPhone.length}
+                                </h3>
+                                <HistoryTableShippingList
+                                    shippingListByPhone={shippingListByPhone}
+                                    setShippingListByPhone={setShippingListByPhone}
+                                />
+                            </div>
+                        )}
                     </div>
-                )}
-                {shippingListByPhone && (
-                    <div className="shipping-management__data-table" style={{ marginTop: '10px' }}>
-                        <h3 style={{ color: 'var(--second-color)' }}>Số đơn hàng: {shippingListByPhone.length}</h3>
-                        <HistoryTableShippingList
-                            shippingListByPhone={shippingListByPhone}
-                            setShippingListByPhone={setShippingListByPhone}
-                        />
-                    </div>
+                ) : (
+                    <div className="text-center mt-4">Vui lòng đăng nhập để xem lịch sử giao dịch</div>
                 )}
             </div>
         </Helmet>

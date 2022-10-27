@@ -51,7 +51,6 @@ import CancelTicketManagement from '~/pages/Admin/CancelTicketManagement/CancelT
 const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.contract, component: Contract },
-    { path: config.routes.booking, component: Booking },
     { path: config.routes.coachesdetail, component: CoachesDetail },
     { path: config.routes.accountinfo, component: AccountInfo },
     { path: config.routes.accountinfosetting, component: AccountInfoSetting },

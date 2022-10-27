@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import config from '~/config';
 import Dropdown from '~/components/Dropdown/Dropdown';
 import './searchcoach.scss';
 function SearchCoach({
@@ -20,7 +19,7 @@ function SearchCoach({
     const handleSearch = () => {
         // Test
         console.log(selectedFrom, selectedFromId, selectedTo, selectedToId);
-        nav(config.routes.booking);
+        nav(`/dat-ve/${selectedFromId}/${selectedToId}/${date}`);
     };
     return (
         <div className="search-wrapper">

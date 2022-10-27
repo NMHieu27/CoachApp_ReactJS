@@ -189,10 +189,6 @@ function AddCoachGarage() {
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={district}
-                                            // onChange={({ selected, selectedId }) => {
-                                            //     selectedDistrict = selected;
-                                            //     selectedDistrictId = selectedId;
-                                            // }}
                                             selected={selectedDistrict}
                                             setSelected={setSelectedDistrict}
                                             selectedId={selectedDistrictId}

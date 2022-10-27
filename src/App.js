@@ -15,6 +15,7 @@ import moment from 'moment';
 import 'moment/locale/vi';
 import EditTicket from './pages/Admin/TicketManagement/EditTicket';
 import EmployeeEditTicket from './pages/Employee/EmployeeTicketManagement/EmployeeEditTicket';
+import Booking from './pages/Booking/Booking';
 moment().local('vi');
 
 function App() {
@@ -24,6 +25,47 @@ function App() {
             <Router>
                 <div className="App">
                     <Routes>
+                        <Route element={<DefaultLayout />}>
+                            <Route
+                                path="/dat-ve"
+                                element={
+                                    <>
+                                        <Booking />
+                                        <ScrollButton />
+                                    </>
+                                }
+                            >
+                                <Route
+                                    path=":fromId"
+                                    element={
+                                        <>
+                                            <Booking />
+                                            <ScrollButton />
+                                        </>
+                                    }
+                                >
+                                    <Route
+                                        path=":toId"
+                                        element={
+                                            <>
+                                                <Booking />
+                                                <ScrollButton />
+                                            </>
+                                        }
+                                    >
+                                        <Route
+                                            path=":startDate"
+                                            element={
+                                                <>
+                                                    <Booking />
+                                                    <ScrollButton />
+                                                </>
+                                            }
+                                        ></Route>
+                                    </Route>
+                                </Route>
+                            </Route>
+                        </Route>
                         <Route path="/" element={<DefaultLayout />}>
                             {publicRoutes.map((route, index) => {
                                 const Page = route.component;

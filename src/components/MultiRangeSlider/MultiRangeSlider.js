@@ -39,9 +39,9 @@ const MultiRangeSlider = ({ min, max, onChange, step = 1, minGap = 1, valueInfo 
     }, [maxVal, getPercent]);
 
     // Get min and max values when their state changes
-    // useEffect(() => {
-    //     onChange({ min: minVal, max: maxVal });
-    // }, [minVal, maxVal, onChange]);
+    useEffect(() => {
+        onChange({ min: minVal, max: maxVal });
+    }, [minVal, maxVal, onChange]);
 
     return (
         <div className="multirange">

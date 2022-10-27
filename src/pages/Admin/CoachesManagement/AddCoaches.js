@@ -28,9 +28,9 @@ function AddCoaches() {
     const [pickUpList, setPickUpList] = useState([]);
     const [dropOffList, setDropOffList] = useState([]);
     const [selectedPickUp, setSelectedPickUp] = useState();
-    const [selectedPickUpId, setSelectedPickUpId] = useState();
+    const [selectedPickUpId, setSelectedPickUpId] = useState(1);
     const [selectedDropOff, setSelectedDropOff] = useState();
-    const [selectedDropOffId, setSelectedDropOffId] = useState();
+    const [selectedDropOffId, setSelectedDropOffId] = useState(1);
 
     //Danh sách điểm đón trả về server
     const [pickUpListReq, setPickUpListReq] = useState([]);
@@ -87,7 +87,7 @@ function AddCoaches() {
 
     // fetch list pick up
     useEffect(() => {
-        const fetchAllPickUpByStartPoint = async () => {
+        const fetchAllPickUpByStartPoint = async (selectedStartPointId) => {
             try {
                 // setPickUpListReq([]);
                 const response = await stopByAPI.getStopByCountryId(selectedStartPointId);
@@ -103,12 +103,12 @@ function AddCoaches() {
                 console.log('fetch pickup failed' + err.message);
             }
         };
-        fetchAllPickUpByStartPoint();
+        fetchAllPickUpByStartPoint(selectedStartPointId);
     }, [selectedStartPointId]);
 
     // fetch list drop off
     useEffect(() => {
-        const fetchAllDropOffByEndPoint = async () => {
+        const fetchAllDropOffByEndPoint = async (selectedEndPointId) => {
             try {
                 // setDropOffListReq([]);
                 const response = await stopByAPI.getStopByCountryId(selectedEndPointId);
@@ -124,7 +124,7 @@ function AddCoaches() {
                 console.log('fetch dropoff failed' + err.message);
             }
         };
-        fetchAllDropOffByEndPoint();
+        fetchAllDropOffByEndPoint(selectedEndPointId);
     }, [selectedEndPointId]);
 
     const formik = useFormik({

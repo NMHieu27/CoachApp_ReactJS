@@ -32,7 +32,7 @@ function Dropdown({
     useEffect(() => {
         setSelected(options.find((option) => +option.id === +selectedId).name);
     }, [selectedId]);
-    console.log(selected);
+    // console.log(selected);
 
     const compareIgnore = (str1, str2) => {
         return str1

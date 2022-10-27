@@ -92,7 +92,7 @@ function CoachesDetail() {
                 </div>
 
                 {/* comment input */}
-                {current_user.id && (
+                {accessToken && (
                     <div className="coaches-detail__comment-container">
                         <div className="coaches-detail__user-rating">
                             <div className="coaches-detail__user-rating__avatar">
