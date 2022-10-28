@@ -68,7 +68,7 @@ function EditTicket() {
     const formik = useFormik({
         initialValues: {
             id: 0,
-            fullname: '',
+            name: '',
             phone: '',
             email: '',
             pickUpId: 1,
@@ -97,7 +97,7 @@ function EditTicket() {
             try {
                 const params = {
                     id: values.id,
-                    fullname: values.fullname,
+                    name: values.name,
                     email: values.email,
                     phone: values.phone,
                     pickUpId: values.pickUpId,
@@ -128,7 +128,7 @@ function EditTicket() {
                 if (response.code === 200) {
                     toast.success('Lấy dữ liệu thành công !', { theme: 'colored' });
                     formik.values.id = response.data.id;
-                    formik.values.fullname = response.data?.fullname;
+                    formik.values.name = response.data.name;
                     formik.values.phone = response.data.phone;
                     formik.values.email = response.data.email;
 
@@ -237,7 +237,7 @@ function EditTicket() {
                             <div className="form-outline">
                                 <label className="form-label">Chọn điểm đón</label>
                                 <div style={{ height: '56px' }}>
-                                    {pickUpList && (
+                                    {pickUpList && selectedPickUpId && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={pickUpList}
@@ -262,7 +262,7 @@ function EditTicket() {
                             <div className="form-outline">
                                 <label className="form-label">Chọn điểm trả</label>
                                 <div style={{ height: '56px' }}>
-                                    {dropOffList && (
+                                    {dropOffList && selectedDropOffId && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={dropOffList}

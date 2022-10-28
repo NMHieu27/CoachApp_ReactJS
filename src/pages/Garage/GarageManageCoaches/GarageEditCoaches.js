@@ -11,6 +11,7 @@ import './GarageEditCoaches.scss';
 import StopByBox from '~/components/StopByBox/StopByBox';
 import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
 import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
+import commonCoachesAPI from '~/api/commonAPI/commonCoachesAPI';
 import coachesAPI from '~/api/coachGarageAPI/coachesAPI';
 
 function GarageEditCoaches() {
@@ -129,45 +130,45 @@ function GarageEditCoaches() {
         fetchAllDropOffByEndPoint(selectedEndPointId);
     }, [selectedEndPointId]);
 
-    // fetch list pickup request by coaches id
-    useEffect(() => {
-        const fetchAllPickUpByCoachesID = async (id) => {
-            try {
-                const response = await commonStopByAPI.getPickUpByCoachesId(id);
-                if (response.code === 200) {
-                    console.log('fetch pickup req success');
-                    console.log(response.data);
-                    setPickUpListReq([...response.data]);
-                } else {
-                    console.log('fetch pickup req error');
-                    throw new Error(response.message);
-                }
-            } catch (err) {
-                console.log('fetch pickup req failed' + err.message);
-            }
-        };
-        fetchAllPickUpByCoachesID(id);
-    }, []);
+    // // fetch list pickup request by coaches id
+    // useEffect(() => {
+    //     const fetchAllPickUpByCoachesID = async (id) => {
+    //         try {
+    //             const response = await commonStopByAPI.getPickUpByCoachesId(id);
+    //             if (response.code === 200) {
+    //                 console.log('fetch pickup req success');
+    //                 console.log(response.data);
+    //                 setPickUpListReq([...response.data]);
+    //             } else {
+    //                 console.log('fetch pickup req error');
+    //                 throw new Error(response.message);
+    //             }
+    //         } catch (err) {
+    //             console.log('fetch pickup req failed' + err.message);
+    //         }
+    //     };
+    //     fetchAllPickUpByCoachesID(id);
+    // }, []);
 
-    // fetch list dropoff request by coaches id
-    useEffect(() => {
-        const fetchAllDropOffByCoachesID = async (id) => {
-            try {
-                const response = await commonStopByAPI.getDropOffByCoachesId(id);
-                if (response.code === 200) {
-                    console.log('fetch dropoff req success');
-                    console.log(response.data);
-                    setDropOffListReq([...response.data]);
-                } else {
-                    console.log('fetch dropoff req error');
-                    throw new Error(response.message);
-                }
-            } catch (err) {
-                console.log('fetch dropoff req failed' + err.message);
-            }
-        };
-        fetchAllDropOffByCoachesID(id);
-    }, []);
+    // // fetch list dropoff request by coaches id
+    // useEffect(() => {
+    //     const fetchAllDropOffByCoachesID = async (id) => {
+    //         try {
+    //             const response = await commonStopByAPI.getDropOffByCoachesId(id);
+    //             if (response.code === 200) {
+    //                 console.log('fetch dropoff req success');
+    //                 console.log(response.data);
+    //                 setDropOffListReq([...response.data]);
+    //             } else {
+    //                 console.log('fetch dropoff req error');
+    //                 throw new Error(response.message);
+    //             }
+    //         } catch (err) {
+    //             console.log('fetch dropoff req failed' + err.message);
+    //         }
+    //     };
+    //     fetchAllDropOffByCoachesID(id);
+    // }, []);
 
     const formik = useFormik({
         initialValues: {
@@ -214,11 +215,11 @@ function GarageEditCoaches() {
                     emptySeat: +values.emptySeat,
                     shipping: values.shipping,
                     status: values.status,
-                    pick_up: values.pick_up,
-                    drop_off: values.drop_off,
+                    pickUp: values.pick_up,
+                    dropOff: values.drop_off,
                 };
                 //Đổi APi đúng chức năng
-                const response = await coachesAPI.updateCoaches(params);
+                const response = await coachesAPI.addCoaches(params);
                 if (response.code === 200) {
                     toast.success('Sửa chuyến xe thành công !', { theme: 'colored' });
                     nav(config.routes.garageManageCoaches);
@@ -232,9 +233,6 @@ function GarageEditCoaches() {
                 console.log('Thất bại khi gửi dữ liệu: ', error.message);
                 toast.error('Thất bại khi gửi dữ liệu ! ' + error.message, { theme: 'colored' });
             }
-
-            console.log(pickUpListReq);
-            console.log(dropOffListReq);
             console.log(values);
         },
     });
@@ -242,7 +240,7 @@ function GarageEditCoaches() {
     useEffect(() => {
         const fetchCoachesById = async (id) => {
             try {
-                const response = await coachesAPI.getCoachesById(id);
+                const response = await commonCoachesAPI.getCoachesById(id);
                 if (response.code === 200) {
                     toast.success('Lấy dữ liệu thành công !', { theme: 'colored' });
                     formik.values.id = response.data.id;
@@ -270,6 +268,9 @@ function GarageEditCoaches() {
                     response.data.drop_off &&
                         response.data.drop_off.length > 0 &&
                         setDropOffList([...response.data.drop_off]);
+
+                    setPickUpListReq(response.data.pickUp);
+                    setDropOffListReq(response.data.dropOff);
                 } else {
                     toast.error('Lấy dữ liệu thất bại ! ' + response.message, { theme: 'colored' });
                     throw new Error(response.message);

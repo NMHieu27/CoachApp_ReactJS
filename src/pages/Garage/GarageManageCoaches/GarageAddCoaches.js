@@ -168,11 +168,10 @@ function GarageAddCoaches() {
                     endPoint: +values.endPoint,
                     shipping: values.shipping,
                     status: values.status,
-                    pick_up: values.pick_up,
-                    drop_off: values.drop_off,
+                    pickUp: values.pick_up,
+                    dropOff: values.drop_off,
                 };
-                //Đổi APi đúng chức năng
-                const response = await coachesAPI.postGarageAddCoaches(params);
+                const response = await coachesAPI.addCoaches(params);
                 if (response.code === 200) {
                     toast.success('Thêm chuyến xe thành công !', { theme: 'colored' });
                     nav(config.routes.garageManageCoaches);

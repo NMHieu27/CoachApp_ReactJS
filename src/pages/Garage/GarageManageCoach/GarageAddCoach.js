@@ -66,7 +66,7 @@ function GarageAddCoach() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const info = new FormData(e.currentTarget);
-        info.append('coachGarageId', +selectedCategoryId);
+        info.append('coachGarageId', +selectedCoachGarageId);
         info.append('categoryId', +selectedCategoryId);
         info.append('status', +statusChecked);
         try {

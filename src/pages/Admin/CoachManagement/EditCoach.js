@@ -3,19 +3,19 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Helmet from '~/components/Helmet/Helmet';
 import Dropdown from '~/components/Dropdown/Dropdown';
 import { toast } from 'react-toastify';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-
 import config from '~/config';
 
 import './EditCoach.scss';
-import coachAPI from '~/api/adminAPI/coachAPI';
-import commonCoachGarageAPI from '~/api/commonAPI/commonCoachGarageAPI';
 import commonCategoryAPI from '~/api/commonAPI/commonCategoryAPI';
+import commonCoachGarageAPI from '~/api/commonAPI/commonCoachGarageAPI';
+import coachAPI from '~/api/adminAPI/coachAPI';
 
 function EditCoach() {
     const { id } = useParams();
+    const currentOwnerId = localStorage.getItem('userId');
     const nav = useNavigate();
+    const input_el_licensePlates = useRef();
+    const input_el_description = useRef();
     const list_img_coach = useRef();
     const [coachGarageList, setCoachGarageList] = useState();
     const [categoryList, setCategoryList] = useState();
@@ -66,77 +66,17 @@ function EditCoach() {
         fetchAllCategory();
     }, []);
 
-    const formik = useFormik({
-        initialValues: {
-            coachId: '',
-            licensePlates: '',
-            description: '',
-            coachGarageId: '',
-            categoryId: '',
-            status: 1,
-            files: [],
-        },
-        validationSchema: Yup.object({
-            licensePlates: Yup.string().required('Vui lòng điền trường này !'),
-            description: Yup.string().required('Vui lòng điền trường này !'),
-            files: Yup.mixed().required('Vui lòng upload file !'),
-        }),
-        onSubmit: async (values) => {
-            values.coachGarageId = selectedCoachGarageId;
-            values.categoryId = selectedCategoryId;
-            values.status = statusChecked;
-
-            if (list_img_coach.current.files.length > 1) {
-                values.files = list_img_coach.current.files;
-                console.log(list_img_coach.current.files);
-                try {
-                    // status của admin đối với nhà xe được phép chỉnh sửa, phải có up files
-                    const params = {
-                        id: +values.coachId,
-                        licensePlates: values.licensePlates,
-                        description: values.description,
-                        coachGarageId: values.coachGarageId,
-                        categoryId: values.categoryId,
-                        status: +values.status,
-                        files: values.files,
-                    };
-                    //Đổi APi đúng chức năng
-                    const response = await coachAPI.updateCoach(params);
-                    if (response.code === 200) {
-                        toast.success('Sửa thông tin xe thành công !', { theme: 'colored' });
-                        nav(config.routes.coachManagement);
-                    } else {
-                        toast.error('Sửa thông tin xe thất bại! ' + response.message, {
-                            theme: 'colored',
-                        });
-                        throw new Error(response.message);
-                    }
-                } catch (error) {
-                    console.log('Thất bại khi sửa thông tin ! ', error.message);
-                    toast.error('Thất bại khi sửa thông tin ! ' + error.message, { theme: 'colored' });
-                }
-            } else {
-                console.log('Vui long chon ảnh');
-                toast.error('Vui lòng upload 2 ảnh trở lên');
-            }
-
-            console.log(values);
-        },
-    });
     useEffect(() => {
         const fetchCoachById = async (id) => {
             try {
                 const response = await coachAPI.getCoachById(id);
                 if (response.code === 200) {
                     toast.success('Lấy dữ liệu thành công !', { theme: 'colored' });
-                    formik.values.coachId = response.data.id;
-                    formik.values.licensePlates = response.data.licensePlates;
-                    formik.values.description = response.data.description;
-
+                    input_el_licensePlates.current.value = response.data.licensePlates;
+                    input_el_description.current.value = response.data.description;
                     setSelectedCoachGarageId(response.data.coachGarageId);
                     setSelectedCategoryId(response.data.categoryId);
                     response.data.status ? setStatusChecked(1) : setStatusChecked(0);
-                    formik.values.status = statusChecked;
                 } else {
                     toast.error('Lấy dữ liệu thất bại ! ' + response.message, { theme: 'colored' });
                     throw new Error(response.message);
@@ -147,6 +87,27 @@ function EditCoach() {
         };
         fetchCoachById(id);
     }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const info = new FormData(e.currentTarget);
+        info.append('id', +id);
+        info.append('coachGarageId', +selectedCoachGarageId);
+        info.append('categoryId', +selectedCategoryId);
+        info.append('status', +statusChecked);
+        try {
+            const response = await coachAPI.updateCoach(info);
+            if (response.code === 200) {
+                toast.success('Sửa xe thành công! ', { theme: 'colored' });
+                nav(-1);
+            } else {
+                toast.error('Sửa xe thất bại! ' + response.message, { theme: 'colored' });
+                throw new Error(response.message);
+            }
+        } catch (err) {
+            toast.error('Thất bại khi truyền dữ liệu! ' + err.message, { theme: 'colored' });
+        }
+    };
     return (
         <Helmet title="Thêm nhà xe">
             <div className="add-coach">
@@ -157,6 +118,7 @@ function EditCoach() {
                     <Link style={{ color: 'blue' }} to={config.routes.admin}>
                         Admin home
                     </Link>
+
                     <span>{` / `}</span>
                     <Link style={{ color: 'blue' }} to={config.routes.coachManagement}>
                         Quản lý xe
@@ -165,7 +127,7 @@ function EditCoach() {
                     <span>Sửa thông tin xe</span>
                 </div>
                 <div
-                    className="add-coach__form-add-coach"
+                    className="add-coach__form-add-coach "
                     style={{ background: '#fff', borderRadius: '5px', marginTop: '10px', padding: '15px 20%' }}
                 >
                     <h3
@@ -174,24 +136,21 @@ function EditCoach() {
                     >
                         Sửa thông tin xe
                     </h3>
-                    <form onSubmit={formik.handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div className="col-md-12 mb-2 pb-2">
                             <label className="form-label" htmlFor="licensePlates">
                                 Biển số xe
                             </label>
                             <div className="form-outline">
                                 <input
+                                    ref={input_el_licensePlates}
                                     type="text"
                                     id="licensePlates"
                                     name="licensePlates"
                                     className="form-control form-control-lg"
-                                    value={formik.values.licensePlates}
-                                    onChange={formik.handleChange}
+                                    required
                                 />
                             </div>
-                            {formik.errors.licensePlates && (
-                                <p className="signin-signup__errorMsg">{formik.errors.licensePlates}</p>
-                            )}
                         </div>
                         <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
@@ -199,23 +158,20 @@ function EditCoach() {
                                     Mô tả
                                 </label>
                                 <textarea
+                                    ref={input_el_description}
                                     name="description"
                                     id="description"
                                     className="form-control form-control-lg"
                                     rows={5}
-                                    value={formik.values.description}
-                                    onChange={formik.handleChange}
+                                    required
                                 />
                             </div>
-                            {formik.errors.description && (
-                                <p className="signin-signup__errorMsg">{formik.errors.description}</p>
-                            )}
                         </div>
                         <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
                                 <label className="form-label">Loại xe</label>
                                 <div style={{ height: '56px' }}>
-                                    {categoryList && selectedCategoryId && (
+                                    {selectedCategoryId && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={categoryList}
@@ -240,7 +196,7 @@ function EditCoach() {
                             <div className="form-outline">
                                 <label className="form-label">Nhà xe</label>
                                 <div style={{ height: '56px' }}>
-                                    {coachGarageList && selectedCoachGarageId && (
+                                    {selectedCoachGarageId && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={coachGarageList}
@@ -269,12 +225,10 @@ function EditCoach() {
                                 ref={list_img_coach}
                                 class="form-control form-control-lg"
                                 id="file"
-                                name="files"
+                                name="pictures"
                                 type="file"
                                 multiple="multiple"
-                                onChange={formik.handleChange}
                             />
-                            {formik.errors.files && <p className="signin-signup__errorMsg">{formik.errors.files}</p>}
                         </div>
 
                         <div class="col-md-12 mb-2">
@@ -287,7 +241,7 @@ function EditCoach() {
                                         <input
                                             class="form-check-input"
                                             type="radio"
-                                            name="status"
+                                            name="status1"
                                             id={status.name}
                                             value="option1"
                                             checked={statusChecked === status.id}
