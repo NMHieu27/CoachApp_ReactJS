@@ -8,6 +8,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import HistoryTableTicketList from './HistoryTableTicketList';
 import HistoryTableShippingList from './HistoryTableShippingList';
+import ticketAPI from '~/api/userAPI/ticketAPI';
+import shippingAPI from '~/api/userAPI/shippingAPI';
 function History() {
     const accessToken = localStorage.getItem('accessToken');
     const [ticketListByPhone, setTicketListByPhone] = useState();
@@ -16,18 +18,18 @@ function History() {
 
     useEffect(() => {
         const fetchTicketByUserId = async (currentUserId) => {
-            // try {
-            //     const responseTicket = await ticketAPI.getTicketByUserId(currentUserId);
-            //     if (responseTicket.code === 200) {
-            //         setTicketListByPhone(responseTicket.data);
-            //         console.log('Lấy vé xe thành công');
-            //     } else {
-            //         console.log('Lấy vé thất bại' + responseTicket.message);
-            //         throw new Error(responseTicket.message);
-            //     }
-            // } catch (error) {
-            //     console.log('Thất bại khi lấy dữ liệu: ', error.message);
-            // }
+            try {
+                const responseTicket = await ticketAPI.getTicketByUserId(currentUserId);
+                if (responseTicket.code === 200) {
+                    setTicketListByPhone(responseTicket.data);
+                    console.log('Lấy vé xe thành công');
+                } else {
+                    console.log('Lấy vé thất bại' + responseTicket.message);
+                    throw new Error(responseTicket.message);
+                }
+            } catch (error) {
+                console.log('Thất bại khi lấy dữ liệu: ', error.message);
+            }
         };
         fetchTicketByUserId(currentUserId);
     }, []);
@@ -35,15 +37,14 @@ function History() {
     useEffect(() => {
         const fetchShippingByUserId = async (currentUserId) => {
             try {
-                // const responseShipping = await shippingAPI.getShippingByUserId(currentUserId);
-                // if (responseShipping.code === 200) {
-                //     setShippingListByPhone(responseShipping.data);
-                //     console.log('Lấy đơn hàng thành công');
-                // } else {
-                //     console.log('Lấy đơn hàng thất bại' + responseShipping.message);
-                //     throw new Error(responseShipping.message);
-                // }
-                setShippingListByPhone(shippingList);
+                const responseShipping = await shippingAPI.getShippingByUserId(currentUserId);
+                if (responseShipping.code === 200) {
+                    setShippingListByPhone(responseShipping.data);
+                    console.log('Lấy đơn hàng thành công');
+                } else {
+                    console.log('Lấy đơn hàng thất bại' + responseShipping.message);
+                    throw new Error(responseShipping.message);
+                }
             } catch (error) {
                 console.log('Thất bại khi lấy dữ liệu: ', error.message);
             }

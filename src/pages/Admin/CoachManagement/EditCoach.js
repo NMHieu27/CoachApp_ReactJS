@@ -132,9 +132,9 @@ function EditCoach() {
                     formik.values.coachId = response.data.id;
                     formik.values.licensePlates = response.data.licensePlates;
                     formik.values.description = response.data.description;
-                    +response.data.coachGarageId !== selectedCoachGarageId &&
-                        setSelectedCoachGarageId(response.data.coachGarageId);
-                    +response.data.categoryId !== selectedCategoryId && setSelectedCategoryId(response.data.categoryId);
+
+                    setSelectedCoachGarageId(response.data.coachGarageId);
+                    setSelectedCategoryId(response.data.categoryId);
                     response.data.status ? setStatusChecked(1) : setStatusChecked(0);
                     formik.values.status = statusChecked;
                 } else {
@@ -215,7 +215,7 @@ function EditCoach() {
                             <div className="form-outline">
                                 <label className="form-label">Loại xe</label>
                                 <div style={{ height: '56px' }}>
-                                    {categoryList && (
+                                    {categoryList && selectedCategoryId && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={categoryList}
@@ -240,7 +240,7 @@ function EditCoach() {
                             <div className="form-outline">
                                 <label className="form-label">Nhà xe</label>
                                 <div style={{ height: '56px' }}>
-                                    {coachGarageList && (
+                                    {coachGarageList && selectedCoachGarageId && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={coachGarageList}

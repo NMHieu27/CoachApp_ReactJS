@@ -146,7 +146,6 @@ function CoachesManagement() {
         } catch (err) {
             console.log('fetch shipping failed' + err.message);
         }
-        setShippingListByCoachesId(shippingList);
     };
     return (
         <Helmet title="Quản lí chuyến xe">

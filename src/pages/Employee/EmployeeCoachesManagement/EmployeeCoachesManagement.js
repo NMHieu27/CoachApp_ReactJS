@@ -163,11 +163,9 @@ function EmployeeCoachesManagement() {
                         <div className="card__body">
                             {coachesList ? (
                                 <TableCustom
-                                    isAddButton
                                     title={'Danh sách chuyến xe'}
                                     columns={columns}
                                     data={coachesList}
-                                    link={config.routes.addCoaches}
                                     onRowClick={(event, rowData) => handleRowClick(event, rowData)}
                                 />
                             ) : (

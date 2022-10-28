@@ -215,7 +215,7 @@ function EditCoachGarage() {
                             <div className="form-outline">
                                 <label className="form-label">Tỉnh, thành phố</label>
                                 <div style={{ height: '56px' }}>
-                                    {district && (
+                                    {district && selectedDistrictId && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={district}

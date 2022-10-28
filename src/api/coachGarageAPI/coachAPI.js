@@ -1,7 +1,7 @@
 import axiosClient from '../axiosClient';
 const coachAPI = {
-    getAll: (id) => {
-        const url = `/garageowner/coachgarage/${id}`;
+    getCoachByUserId: (id) => {
+        const url = `/garageowner/coachgarage/coach/user/${id}`;
         return axiosClient.get(url);
     },
     getCoachById: (id) => {
@@ -10,11 +10,21 @@ const coachAPI = {
     },
     addCoach: (params) => {
         const url = '/garageowner/coachgarage/coach/add';
-        return axiosClient.post(url, params);
+        return axiosClient.post(url, params, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                // accept: 'multipart/form-data',
+            },
+        });
     },
     updateCoach: (params) => {
         const url = '/garageowner/coachgarage/coach/update';
-        return axiosClient.put(url, params);
+        return axiosClient.put(url, params, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                // accept: 'multipart/form-data',
+            },
+        });
     },
     deleteCoach: (id) => {
         const url = `/garageowner/coachgarage/coach/delete/${id}`;

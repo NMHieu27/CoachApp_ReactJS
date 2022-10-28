@@ -10,6 +10,7 @@ import Image from '~/components/Image';
 import userAPI from '~/api/userAPI/userAPI';
 function AccountInfoSetting() {
     const currentUserId = localStorage.getItem('userId');
+    const currentAvatar = localStorage.getItem('avatar');
     const sexs = [
         { id: 0, name: 'male', title: 'Nam' },
         { id: 1, name: 'female', title: 'Nữ' },
@@ -63,7 +64,7 @@ function AccountInfoSetting() {
             console.log(avatar_el.current.files[0]);
             if (avatar_el.current.files[0]) {
                 // values.avatar = avatar_el.current.files[0]; set như thế này khi đã có cloudinary
-                values.avatar = avatar_el.current.files[0].toString();
+                values.avatar = avatar_el.current.files[0];
             }
             console.log('tesssss');
             console.log(values.avatar);
@@ -136,7 +137,7 @@ function AccountInfoSetting() {
                         <div className="col-4 account-setting-content__left">
                             <div class="image-input-container">
                                 <div class="preview">
-                                    <Image id="img-preview" src="cho-nay-lay-anh-tu-api" alt="" />
+                                    <Image id="img-preview" src={currentAvatar} alt="" />
                                     <label for="file-input">Tải ảnh lên</label>
                                     <input
                                         ref={avatar_el}

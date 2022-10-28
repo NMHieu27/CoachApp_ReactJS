@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Helmet from '~/components/Helmet/Helmet';
 import Dropdown from '~/components/Dropdown/Dropdown';
 import { toast } from 'react-toastify';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import config from '~/config';
 
 import './GarageAddCoach.scss';
@@ -65,61 +63,26 @@ function GarageAddCoach() {
         fetchAllCategory();
     }, []);
 
-    const formik = useFormik({
-        initialValues: {
-            licensePlates: '',
-            description: '',
-            coachGarageId: '',
-            categoryId: '',
-            status: 1,
-            files: [],
-        },
-        validationSchema: Yup.object({
-            licensePlates: Yup.string().required('Vui lòng điền trường này !'),
-            description: Yup.string().required('Vui lòng điền trường này !'),
-            files: Yup.mixed().required('Vui lòng upload file !'),
-        }),
-        onSubmit: async (values) => {
-            values.coachGarageId = selectedCoachGarageId;
-            values.categoryId = selectedCategoryId;
-            values.status = statusChecked;
-
-            if (list_img_coach.current.files.length > 1) {
-                values.files = list_img_coach.current.files;
-                console.log(list_img_coach.current.files);
-                try {
-                    // status của admin đối với nhà xe được phép chỉnh sửa, phải có up files
-                    const params = {
-                        ownerId: +currentOwnerId,
-                        licensePlates: values.licensePlates,
-                        description: values.description,
-                        coachGarageId: values.coachGarageId,
-                        categoryId: values.categoryId,
-                        status: +values.status,
-                        files: values.files,
-                    };
-                    const response = await coachAPI.addCoach(params);
-                    if (response.code === 200) {
-                        toast.success('Thêm xe thành công !', { theme: 'colored' });
-                        nav(config.routes.garageManageCoach);
-                    } else {
-                        toast.error('Thêm xe thất bại! ' + response.message, {
-                            theme: 'colored',
-                        });
-                        throw new Error(response.message);
-                    }
-                } catch (error) {
-                    console.log('Thất bại khi gửi dữ liệu: ', error.message);
-                    toast.error('Thất bại khi gửi dữ liệu ! ' + error.message, { theme: 'colored' });
-                }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const info = new FormData(e.currentTarget);
+        info.append('coachGarageId', +selectedCategoryId);
+        info.append('categoryId', +selectedCategoryId);
+        info.append('status', +statusChecked);
+        try {
+            const response = await coachAPI.addCoach(info);
+            if (response.code === 200) {
+                toast.success('Thêm xe thành công! ', { theme: 'colored' });
+                nav(-1);
             } else {
-                console.log('Vui long chon ảnh');
-                toast.error('Vui lòng upload 2 ảnh trở lên');
+                toast.error('Thêm xe thất bại! ' + response.message, { theme: 'colored' });
+                throw new Error(response.message);
             }
+        } catch (err) {
+            toast.error('Thất bại khi gửi dữ liệu! ' + err.message, { theme: 'colored' });
+        }
+    };
 
-            console.log(values);
-        },
-    });
     return (
         <Helmet title="Thêm nhà xe">
             <div className="add-coach">
@@ -147,7 +110,7 @@ function GarageAddCoach() {
                     >
                         Thêm xe
                     </h3>
-                    <form onSubmit={formik.handleSubmit}>
+                    <form id="coachForm" onSubmit={handleSubmit}>
                         <div className="col-md-12 mb-2 pb-2">
                             <label className="form-label" htmlFor="licensePlates">
                                 Biển số xe
@@ -158,13 +121,8 @@ function GarageAddCoach() {
                                     id="licensePlates"
                                     name="licensePlates"
                                     className="form-control form-control-lg"
-                                    value={formik.values.licensePlates}
-                                    onChange={formik.handleChange}
                                 />
                             </div>
-                            {formik.errors.licensePlates && (
-                                <p className="signin-signup__errorMsg">{formik.errors.licensePlates}</p>
-                            )}
                         </div>
                         <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
@@ -176,13 +134,8 @@ function GarageAddCoach() {
                                     id="description"
                                     className="form-control form-control-lg"
                                     rows={5}
-                                    value={formik.values.description}
-                                    onChange={formik.handleChange}
                                 />
                             </div>
-                            {formik.errors.description && (
-                                <p className="signin-signup__errorMsg">{formik.errors.description}</p>
-                            )}
                         </div>
                         <div className="col-md-12 mb-2 pb-2">
                             <div className="form-outline">
@@ -242,12 +195,10 @@ function GarageAddCoach() {
                                 ref={list_img_coach}
                                 class="form-control form-control-lg"
                                 id="file"
-                                name="files"
+                                name="pictures"
                                 type="file"
                                 multiple="multiple"
-                                onChange={formik.handleChange}
                             />
-                            {formik.errors.files && <p className="signin-signup__errorMsg">{formik.errors.files}</p>}
                         </div>
 
                         <div class="col-md-12 mb-2">
@@ -260,7 +211,7 @@ function GarageAddCoach() {
                                         <input
                                             class="form-check-input"
                                             type="radio"
-                                            name="status"
+                                            name="status1"
                                             id={status.name}
                                             value="option1"
                                             checked={statusChecked === status.id}

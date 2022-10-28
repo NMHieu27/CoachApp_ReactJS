@@ -8,5 +8,9 @@ const ticketAPI = {
         const url = `/user/refund/${id}`;
         return axiosClient.put(url);
     },
+    getTicketByUserId: (id) => {
+        const url = `/user/ticket/user/${id}`;
+        return axiosClient.get(url);
+    },
 };
 export default ticketAPI;

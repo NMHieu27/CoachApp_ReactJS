@@ -49,7 +49,7 @@ function GarageCoachManagement() {
     useEffect(() => {
         const fetchCoachList = async (currentOwnerId) => {
             try {
-                const response = await coachAPI.getAll(currentOwnerId);
+                const response = await coachAPI.getCoachByUserId(currentOwnerId);
                 if (response.code === 200) {
                     toast.success('Lấy đữ liệu thành công !', {
                         theme: 'colored',
@@ -65,7 +65,7 @@ function GarageCoachManagement() {
             }
         };
         fetchCoachList(currentOwnerId);
-    }, []);
+    }, [isDeleted]);
 
     const handleDeleteCoach = async (coach) => {
         try {

@@ -167,8 +167,8 @@ function AddCoaches() {
                     endPoint: +values.endPoint,
                     shipping: values.shipping,
                     status: values.status,
-                    pick_up: values.pick_up,
-                    drop_off: values.drop_off,
+                    pickUp: values.pick_up,
+                    dropOff: values.drop_off,
                 };
                 const response = await coachesAPI.addCoaches(params);
                 if (response.code === 200) {
