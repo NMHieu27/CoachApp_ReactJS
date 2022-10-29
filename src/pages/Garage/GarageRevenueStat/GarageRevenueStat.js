@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import revenueStatAPI from '~/api/coachGarageAPI/revenueStatAPI';
 import LineChart from '~/components/Chart/LineChart';
 import Helmet from '~/components/Helmet/Helmet';
 import StatFilterBox from '~/components/StatFilterBox/StatFilterBox';
@@ -58,51 +59,55 @@ function GarageRevenueStat() {
     const handleStat = async () => {
         switch (filterSelected) {
             case 1:
-                // try {
-                // const response2 = await statsAPI.garageGetRevenueStatsByMonth(monthFilterByMonth, year, currentUserId);
-                //     if (response2 === 200) {
-                //         toast.success('Thống kê thành công! ', { theme: 'colored' });
-                //         setRevenueData(response2.data);
-                //     } else {
-                //         toast.error('Thống kê thất bại! ' + response2.message, { theme: 'colored' });
-                //         throw new Error(response2.message);
-                //     }
-                // } catch (error) {
-                //     toast.error('Lỗi !' + error.message, { theme: 'colored' });
-                // }
-                setRevenueData(revenueStatByMonth);
+                try {
+                    const response2 = await revenueStatAPI.getRevenueMonthStat(monthFilterByMonth, year, currentUserId);
+                    if (response2.code === 200) {
+                        toast.success('Thống kê thành công! ', { theme: 'colored' });
+                        setRevenueData(response2.data);
+                    } else {
+                        toast.error('Thống kê thất bại! ' + response2.message, { theme: 'colored' });
+                        throw new Error(response2.message);
+                    }
+                } catch (error) {
+                    toast.error('Lỗi !' + error.message, { theme: 'colored' });
+                }
+                // setRevenueData(revenueStatByMonth);
                 break;
 
             case 2:
-                // try {
-                // const response3 = await statsAPI.garageGetRevenueStatsByQuarter(quarterFilterByQuarter, year, currentUserId);
-                //     if (response3 === 200) {
-                //         toast.success('Thống kê thành công! ', { theme: 'colored' });
-                //         setRevenueData(response3.data);
-                //     } else {
-                //         toast.error('Thống kê thất bại! ' + response3.message, { theme: 'colored' });
-                //         throw new Error(response3.message);
-                //     }
-                // } catch (error) {
-                //     toast.error('Lỗi !' + error.message, { theme: 'colored' });
-                // }
-                setRevenueData(revenueStatByQuarter);
+                try {
+                    const response3 = await revenueStatAPI.getRevenueQuarterStat(
+                        quarterFilterByQuarter,
+                        year,
+                        currentUserId,
+                    );
+                    if (response3.code === 200) {
+                        toast.success('Thống kê thành công! ', { theme: 'colored' });
+                        setRevenueData(response3.data);
+                    } else {
+                        toast.error('Thống kê thất bại! ' + response3.message, { theme: 'colored' });
+                        throw new Error(response3.message);
+                    }
+                } catch (error) {
+                    toast.error('Lỗi !' + error.message, { theme: 'colored' });
+                }
+                // setRevenueData(revenueStatByQuarter);
                 break;
 
             default:
-                // try {
-                // const response4 = await statsAPI.garageGetRevenueStatsByYear(year, currentUserId);
-                //     if (response4 === 200) {
-                //         toast.success('Thống kê thành công! ', { theme: 'colored' });
-                //         setRevenueData(response4.data);
-                //     } else {
-                //         toast.error('Thống kê thất bại! ' + response4.message, { theme: 'colored' });
-                //         throw new Error(response4.message);
-                //     }
-                // } catch (error) {
-                //     toast.error('Lỗi !' + error.message, { theme: 'colored' });
-                // }
-                setRevenueData(revenueStatByYear);
+                try {
+                    const response4 = await revenueStatAPI.getRevenueYearStat(year, currentUserId);
+                    if (response4.code === 200) {
+                        toast.success('Thống kê thành công! ', { theme: 'colored' });
+                        setRevenueData(response4.data);
+                    } else {
+                        toast.error('Thống kê thất bại! ' + response4.message, { theme: 'colored' });
+                        throw new Error(response4.message);
+                    }
+                } catch (error) {
+                    toast.error('Lỗi !' + error.message, { theme: 'colored' });
+                }
+                // setRevenueData(revenueStatByYear);
                 break;
         }
     };

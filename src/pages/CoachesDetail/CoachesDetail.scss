@@ -72,3 +72,65 @@
         color: red;
     }
 }
+
+.btn-active-coaches-detail {
+    background: var(--main-color);
+    color: white;
+}
+.comment-list {
+    &__stat {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 77px 0 77px;
+        button {
+            border: 2px solid #ccc;
+            padding: 5px 5px;
+            border-radius: 2px;
+
+            &:hover {
+                background: var(--main-color);
+                color: #fff;
+                border-color: var(--main-color);
+            }
+        }
+    }
+    &__items {
+        // margin-top: 40px;
+        // margin-left: 20px;
+        // margin-right: 20px;
+        margin: 40px 20px 0 20px;
+    }
+
+    &__item {
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 20px;
+    }
+}
+
+.comment-item {
+    &__info {
+        display: flex;
+        margin-bottom: 7px;
+    }
+
+    &__avatar {
+        height: 3%;
+        width: 3%;
+        margin-right: 20px;
+        img {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+    }
+    &__name {
+        color: var(--main-color);
+        font-weight: bold;
+    }
+    &__created-date {
+        font-size: 14px;
+        // font-style: italic;
+        color: rgb(56, 54, 52);
+    }
+}

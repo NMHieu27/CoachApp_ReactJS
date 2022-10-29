@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
 import numberWithCommas from '~/utils/numberWithCommas';
+import Image from '../Image';
 import './CoachCard.scss';
 function CoachCard({ data }) {
     return (
         <div className="coach-card">
             <div className="row coach-card__container">
                 <div className="col-3 coach-card__image">
-                    <img src={data.images[0].url} alt="loi" />
+                    <Image src={data?.pictures[0]?.url} alt="loi" />
                 </div>
                 <div className="col-5 coach-card__info ">
-                    <p style={{ fontWeight: 'bold', color: '#2c3e50' }}>{data.coach_garage_name}</p>
-                    <div style={{ fontSize: '16px' }}>{data.category_name}</div>
+                    <p style={{ fontWeight: 'bold', color: '#2c3e50' }}>{data.name}</p>
+                    <div style={{ fontSize: '16px' }}>{data.category}</div>
                     <i style={{ fontSize: '14px', color: '#2c3e50' }}>
-                        {data.isShip ? 'Có nhận giao hàng' : 'Không nhận giao hàng'}
+                        {data.shipping ? 'Có nhận giao hàng' : 'Không nhận giao hàng'}
                     </i>
                     <div className="time-line d-flex">
                         <svg
@@ -41,19 +42,21 @@ function CoachCard({ data }) {
                         </svg>{' '}
                         <div className="time-line__from-to">
                             <div className="time-line__from d-flex">
-                                <p className="time-line__hour">{data.pick_up[0].time}</p>
-                                <p className="time-line__place">• {data.pick_up[0].name}</p>
+                                <p className="time-line__hour">{data?.pickUp[0]?.time.slice(0, 5)}</p>
+                                <p className="time-line__place">• {data?.dropOff[0]?.name}</p>
                             </div>
                             <div className="time-line__to d-flex">
-                                <p className="time-line__hour">{data.drop_off[data.drop_off.length - 1].time}</p>
-                                <p className="time-line__place">• {data.drop_off[data.drop_off.length - 1].name}</p>
+                                <p className="time-line__hour">
+                                    {data.pickUp[data.pickUp.length - 1]?.time.slice(0, 5)}
+                                </p>
+                                <p className="time-line__place">• {data.dropOff[data.dropOff.length - 1]?.name}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="col-4 coach-card__booking">
                     <p className="coach-card__booking__price">{numberWithCommas(data.price)}đ</p>
-                    <p className="coach-card__booking__empty-seat">Còn {data.empty_seat} chỗ trống</p>
+                    <p className="coach-card__booking__empty-seat">Còn {data.emptySeat} chỗ trống</p>
                     <Link to={`/chi-tiet-chuyen-xe/${data.id}`}>
                         <button className="coach-card__booking__btn-detail">
                             <span>Chọn chuyến </span>

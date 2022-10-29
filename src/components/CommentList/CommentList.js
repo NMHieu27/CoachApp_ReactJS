@@ -11,7 +11,7 @@ function CommentList({ comments, fiveStar, fourStar, threeStar, twoStar, oneStar
     return (
         <div className="comment-list">
             <div className="comment-list__stat">
-                <button onClick={() => setData(comments)}>Số bình luận {`(${comments.length})`}</button>
+                <button onClick={() => setData(comments)}>Số bình luận {`(${comments?.length})`}</button>
                 <button onClick={() => handleClick(5)}>5★{`(${fiveStar})`}</button>
                 <button onClick={() => handleClick(4)}>4★{`(${fourStar})`}</button>
                 <button onClick={() => handleClick(3)}>3★{`(${threeStar})`}</button>

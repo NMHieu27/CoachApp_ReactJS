@@ -1,8 +1,8 @@
 const monthColumns = [
-    { title: 'Tháng', field: 'month' },
+    { title: 'Tháng', field: 'id' },
     { title: 'Năm', field: 'year' },
-    { title: 'Điểm xuất phát', field: 'start_point' },
-    { title: 'Điểm đến', field: 'end_point' },
-    { title: 'Số chuyến', field: 'count' },
+    { title: 'Điểm xuất phát', field: 'startPoint' },
+    { title: 'Điểm đến', field: 'endPoint' },
+    { title: 'Số chuyến', field: 'amount' },
 ];
 export default monthColumns;

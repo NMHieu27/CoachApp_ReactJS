@@ -4,6 +4,7 @@ import './ModalShipping.scss';
 import { toast } from 'react-toastify';
 import Modal from '../Modal/Modal';
 import { useEffect, useState } from 'react';
+import shippingAPI from '~/api/employeeAPI/shippingAPI';
 function ModalShipping({ userId, coachesId, isShowingShipping, setIsShowingShipping, toggleShipping }) {
     const userRole = localStorage.getItem('role');
     const [isUser, setIsUser] = useState(false);
@@ -61,16 +62,16 @@ function ModalShipping({ userId, coachesId, isShowingShipping, setIsShowingShipp
                     receiverName: values.receiverName,
                     receiverPhone: values.receiverPhone,
                     receiverEmail: values.receiverEmail,
-                    price: values.price,
+                    price: +values.price,
                 };
 
-                // const response = await shippingAPI.postAddShipping(params);
-                // if (response.code === 200) {
-                //     toast.success('Gửi hàng thành công !', { theme: 'colored' });
-                // } else {
-                //     toast.error('Gửi hàng thất bại !' + response.message, { theme: 'colored' });
-                //     throw new Error(response.message);
-                // }
+                const response = await shippingAPI.addShipping(params);
+                if (response.code === 200) {
+                    toast.success('Gửi hàng thành công !', { theme: 'colored' });
+                } else {
+                    toast.error('Gửi hàng thất bại !' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
+                }
             } catch (err) {
                 toast.error('Thất bại khi thêm dữ liệu' + err.message, { theme: 'colored' });
             }

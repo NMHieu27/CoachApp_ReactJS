@@ -3,7 +3,6 @@ import config from '~/config';
 import CoachImagesSlider from '../CoachImagesSlider/CoachImagesSlider';
 import numberWithCommas from '~/utils/numberWithCommas';
 import ReactStars from 'react-stars';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import './CoachesView.scss';
 function CoachesView({ data, onClickBooking, onClickShipping, isSystemUser }) {
     return (
@@ -17,7 +16,7 @@ function CoachesView({ data, onClickBooking, onClickShipping, isSystemUser }) {
                     {` / `} Vé xe
                 </Link>
                 <span>
-                    {` / `} Chuyến {data.id} đi từ {data.start} đến {data.end}
+                    {` / `} Thông tin chuyến xe số {data.id}
                 </span>
             </div>
 
@@ -25,20 +24,17 @@ function CoachesView({ data, onClickBooking, onClickShipping, isSystemUser }) {
             <div className="row coaches-view__content p-0 m-0">
                 <div className="col-5 coaches-view__content__left p-0 m-0">
                     <div className="coaches-view__content__item coaches-view__carousel">
-                        <CoachImagesSlider images={data.images} />
+                        <CoachImagesSlider images={data.pictures} />
                     </div>
                 </div>
                 <div className="col-7 coaches-view__content__right p-0 m-0">
                     <div className="coaches-view__content__item coaches-view__detail">
                         <div className="coaches-view__detail__info">
-                            <p style={{ fontSize: '26px', fontWeight: 'bold', color: '#2c3e50' }}>
-                                {data.coach_garage_name}
-                            </p>
+                            <p style={{ fontSize: '26px', fontWeight: 'bold', color: '#2c3e50' }}>{data.name}</p>
                             <p>Mã chuyến: {data.id}</p>
-                            <p>Biển số: {data.License_plate}</p>
-                            <p>{data.category_name}</p>
+                            <p>{data.category}</p>
                             <p style={{ fontStyle: 'italic', color: '#2c3e50' }}>
-                                {data.isShip ? (
+                                {data.shipping ? (
                                     <span>
                                         <i style={{ color: '#2c3e50' }} class="fa-solid fa-truck-fast"></i> Nhận giao
                                         hàng
@@ -54,7 +50,7 @@ function CoachesView({ data, onClickBooking, onClickShipping, isSystemUser }) {
                                     <b> ★ </b>
                                 </span>
                             </p>
-                            {data.isShip && isSystemUser && (
+                            {data.shipping && isSystemUser && (
                                 <button className="coaches-view__detail__btn btn-shipping" onClick={onClickShipping}>
                                     <span>Gửi hàng </span>
                                 </button>
@@ -64,7 +60,7 @@ function CoachesView({ data, onClickBooking, onClickShipping, isSystemUser }) {
                             <p style={{ fontSize: '36px', fontWeight: 'bold', color: '#2c3e50', textAlign: 'right' }}>
                                 {numberWithCommas(data.price)}đ
                             </p>
-                            <p style={{ textAlign: 'right', fontStyle: 'italic' }}>Còn {data.empty_seat} chỗ trống</p>
+                            <p style={{ textAlign: 'right', fontStyle: 'italic' }}>Còn {data.emptySeat} chỗ trống</p>
                             <button className="coaches-view__detail__btn btn-booking" onClick={onClickBooking}>
                                 <span>Đặt vé</span>
                             </button>
@@ -85,18 +81,22 @@ function CoachesView({ data, onClickBooking, onClickShipping, isSystemUser }) {
                 <div className="coaches-view__stop-by__from-to mt-2">
                     <div className="coaches-view__stop-by__from-to__pick-up">
                         <p style={{ fontWeight: 'bold', color: '#2c3e50', fontSize: '20px' }}>Điểm đón</p>
-                        {data.pick_up.map((value, index) => (
+                        {data.pickUp.map((value, index) => (
                             <div className="coaches-view__stop-by__from-to__point-info" key={index}>
-                                <p className="coaches-view__stop-by__from-to__point-info__time">{value.time} • </p>
+                                <p className="coaches-view__stop-by__from-to__point-info__time">
+                                    {value.time.slice(0, 5)} •{' '}
+                                </p>
                                 <p>{value.name}</p>
                             </div>
                         ))}
                     </div>
                     <div className="coaches-view__stop-by__from-to__drop-off">
                         <p style={{ fontWeight: 'bold', color: '#2c3e50', fontSize: '20px' }}>Điểm trả</p>
-                        {data.drop_off.map((value, index) => (
+                        {data.dropOff.map((value, index) => (
                             <div className="coaches-view__stop-by__from-to__point-info" key={index}>
-                                <p className="coaches-view__stop-by__from-to__point-info__time">{value.time} • </p>
+                                <p className="coaches-view__stop-by__from-to__point-info__time">
+                                    {value.time.slice(0, 5)} •{' '}
+                                </p>
                                 <p>{value.name}</p>
                             </div>
                         ))}

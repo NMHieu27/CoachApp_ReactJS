@@ -5,13 +5,11 @@ import Helmet from '~/components/Helmet/Helmet';
 import StatFilterBox from '~/components/StatFilterBox/StatFilterBox';
 import TableCustom from '~/components/TableCustom/TableCustom';
 import config from '~/config';
-import coachesStatByMonth from '~/fakedata/coachesStatByMonth';
-import coachesStatByQuarter from '~/fakedata/coachesStatByQuarter';
-import coachesStatByYear from '~/fakedata/coachesStatByYear';
 import monthColumns from './monthColumns';
 import quarterColumns from './quarterColumns';
 import yearColumns from './yearColumns';
 import PieChart from '~/components/Chart/PieChart';
+import freqStatAPI from '~/api/coachGarageAPI/freqStatAPI';
 function GarageCoachesStat() {
     const currentUserId = localStorage.getItem('userId');
     const [coachesData, setCoachesData] = useState();
@@ -24,17 +22,15 @@ function GarageCoachesStat() {
         setDataStat({
             labels:
                 filterSelected === 1
-                    ? coachesData?.map((data) => `${data.start_point} - ${data.end_point} ${data.month}/${data.year}`)
+                    ? coachesData?.map((data) => `${data.startPoint} - ${data.endPoint} ${data.id}/${data?.year}`)
                     : filterSelected === 2
-                    ? coachesData?.map(
-                          (data) => `${data.start_point} - ${data.end_point} Quý ${data.quarter}-${data.year}`,
-                      )
-                    : coachesData?.map((data) => `${data.start_point} - ${data.end_point} Năm ${data.year}`),
+                    ? coachesData?.map((data) => `${data.startPoint} - ${data.endPoint} Quý ${data.id}-${data?.year}`)
+                    : coachesData?.map((data) => `${data.startPoint} - ${data.id} Năm ${data?.year}`),
 
             datasets: [
                 {
                     label: 'Số chuyến',
-                    data: coachesData?.map((data) => data.count),
+                    data: coachesData?.map((data) => data.amount),
                     backgroundColor: colors,
                     borderColor: borderColors,
                     borderWidth: 1,
@@ -60,55 +56,51 @@ function GarageCoachesStat() {
     const handleStat = async () => {
         switch (filterSelected) {
             case 1:
-                // try {
-                //     const response2 = await statsAPI.garageGetCoachesStatsByMonth(monthFilterByMonth, year, currentUserId);
-                //     if (response2 === 200) {
-                //         toast.success('Thống kê thành công! ', { theme: 'colored' });
-                //         setCoachesData(response2.data);
-                //     } else {
-                //         toast.error('Thống kê thất bại! ' + response2.message, { theme: 'colored' });
-                //         throw new Error(response2.message);
-                //     }
-                // } catch (error) {
-                //     toast.error('Lỗi !' + error.message, { theme: 'colored' });
-                // }
-                setCoachesData(coachesStatByMonth);
+                try {
+                    const response2 = await freqStatAPI.getFreqMonthStat(monthFilterByMonth, year, currentUserId);
+                    if (response2.code === 200) {
+                        toast.success('Thống kê thành công! ', { theme: 'colored' });
+                        setCoachesData(response2.data);
+                    } else {
+                        toast.error('Thống kê thất bại! ' + response2.message, { theme: 'colored' });
+                        throw new Error(response2.message);
+                    }
+                } catch (error) {
+                    toast.error('Lỗi !' + error.message, { theme: 'colored' });
+                }
+                // setCoachesData(coachesStatByMonth);
                 break;
 
             case 2:
-                // try {
-                // const response3 = await statsAPI.garageGetCoachesStatsByQuarter(
-                //         quarterFilterByQuarter,
-                //         year,
-                //         currentUserId,
-                //     );
-                //     if (response3 === 200) {
-                //         toast.success('Thống kê thành công! ', { theme: 'colored' });
-                //         setCoachesData(response3.data);
-                //     } else {
-                //         toast.error('Thống kê thất bại! ' + response3.message, { theme: 'colored' });
-                //         throw new Error(response3.message);
-                //     }
-                // } catch (error) {
-                //     toast.error('Lỗi !' + error.message, { theme: 'colored' });
-                // }
-                setCoachesData(coachesStatByQuarter);
+                try {
+                    const response3 = await freqStatAPI.getFreqQuarterStat(quarterFilterByQuarter, year, currentUserId);
+                    if (response3.code === 200) {
+                        toast.success('Thống kê thành công! ', { theme: 'colored' });
+                        setCoachesData(response3.data);
+                    } else {
+                        toast.error('Thống kê thất bại! ' + response3.message, { theme: 'colored' });
+                        throw new Error(response3.message);
+                    }
+                } catch (error) {
+                    toast.error('Lỗi !' + error.message, { theme: 'colored' });
+                }
+                // setCoachesData(coachesStatByQuarter);
                 break;
 
             default:
-                // try {
-                // const response4 = await statsAPI.garageGetCoachesStatsByYear(year, currentUserId);
-                //     if (response4 === 200) {
-                //         toast.success('Thống kê thành công! ', { theme: 'colored' });
-                //         setCoachesData(response4.data);
-                //     } else {
-                //         toast.error('Thống kê thất bại! ' + response4.message, { theme: 'colored' });
-                //         throw new Error(response4.message);
-                //     }
-                // } catch (error) {
-                //     toast.error('Lỗi !' + error.message, { theme: 'colored' });
-                // }
-                setCoachesData(coachesStatByYear);
+                try {
+                    const response4 = await freqStatAPI.getFreqYearStat(year, currentUserId);
+                    if (response4.code === 200) {
+                        toast.success('Thống kê thành công! ', { theme: 'colored' });
+                        setCoachesData(response4.data);
+                    } else {
+                        toast.error('Thống kê thất bại! ' + response4.message, { theme: 'colored' });
+                        throw new Error(response4.message);
+                    }
+                } catch (error) {
+                    toast.error('Lỗi !' + error.message, { theme: 'colored' });
+                }
+                // setCoachesData(coachesStatByYear);
                 break;
         }
     };

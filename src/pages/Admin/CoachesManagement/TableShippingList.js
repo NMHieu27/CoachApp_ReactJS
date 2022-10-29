@@ -26,7 +26,7 @@ function TableShippingList({ shippingListByCoachesId, setShippingListByCoachesId
     };
     const columns = [
         { title: 'Id', field: 'id' },
-        { title: 'Tên đơn hàng', field: 'namename' },
+        { title: 'Tên đơn hàng', field: 'name' },
         { title: 'Họ tên người gửi', field: 'senderName' },
         { title: 'SĐT người gửi', field: 'senderPhone' },
         { title: 'Họ tên người nhận', field: 'receiverName' },

@@ -15,6 +15,8 @@ import { toast } from 'react-toastify';
 import Dropdown from '~/components/Dropdown/Dropdown';
 import commonCountryAPI from '~/api/commonAPI/commonCountryAPI';
 import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
+import commonCoachGarageAPI from '~/api/commonAPI/commonCoachGarageAPI';
+import commonCoachesAPI from '~/api/commonAPI/commonCoachesAPI';
 
 function Booking() {
     const { fromId, toId, startDate } = useParams();
@@ -30,12 +32,12 @@ function Booking() {
     const [date, setDate] = useState(startDate);
 
     // from and to Time
-    const [fromTime, setFromTime] = useState();
-    const [toTime, setToTime] = useState();
+    const [fromTime, setFromTime] = useState('');
+    const [toTime, setToTime] = useState('');
 
     // min price and max price
-    const [minPrice, setMinPrice] = useState();
-    const [maxPrice, setMaxPrice] = useState();
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(1000000);
 
     //  empty seat
     const [emptySeat, setEmptySeat] = useState(1);
@@ -43,16 +45,83 @@ function Booking() {
     // coachGarage
     const [coachGarageList, setCoachGarageList] = useState([]);
     const [selectedCoachGarage, setSelectedCoachGarage] = useState();
-    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState();
+    const [selectedCoachGarageId, setSelectedCoachGarageId] = useState('');
 
     //Pickup and dropoff
     const [pickUpList, setPickUpList] = useState([]);
     const [dropOffList, setDropOffList] = useState([]);
 
     const [selectedPickUp, setSelectedPickUp] = useState();
-    const [selectedPickUpId, setSelectedPickUpId] = useState();
+    const [selectedPickUpId, setSelectedPickUpId] = useState('');
     const [selectedDropOff, setSelectedDropOff] = useState();
-    const [selectedDropOffId, setSelectedDropOffId] = useState();
+    const [selectedDropOffId, setSelectedDropOffId] = useState('');
+
+    const [coachesList, setCoachesList] = useState();
+    useEffect(() => {
+        const fetchCoaches = async (
+            fromTime,
+            toTime,
+            date,
+            selectedToId,
+            selectedFromId,
+            minPrice,
+            maxPrice,
+            selectedPickUpId,
+            selectedDropOffId,
+            emptySeat,
+            selectedCoachGarageId,
+        ) => {
+            try {
+                const response = await commonCoachesAPI.getCoachesModify(
+                    fromTime,
+                    toTime,
+                    date,
+                    selectedToId,
+                    selectedFromId,
+                    minPrice,
+                    maxPrice,
+                    selectedPickUpId,
+                    selectedDropOffId,
+                    emptySeat,
+                    selectedCoachGarageId,
+                );
+                if (response.code === 200) {
+                    console.log('lay danh sach chuyen xe thanh cong');
+                    setCoachesList(response.data);
+                } else {
+                    console.log('khong lay duoc chuyen xe' + response.message);
+                    throw new Error(response.message);
+                }
+            } catch (err) {
+                toast.error('Lỗi tìm kiếm! ' + err.message, { theme: 'colored' });
+            }
+        };
+        fetchCoaches(
+            fromTime,
+            toTime,
+            date,
+            selectedToId,
+            selectedFromId,
+            minPrice,
+            maxPrice,
+            selectedPickUpId,
+            selectedDropOffId,
+            emptySeat,
+            selectedCoachGarageId,
+        );
+    }, [
+        fromTime,
+        toTime,
+        date,
+        selectedToId,
+        selectedFromId,
+        minPrice,
+        maxPrice,
+        selectedPickUpId,
+        selectedDropOffId,
+        emptySeat,
+        selectedCoachGarageId,
+    ]);
 
     useEffect(() => {
         const fetchCountryList = async () => {
@@ -73,23 +142,23 @@ function Booking() {
     }, []);
 
     // Get coach garage list
-    // useEffect(() => {
-    //     const fetchAllCoachGarage = async () => {
-    //         try {
-    //             const response = await coachGarageAPI.getAll();
-    //             if (response.code === 200) {
-    //                 console.log('fetch coach garage success');
-    //                 setCoachGarageList(response.data);
-    //             } else {
-    //                 console.log('fetch coach garage error');
-    //                 throw new Error(response.message);
-    //             }
-    //         } catch (err) {
-    //             console.log('fetch coach garage failed' + err.message);
-    //         }
-    //     };
-    //     fetchAllCoachGarage();
-    // }, []);
+    useEffect(() => {
+        const fetchAllCoachGarage = async () => {
+            try {
+                const response = await commonCoachGarageAPI.getAll();
+                if (response.code === 200) {
+                    console.log('fetch coach garage success');
+                    setCoachGarageList(response.data);
+                } else {
+                    console.log('fetch coach garage error');
+                    throw new Error(response.message);
+                }
+            } catch (err) {
+                console.log('fetch coach garage failed' + err.message);
+            }
+        };
+        fetchAllCoachGarage();
+    }, []);
 
     // fetch list pick up
     useEffect(() => {
@@ -130,6 +199,12 @@ function Booking() {
         };
         fetchAllDropOffByEndPoint(toId);
     }, [toId]);
+
+    const Loading = () => (
+        <div className="item-loading">
+            <h5>Loading...</h5>
+        </div>
+    );
 
     return (
         <Helmet title="Đặt vé">
@@ -179,8 +254,8 @@ function Booking() {
                                             <button
                                                 className="btn-time"
                                                 onClick={() => {
-                                                    setFromTime('00:00');
-                                                    setToTime('06:00');
+                                                    setFromTime(`${date}T00:00:00.000`);
+                                                    setToTime(`${date}T06:00:00.000`);
                                                 }}
                                             >
                                                 <p className="label-time">Sáng sớm</p>
@@ -190,8 +265,8 @@ function Booking() {
                                             <button
                                                 className="btn-time"
                                                 onClick={() => {
-                                                    setFromTime('06:01');
-                                                    setToTime('12:00');
+                                                    setFromTime(`${date}T06:01:00.000`);
+                                                    setToTime(`${date}T12:00:00.000`);
                                                 }}
                                             >
                                                 <p className="label-time">Buổi sáng</p>
@@ -201,8 +276,8 @@ function Booking() {
                                             <button
                                                 className="btn-time"
                                                 onClick={() => {
-                                                    setFromTime('12:01');
-                                                    setToTime('18:00');
+                                                    setFromTime(`${date}T12:01:00.000`);
+                                                    setToTime(`${date}T18:00:00.000`);
                                                 }}
                                             >
                                                 <p className="label-time">Buổi chiều</p>
@@ -212,8 +287,8 @@ function Booking() {
                                             <button
                                                 className="btn-time"
                                                 onClick={() => {
-                                                    setFromTime('18:01');
-                                                    setToTime('23:59');
+                                                    setFromTime(`${date}T18:01:00.000`);
+                                                    setToTime(`${date}T23:59:00.000`);
                                                 }}
                                             >
                                                 <p className="label-time">Buổi tối</p>
@@ -267,14 +342,15 @@ function Booking() {
                                                 <div style={{ height: '56px' }}>
                                                     {coachGarageList.length > 0 && (
                                                         <Dropdown
-                                                            maxHeight={'150px'}
+                                                            isSelected={false}
+                                                            maxHeight={'250px'}
                                                             options={coachGarageList}
                                                             selected={selectedCoachGarage}
                                                             setSelected={setSelectedCoachGarage}
                                                             selectedId={selectedCoachGarageId}
                                                             setSelectedId={setSelectedCoachGarageId}
                                                             isEdit
-                                                            placeholder="Chọn điểm trả"
+                                                            placeholder="Chọn nhà xe"
                                                             top={'100%'}
                                                             paddingDropDown="0px 20px"
                                                             borderDropDown="1px solid #ccc"
@@ -295,6 +371,7 @@ function Booking() {
                                                 <div style={{ height: '56px' }}>
                                                     {pickUpList.length > 0 && (
                                                         <Dropdown
+                                                            isSelected={false}
                                                             maxHeight={'250px'}
                                                             options={pickUpList}
                                                             selected={selectedPickUp}
@@ -323,6 +400,7 @@ function Booking() {
                                                 <div style={{ height: '56px' }}>
                                                     {dropOffList.length > 0 && (
                                                         <Dropdown
+                                                            isSelected={false}
                                                             maxHeight={'250px'}
                                                             options={dropOffList}
                                                             selected={selectedDropOff}
@@ -349,13 +427,16 @@ function Booking() {
 
                         {/* result coaches */}
                         <div className="coaches-container col-lg-9 p-0">
-                            <p style={{ marginLeft: '10px', marginBottom: '0' }}>Số chuyến: {chuyenxe.length}</p>
+                            <p style={{ marginLeft: '10px', marginBottom: '0' }}>
+                                Số chuyến: {coachesList ? coachesList.length : 0}
+                            </p>
                             <div className="coaches-container__list-coaches">
-                                {chuyenxe.map((data) => (
-                                    <div key={data.id} className="coaches-container__item-coaches">
-                                        <CoachCard data={data} />
-                                    </div>
-                                ))}
+                                {coachesList &&
+                                    coachesList.map((data, index) => (
+                                        <div key={data.id} className="coaches-container__item-coaches">
+                                            <CoachCard data={data} />
+                                        </div>
+                                    ))}
                             </div>
                         </div>
                         {/* end result coaches */}

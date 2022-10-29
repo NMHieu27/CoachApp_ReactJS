@@ -11,8 +11,8 @@ import commonStopByAPI from '~/api/commonAPI/commonStopByAPI';
 function EditTicket() {
     const nav = useNavigate();
     const { ticketId, coachesId } = useParams();
-    const [pickUpList, setPickUpList] = useState();
-    const [dropOffList, setDropOffList] = useState();
+    const [pickUpList, setPickUpList] = useState([]);
+    const [dropOffList, setDropOffList] = useState([]);
     const [selectedPickUp, setSelectedPickUp] = useState();
     const [selectedPickUpId, setSelectedPickUpId] = useState();
     const [selectedDropOff, setSelectedDropOff] = useState();
@@ -132,10 +132,10 @@ function EditTicket() {
                     formik.values.phone = response.data.phone;
                     formik.values.email = response.data.email;
 
-                    +response.data.pickUpId !== +selectedPickUpId && setSelectedPickUpId(response.data.pickUpId);
+                    setSelectedPickUpId(response.data.pickUpId);
                     formik.values.pickUpId = +selectedPickUpId;
 
-                    +response.data.dropOffId !== +selectedDropOffId && setSelectedDropOffId(response.data.dropOffId);
+                    setSelectedDropOffId(response.data.dropOffId);
                     formik.values.dropOffId = +selectedDropOffId;
 
                     formik.values.seatNum = +response.data.seatNum;
@@ -237,7 +237,7 @@ function EditTicket() {
                             <div className="form-outline">
                                 <label className="form-label">Chọn điểm đón</label>
                                 <div style={{ height: '56px' }}>
-                                    {pickUpList && selectedPickUpId && (
+                                    {pickUpList.length > 0 && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={pickUpList}
@@ -262,7 +262,7 @@ function EditTicket() {
                             <div className="form-outline">
                                 <label className="form-label">Chọn điểm trả</label>
                                 <div style={{ height: '56px' }}>
-                                    {dropOffList && selectedDropOffId && (
+                                    {dropOffList.length > 0 && (
                                         <Dropdown
                                             maxHeight={'150px'}
                                             options={dropOffList}

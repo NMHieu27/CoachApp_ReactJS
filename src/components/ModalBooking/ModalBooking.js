@@ -10,13 +10,15 @@ import ticketAPI from '~/api/userAPI/ticketAPI';
 function ModalBooking({
     userId,
     coachesId,
-    pickUpList,
-    dropOffList,
+    pickUpList = [{ name: 'empty', id: 0 }],
+    dropOffList = [{ name: 'empty', id: 0 }],
     maxSeat,
     price = 100000,
     isShowingBooking,
     setIsShowingBooking,
     toggleBooking,
+    isBooking,
+    setIsBooking,
 }) {
     const userRole = localStorage.getItem('role');
     const [isUser, setIsUser] = useState(false);
@@ -61,24 +63,25 @@ function ModalBooking({
             values.dropOffId = +selectedDropOffId;
             try {
                 const params = {
-                    fullname: values.fullname,
+                    name: values.fullname,
                     email: values.email,
                     phone: values.phone,
                     coachesId: values.coachesId,
                     userId: values.userId,
                     pickUpId: values.pickUpId,
                     dropOffId: values.dropOffId,
-                    seatNum: values.seatNum,
+                    amount: values.seatNum,
                 };
 
                 // Dung api thanh toan momo
-                // const response = await ticketAPI.postAddTicket(params);
-                // if (response.code === 200) {
-                //     toast.success('Đặt vé thành công !', { theme: 'colored' });
-                // } else {
-                //     toast.error('Đặt vé thất bại !' + response.message, { theme: 'colored' });
-                //     throw new Error(response.message);
-                // }
+                const response = await ticketAPI.addTicket(params);
+                if (response.code === 200) {
+                    toast.success('Đặt vé thành công !', { theme: 'colored' });
+                    setIsBooking(!isBooking);
+                } else {
+                    toast.error('Đặt vé thất bại !' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
+                }
             } catch (err) {
                 toast.error('Thất bại khi thêm dữ liệu' + err.message, { theme: 'colored' });
             }
@@ -99,12 +102,13 @@ function ModalBooking({
                 userId: formik.values.userId,
                 pickUpId: formik.values.pickUpId,
                 dropOffId: formik.values.dropOffId,
-                seatNum: formik.values.seatNum,
+                amount: formik.values.seatNum,
             };
             console.log(params);
             const response = await ticketAPI.addTicket(params);
             if (response.code === 200) {
                 toast.success('Đặt vé thành công !', { theme: 'colored' });
+                setIsBooking(!isBooking);
             } else {
                 toast.error('Đặt vé thất bại !' + response.message, { theme: 'colored' });
                 throw new Error(response.message);

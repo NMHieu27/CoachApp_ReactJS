@@ -13,7 +13,7 @@ function StopByBox({
     const [time, setTime] = useState('00:00');
     // const [stopByList, setStopByList] = useState([]);
     const handleAddStopBy = () => {
-        setStopByList((prev) => [...prev, { stopById: selectedPointId, name: selectedPoint, time: `${time}:00` }]);
+        setStopByList((prev) => [...prev, { id: selectedPointId, name: selectedPoint, time: `${time}:00` }]);
     };
     const handleDeleteStopBy = (index) => {
         let arrCopy = [...stopByList];

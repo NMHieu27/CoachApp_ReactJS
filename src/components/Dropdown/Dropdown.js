@@ -19,6 +19,7 @@ function Dropdown({
     setSelected,
     selectedId,
     setSelectedId,
+    isSelected = true,
 }) {
     const [isActive, setIsActive] = useState(false);
 
@@ -30,11 +31,13 @@ function Dropdown({
     // const [selectedId, setSelectedId] = useState(options[0].id);
 
     useEffect(() => {
-        if (options && selectedId) {
-            setSelected(options.find((option) => +option.id === +selectedId).name);
-        } else {
-            setSelectedId(options[0].id);
-            setSelected(options[0].name);
+        if (isSelected) {
+            if (options && selectedId) {
+                setSelected(options.find((option) => +option.id === +selectedId).name);
+            } else {
+                setSelectedId(options[0].id);
+                setSelected(options[0].name);
+            }
         }
     }, [selectedId]);
 
@@ -122,6 +125,7 @@ function Dropdown({
                     <input
                         className="dropdown-input"
                         style={{ fontWeight: fontWeightInput }}
+                        placeholder={placeholder}
                         ref={dropdown_input_el}
                         type="text"
                         value={selected}
