@@ -3,10 +3,10 @@ import TableCustom from '~/components/TableCustom/TableCustom';
 function GarageTableTicketList({ ticketListByCoachesId, coachesId }) {
     const columns = [
         { title: 'Id', field: 'id' },
-        { title: 'Họ tên', field: 'fullname' },
+        { title: 'Họ tên', field: 'name' },
         { title: 'SĐT', field: 'phone' },
         { title: 'Email', field: 'email' },
-        { title: 'Số ghế', field: 'seat' },
+        { title: 'Số ghế', field: 'amount' },
         { title: 'Mã chuyến', field: 'coachesId' },
     ];
     return (

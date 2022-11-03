@@ -28,7 +28,7 @@ function TableTicketList({ ticketListByCoachesId, setTicketListByCoachesId, coac
         { title: 'Họ tên', field: 'name' },
         { title: 'SĐT', field: 'phone' },
         { title: 'Email', field: 'email' },
-        { title: 'Số ghế', field: 'seat' },
+        { title: 'Số ghế', field: 'amount' },
         { title: 'Mã chuyến', field: 'coachesId' },
         {
             title: 'Action',

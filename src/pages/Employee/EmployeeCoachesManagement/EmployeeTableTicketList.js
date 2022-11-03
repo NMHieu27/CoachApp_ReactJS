@@ -25,7 +25,7 @@ function EmployeeTableTicketList({ ticketListByCoachesId, setTicketListByCoaches
     };
     const columns = [
         { title: 'Id', field: 'id' },
-        { title: 'Họ tên', field: 'fullname' },
+        { title: 'Họ tên', field: 'name' },
         { title: 'SĐT', field: 'phone' },
         { title: 'Email', field: 'email' },
         { title: 'Số ghế', field: 'seat' },

@@ -25,10 +25,10 @@ function HistoryTableTicketList({ ticketListByPhone, setTicketListByPhone }) {
     };
     const columns = [
         { title: 'Id', field: 'id' },
-        { title: 'Họ tên', field: 'fullname' },
+        { title: 'Họ tên', field: 'name' },
         { title: 'SĐT', field: 'phone' },
         { title: 'Email', field: 'email' },
-        { title: 'Số ghế', field: 'seat' },
+        { title: 'Số ghế', field: 'amount' },
         { title: 'Mã chuyến', field: 'coachesId' },
         {
             title: 'Ngày đặt',
@@ -40,7 +40,7 @@ function HistoryTableTicketList({ ticketListByPhone, setTicketListByPhone }) {
         },
         {
             title: 'Ngày khởi hành',
-            field: 'startTime',
+            field: 'startDate',
             type: 'date',
             dateSetting: {
                 format: 'dd/MM/yyyy',
@@ -62,7 +62,7 @@ function HistoryTableTicketList({ ticketListByPhone, setTicketListByPhone }) {
                             <button className="btn-handle btn-handle-primary">Đến chuyến xe</button>
                         </Link>
                         {/* Khi có API sẽ lấy row.startTime để kiểm tra */}
-                        {new Date(rowData.createDate).getTime() - new Date().getTime() >= 86400000 &&
+                        {new Date(rowData.startDate).getTime() - new Date().getTime() >= 86400000 &&
                             rowData.status !== 2 &&
                             rowData.status !== 0 && (
                                 <button

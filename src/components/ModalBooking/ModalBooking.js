@@ -78,6 +78,7 @@ function ModalBooking({
                 if (response.code === 200) {
                     toast.success('Đặt vé thành công !', { theme: 'colored' });
                     setIsBooking(!isBooking);
+                    setIsShowingBooking(false);
                 } else {
                     toast.error('Đặt vé thất bại !' + response.message, { theme: 'colored' });
                     throw new Error(response.message);

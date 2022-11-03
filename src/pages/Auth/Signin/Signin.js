@@ -48,7 +48,7 @@ function Signin(props) {
                     navigate(config.routes.garage);
                 } else navigate(config.routes.unauthorized);
             } else {
-                toast.error('Đăng nhập thất bại, vui lòng kiểm tra thông tin !', { theme: 'colored' });
+                toast.error('Đăng nhập thất bại ' + response.message, { theme: 'colored' });
             }
         } catch (error) {
             console.log('Thất bại khi gửi dữ liệu: ', error.message);

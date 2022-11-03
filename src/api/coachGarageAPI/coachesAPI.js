@@ -1,7 +1,7 @@
 import axiosClient from '../axiosClient';
 const coachesAPI = {
     getAll: (id) => {
-        const url = `/garageowner/coachgarage/coaches/getall/${id}`;
+        const url = `/garageowner/coachgarage/coaches/user/${id}`;
         return axiosClient.get(url);
     },
     getCoachesById: (id) => {

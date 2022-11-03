@@ -35,7 +35,6 @@ function EmployeeCoachesManagement() {
                 format: 'dd/MM/yyyy',
             },
         },
-        { title: 'Mô tả', field: 'description' },
         { title: 'Giá', field: 'price' },
         { title: 'Ghế trống', field: 'emptySeat' },
         { title: 'Mã xe', field: 'coachId' },
